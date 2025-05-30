@@ -262,8 +262,166 @@ def create_real_world_chain_test():
         import traceback
         traceback.print_exc()
 
+def create_complex_mixed_provider_chain_test():
+    """Test a complex chain with fan-out/fan-in, mixed providers, and different configs."""
+    print("\n=== COMPLEX MIXED-PROVIDER CHAIN TEST (FAN-OUT/FAN-IN) ===")
+    print("Testing: NodeA -> (NodeB, NodeC, NodeD) -> NodeE")
+
+    timestamp = int(time.time())
+
+    # --- Node Configurations --- #
+
+    # Node A: Initial Data Generation (e.g., OpenAI)
+    # Output: A list of three distinct concepts or items.
+    node_a_id = f"initial_generator_A_{timestamp}"
+    node_a_config = create_node_config(
+        node_id=node_a_id,
+        name="Initial Concept Generator (OpenAI)",
+        prompt="""Generate three distinct, one-word technical concepts (e.g., 'authentication', 'database', 'API').
+        Your response MUST be a single, valid JSON object ONLY, with a single key "concepts" which is a list of three strings.""",
+        model="gpt-3.5-turbo", # Using a faster model for this simple task
+        provider="openai",
+        output_schema={"concepts": "list"}
+    )
+
+    # Fan-out Nodes (processing items from Node A)
+
+    # Node B: Process Concept 1 (e.g., Anthropic)
+    node_b_id = f"process_concept1_B_{timestamp}"
+    node_b_config = create_node_config(
+        node_id=node_b_id,
+        name="Define Concept 1 (Anthropic)",
+        prompt="""Provide a concise, one-sentence definition for the concept: {concept1}.
+        Your response MUST be a single, valid JSON object ONLY, with a single key "definition" which is a string.""",
+        model="claude-3-haiku-20240307", # Using a faster/cheaper Claude model
+        provider="anthropic",
+        dependencies=[node_a_id],
+        input_mappings={"concept1": {"source_node_id": node_a_id, "source_output_key": "concepts.0"}}, # Assuming concepts is a list
+        output_schema={"definition": "string"}
+    )
+
+    # Node C: Process Concept 2 (e.g., Google Gemini)
+    node_c_id = f"process_concept2_C_{timestamp}"
+    node_c_config = create_node_config(
+        node_id=node_c_id,
+        name="Use Case for Concept 2 (Google)",
+        prompt="""Describe a primary use case for the concept: {concept2}.
+        Your response MUST be a single, valid JSON object ONLY, with a single key "use_case" which is a string.""",
+        model="gemini-1.5-flash-latest",
+        provider="google",
+        dependencies=[node_a_id],
+        input_mappings={"concept2": {"source_node_id": node_a_id, "source_output_key": "concepts.1"}},
+        output_schema={"use_case": "string"}
+    )
+
+    # Node D: Process Concept 3 (e.g., DeepSeek)
+    # Ensure you have DEEPSEEK_API_KEY in your .env for this to work
+    node_d_id = f"related_tech_concept3_D_{timestamp}"
+    node_d_config = create_node_config(
+        node_id=node_d_id,
+        name="Related Tech for Concept 3 (DeepSeek)",
+        prompt="""List one related technology for the concept: {concept3}.
+        Your response MUST be a single, valid JSON object ONLY, with a single key "related_technology" which is a string.""",
+        model="deepseek-chat", # Or another valid DeepSeek model name
+        provider="deepseek",
+        dependencies=[node_a_id],
+        input_mappings={"concept3": {"source_node_id": node_a_id, "source_output_key": "concepts.2"}},
+        output_schema={"related_technology": "string"}
+    )
+
+    # Fan-in Node
+
+    # Node E: Synthesize Information (e.g., OpenAI GPT-4 for better synthesis)
+    node_e_id = f"synthesizer_E_{timestamp}"
+    node_e_config = create_node_config(
+        node_id=node_e_id,
+        name="Synthesize Concepts Report (OpenAI GPT-4)",
+        prompt="""Compile a brief report from the following information:
+        Concept 1 Definition: {definition1}
+        Concept 2 Use Case: {use_case2}
+        Concept 3 Related Technology: {related_tech3}
+        Your response MUST be a single, valid JSON object ONLY, with a single key "report" which is a string summarizing all inputs.""",
+        model="gpt-4",
+        provider="openai",
+        dependencies=[node_b_id, node_c_id, node_d_id],
+        input_mappings={
+            "definition1": {"source_node_id": node_b_id, "source_output_key": "definition"},
+            "use_case2": {"source_node_id": node_c_id, "source_output_key": "use_case"},
+            "related_tech3": {"source_node_id": node_d_id, "source_output_key": "related_technology"}
+        },
+        output_schema={"report": "string"}
+    )
+
+    nodes_data = [
+        node_a_config, node_b_config, node_c_config, node_d_config, node_e_config
+    ]
+
+    # Add DEEPSEEK_API_KEY check similar to others if you intend to run this frequently
+    # For now, assuming it's set if the user wants to test DeepSeek.
+
+    try:
+        print("\n--- CLEANUP: Clearing existing context for complex chain ---")
+        for node_config in nodes_data:
+            node_id = node_config['id']
+            try:
+                make_api_request("DELETE", f"/nodes/{node_id}/context")
+                print(f"  ✓ Cleared context for {node_id}")
+            except:
+                print(f"  ⚠ No existing context for {node_id}")
+        print()
+
+        print("--- EXECUTING COMPLEX CHAIN ---")
+        print("Chain configuration:")
+        for i, node in enumerate(nodes_data):
+            deps = ", ".join(node['dependencies']) if node['dependencies'] else "None"
+            prov = node.get('provider', node['llm_config']['provider']) # Handle provider key location
+            mod = node.get('model', node['llm_config']['model']) # Handle model key location
+            print(f"  {i+1}. {node['name']} (Provider: {prov}, Model: {mod}) - Deps: {deps}")
+        print("\nExecuting chain...")
+
+        chain_result = make_api_request("POST", "/chains/execute", {
+            "nodes": nodes_data,
+            # No initial global context needed as Node A generates it.
+            "persist_intermediate_outputs": True 
+        })
+
+        if chain_result.get('success'):
+            print("\n✓ Complex chain execution successful!")
+            print("\n--- RESULTS OF COMPLEX CHAIN ---")
+            chain_output = chain_result.get('output', {})
+            
+            for node_config in nodes_data:
+                node_id = node_config['id']
+                node_name = node_config['name']
+                print(f"\n{node_name} (ID: {node_id}) Results:")
+                if node_id in chain_output and chain_output[node_id].get('success'):
+                    node_actual_output = chain_output[node_id].get('output', {})
+                    print(json.dumps(node_actual_output, indent=2))
+                elif node_id in chain_output:
+                    print(f"  Node failed: {chain_output[node_id].get('error')}")
+                else:
+                    print("  No output found for this node in chain result.")
+
+            print("\n=== COMPLEX CHAIN EXECUTION METRICS ===")
+            if 'metadata' in chain_result:
+                print(f"Total execution time: {chain_result['metadata'].get('duration', 'N/A')} seconds")
+            if 'token_stats' in chain_result and chain_result['token_stats']:
+                print(f"Total token usage: {chain_result['token_stats'].get('total_tokens', 'N/A')}")
+                print(f"Provider breakdown: {json.dumps(chain_result['token_stats'].get('provider_usage', {}), indent=2)}")
+
+        else:
+            print(f"\n✗ Complex chain execution failed: {chain_result.get('error', 'Unknown error')}")
+            # Print full output for debugging if the chain itself failed
+            print("Full chain result for failed execution:")
+            print(json.dumps(chain_result, indent=2))
+
+    except Exception as e:
+        print(f"\nComplex chain test failed with an exception: {str(e)}")
+        import traceback
+        traceback.print_exc()
+
 if __name__ == "__main__":
-    print("Starting Real-World Chain Test...")
+    print("Starting ScriptChain Test Suite...")
     print(f"API Base URL: {API_BASE_URL}")
     
     # Check API keys
@@ -281,15 +439,9 @@ if __name__ == "__main__":
     
     try:
         create_real_world_chain_test()
+        create_complex_mixed_provider_chain_test()
         print("\n" + "="*60)
-        print("🎉 TEST COMPLETED!")
-        print("Demonstrated capabilities:")
-        print("  • Multiple LLM providers")
-        print("  • Context passing between nodes")
-        print("  • Structured output schemas")
-        print("  • Dependency management")
-        print("  • Error handling")
-        print("="*60)
+        print("🎉 ALL SCRIPTCHAIN TESTS COMPLETED! 🎉")
     except KeyboardInterrupt:
         print("\n\nTest interrupted by user")
     except Exception as e:
