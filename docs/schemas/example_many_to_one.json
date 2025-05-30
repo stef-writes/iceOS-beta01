@@ -1,0 +1,45 @@
+{
+  "chain_id": "chain-123",
+  "nodes": [
+    {
+      "id": "summarizer",
+      "type": "ai",
+      "model": "gpt-3.5-turbo",
+      "provider": "openai",
+      "prompt": "Summarize the following text.",
+      "level": 0,
+      "dependencies": [],
+      "output_schema": {"summary": "str"}
+    },
+    {
+      "id": "translator",
+      "type": "ai",
+      "model": "gemini-pro",
+      "provider": "google",
+      "prompt": "Translate the following text to French.",
+      "level": 0,
+      "dependencies": [],
+      "output_schema": {"translation": "str"}
+    },
+    {
+      "id": "aggregator",
+      "type": "ai",
+      "model": "claude-3-opus",
+      "provider": "anthropic",
+      "prompt": "Combine the summary and translation.",
+      "level": 1,
+      "dependencies": ["summarizer", "translator"],
+      "input_mappings": {
+        "summary_input": {"source_node_id": "summarizer", "source_output_key": "summary"},
+        "translation_input": {"source_node_id": "translator", "source_output_key": "translation"}
+      },
+      "output_schema": {"result": "str"}
+    }
+  ],
+  "levels": {
+    "0": ["summarizer", "translator"],
+    "1": ["aggregator"]
+  },
+  "max_parallel": 2,
+  "persist_intermediate_outputs": true
+} 

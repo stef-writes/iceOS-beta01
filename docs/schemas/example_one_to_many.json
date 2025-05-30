@@ -1,0 +1,47 @@
+{
+  "chain_id": "chain-456",
+  "nodes": [
+    {
+      "id": "input_node",
+      "type": "ai",
+      "model": "gpt-4",
+      "provider": "openai",
+      "prompt": "Provide a detailed analysis.",
+      "level": 0,
+      "dependencies": [],
+      "output_schema": {"analysis": "str"}
+    },
+    {
+      "id": "summarizer",
+      "type": "ai",
+      "model": "gemini-pro",
+      "provider": "google",
+      "prompt": "Summarize the analysis.",
+      "level": 1,
+      "dependencies": ["input_node"],
+      "input_mappings": {
+        "analysis_input": {"source_node_id": "input_node", "source_output_key": "analysis"}
+      },
+      "output_schema": {"summary": "str"}
+    },
+    {
+      "id": "translator",
+      "type": "ai",
+      "model": "claude-3-opus",
+      "provider": "anthropic",
+      "prompt": "Translate the analysis to Spanish.",
+      "level": 1,
+      "dependencies": ["input_node"],
+      "input_mappings": {
+        "analysis_input": {"source_node_id": "input_node", "source_output_key": "analysis"}
+      },
+      "output_schema": {"translation": "str"}
+    }
+  ],
+  "levels": {
+    "0": ["input_node"],
+    "1": ["summarizer", "translator"]
+  },
+  "max_parallel": 2,
+  "persist_intermediate_outputs": true
+} 
