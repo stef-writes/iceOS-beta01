@@ -460,88 +460,119 @@ class AiNode(BaseNode):
 
     def _process_and_validate_output(self, generated_text: str) -> Tuple[Dict[str, Any], bool, Optional[str]]:
         """Processes the raw text from LLM and validates against output_schema."""
+        logger.debug(f"[_PVP] Raw generated_text: '{generated_text}'")
         output = {}
         node_succeeded = True
         final_error_message = None
         error_message_prefix = f"Node '{self.config.id}' (Name: '{self.config.name}'): "
 
+        # This will hold the Python dictionary if JSON parsing is successful
+        parsed_dict_for_output: Optional[Dict[str, Any]] = None
+        # This will hold the string that was last attempted for field-by-field parsing if block parsing fails
+        text_for_field_parsing = generated_text
+
+        # Strategy 1: Try to parse the entire generated_text as a single JSON object.
+        # This handles cases where the LLM returns a clean, single JSON.
+        try:
+            parsed_dict_for_output = json.loads(generated_text)
+            logger.info(f"[_PVP] Attempt 1: Successfully parsed entire generated_text as JSON.")
+        except json.JSONDecodeError as e_direct:
+            logger.debug(f"[_PVP] Attempt 1: Entire generated_text is not a single JSON object ({e_direct}). Trying to isolate a block.")
+            
+            # Strategy 2: If direct parsing fails, try to find and parse an isolated JSON block (e.g., surrounded by text).
+            first_brace = generated_text.find('{')
+            last_brace = generated_text.rfind('}')
+            if first_brace != -1 and last_brace > first_brace:
+                isolated_json_str = generated_text[first_brace : last_brace + 1]
+                logger.debug(f"[_PVP] Attempt 2: Trying to parse isolated block: '{isolated_json_str}'")
+                try:
+                    parsed_dict_for_output = json.loads(isolated_json_str)
+                    logger.info(f"[_PVP] Attempt 2: Successfully parsed isolated JSON block.")
+                except json.JSONDecodeError as e_isolated:
+                    logger.warning(f"{error_message_prefix}Parsing isolated block ('{isolated_json_str}') failed: {str(e_isolated)}")
+                    # Strategy 3: Handle "Extra data" - specific for "JSON1 JSON2" cases.
+                    if "Extra data" in str(e_isolated) and e_isolated.pos > 0:
+                        # e_isolated.doc is the string that was being parsed (isolated_json_str)
+                        # e_isolated.pos is where the extra data started within isolated_json_str
+                        second_json_candidate_str = isolated_json_str[e_isolated.pos:].strip()
+                        logger.info(f"{error_message_prefix}Attempting to parse second JSON object from 'Extra data' tail: '{second_json_candidate_str}'")
+                        if second_json_candidate_str.startswith('{'):
+                            try:
+                                parsed_dict_for_output = json.loads(second_json_candidate_str)
+                                logger.info(f"{error_message_prefix}Successfully parsed second JSON object from 'Extra data' tail.")
+                            except json.JSONDecodeError as e_second:
+                                logger.error(f"{error_message_prefix}Failed to parse second JSON object ('{second_json_candidate_str}') from 'Extra data' tail: {str(e_second)}")
+                                # Keep parsed_dict_for_output as None or its prior state (None here)
+                        else:
+                            logger.warning(f"{error_message_prefix}Second part of 'Extra data' in isolated block did not start with '{{'.")
+                    # If not "Extra data" or if parsing the second part failed, parsed_dict_for_output remains None from this path.
+            else:
+                logger.debug(f"[_PVP] Attempt 2: No clear JSON block found via find/rfind braces.")
+        
+        # If any parsing strategy was successful and yielded a dictionary:
+        if isinstance(parsed_dict_for_output, dict):
+            output = parsed_dict_for_output
+            logger.info(f"[_PVP] Populated 'output' from successfully parsed JSON block: {json.dumps(output, indent=2)}")
+        else:
+            logger.warning(f"[_PVP] No valid JSON block successfully parsed into a dictionary. 'output' remains empty. Will use raw text for field-by-field if schema exists.")
+            # text_for_field_parsing is already generated_text by default.
+
+        # Field-by-field extraction and validation (only if 'output' is still empty)
         if self.config.output_schema:
-            for key, type_str_in_schema in self.config.output_schema.items():
-                # Try to parse common types like int from the generated_text
-                # This is a simplified parsing logic. More robust parsing might be needed.
-                parsed_value = None
-                if type_str_in_schema == "int":
-                    try:
-                        numbers = re.findall(r'-?\d+', generated_text)
-                        if numbers:
-                            parsed_value = int(numbers[0])
-                    except (ValueError, IndexError):
-                        pass # Will be caught by validation if key is missing or type mismatch
-                elif type_str_in_schema == "float":
-                    try:
-                        # More robust float parsing might be needed
-                        numbers = re.findall(r'-?\d*\.?\d+', generated_text)
-                        if numbers:
-                            parsed_value = float(numbers[0])
-                    except (ValueError, IndexError):
-                        pass
-                # Add other type parsers as needed (e.g., bool, list from string)
-                
-                # If a specific parser was successful for the key, use its value.
-                # Otherwise, if the schema expects a string for this key, use the raw generated_text.
-                if parsed_value is not None:
-                    output[key] = parsed_value
-                elif type_str_in_schema == "str":
-                    output[key] = generated_text # Assign raw text if schema is str and no specific parser hit
-                # If schema is not str and no specific parser hit, output[key] will remain unset here.
+            if not output: # If 'output' is empty, it means block parsing failed to produce a dict.
+                logger.debug(f"[_PVP] 'output' is empty after block parsing attempts. Entering field-by-field parsing from text: '{text_for_field_parsing[:200]}...'")
+                # This loop attempts to populate 'output' from text_for_field_parsing
+                for key, type_str_in_schema in self.config.output_schema.items():
+                    parsed_value = None
+                    if type_str_in_schema == "int":
+                        try:
+                            numbers = re.findall(r'-?\\d+', text_for_field_parsing)
+                            if numbers:
+                                parsed_value = int(numbers[0])
+                        except (ValueError, IndexError): pass
+                    elif type_str_in_schema == "float":
+                        try:
+                            numbers = re.findall(r'-?\\d*\\.?\\d+', text_for_field_parsing)
+                            if numbers:
+                                parsed_value = float(numbers[0])
+                        except (ValueError, IndexError): pass
+                    
+                    if parsed_value is not None:
+                        output[key] = parsed_value
+                    elif type_str_in_schema == "str":
+                        try:
+                            potential_dict = json.loads(text_for_field_parsing)
+                            if isinstance(potential_dict, dict) and key in potential_dict:
+                                output[key] = str(potential_dict[key])
+                            elif len(self.config.output_schema) == 1:
+                                output[key] = text_for_field_parsing
+                        except json.JSONDecodeError:
+                            if len(self.config.output_schema) == 1:
+                                output[key] = text_for_field_parsing
+                logger.debug(f"[_PVP] 'output' after field-by-field attempt: {output}")
+
 
             # Strict validation of the populated 'output' against 'self.config.output_schema'
+            # This validation runs regardless of how 'output' was populated (block or field-by-field)
             for key_in_schema, type_str_in_schema in self.config.output_schema.items():
                 if key_in_schema not in output:
-                    # If the key is missing, but schema expects string, and we haven't assigned it yet
-                    # (e.g. it wasn't 'int' or 'float'), assign the raw text now if it was the *only* string field.
-                    # This is a bit heuristic for cases where LLM just returns the value for a single-field schema.
-                    if type_str_in_schema == "str" and len(self.config.output_schema) == 1:
-                        output[key_in_schema] = generated_text
+                    if type_str_in_schema == "str" and len(self.config.output_schema) == 1 and generated_text: # Check generated_text not output[key]
+                        logger.debug(f"[_PVP] Heuristic: Assigning raw generated_text to single string field '{key_in_schema}' as it's missing in output.")
+                        output[key_in_schema] = generated_text # Use original raw text
+                        # Re-check this specific assignment immediately for this heuristic
+                        if key_in_schema not in output: # Should not happen if assignment worked
+                             node_succeeded = False
+                             final_error_message = f"Output schema validation failed: Key '{key_in_schema}' (expected type '{type_str_in_schema}') is missing from node output."
+                             logger.error(f"{error_message_prefix}{final_error_message} LLM raw response: '{generated_text}', Parsed output: {output}")
+                             break
+                        else: # Heuristic assignment worked, ensure type.
+                             if not isinstance(output[key_in_schema], str): # It must be str after assignment
+                                 try: output[key_in_schema] = str(output[key_in_schema])
+                                 except: pass # if str() fails, next check will fail it.
                     else:
                         node_succeeded = False
                         final_error_message = f"Output schema validation failed: Key '{key_in_schema}' (expected type '{type_str_in_schema}') is missing from node output."
-                        logger.error(f"{error_message_prefix}{final_error_message} LLM raw response: '{generated_text}', Parsed output attempt: {output}")
-                        break
-               
-                # Proceed with type check if key is present
-                if node_succeeded and key_in_schema in output:
-                    try:
-                        actual_expected_type = eval(type_str_in_schema)
-                        if not isinstance(output[key_in_schema], actual_expected_type):
-                            # Attempt type conversion for basic types if direct instance check fails
-                            can_convert = False
-                            try:
-                                if actual_expected_type is int:
-                                    output[key_in_schema] = int(output[key_in_schema])
-                                    can_convert = True
-                                elif actual_expected_type is float:
-                                    output[key_in_schema] = float(output[key_in_schema])
-                                    can_convert = True
-                                elif actual_expected_type is str:
-                                    output[key_in_schema] = str(output[key_in_schema])
-                                    can_convert = True
-                                # Add other conversions if necessary
-                            except (ValueError, TypeError):
-                                pass # Conversion failed
-
-                            if not can_convert or not isinstance(output[key_in_schema], actual_expected_type):
-                                node_succeeded = False
-                                final_error_message = (
-                                    f"Output schema validation failed: Key '{key_in_schema}' has value '{output[key_in_schema]}' "
-                                    f"of type '{type(output[key_in_schema]).__name__}', but schema expects type '{type_str_in_schema}'. Attempted conversion failed."
-                                )
-                                logger.error(f"{error_message_prefix}{final_error_message} LLM raw response: '{generated_text}'")
-                                break
-                    except NameError:
-                        node_succeeded = False
-                        final_error_message = f"Output schema validation failed: Invalid type string '{type_str_in_schema}' for key '{key_in_schema}' in output_schema."
-                        logger.error(f"{error_message_prefix}{final_error_message}")
+                        logger.error(f"{error_message_prefix}{final_error_message} LLM raw response: '{generated_text}', Parsed output: {output}")
                         break
         else:
             # No output_schema defined, default to putting raw text in "text" key

@@ -2495,5 +2495,204 @@
     },
     "version": "596759ef-03ee-48a4-944d-263a02da4269",
     "timestamp": "2025-05-30T22:44:21.079844"
+  },
+  "feedback_analysis_1748646052": {
+    "data": {
+      "topics": [
+        "App Usage",
+        "App Design",
+        "App Crashes",
+        "Image Upload",
+        "Notifications"
+      ],
+      "sentiment": "mixed",
+      "key_points": [
+        "User enjoys using the app",
+        "App design is appealing",
+        "App crashes occasionally",
+        "Issues with image upload",
+        "Notifications not working consistently"
+      ],
+      "priority": "medium"
+    },
+    "version": "fa84d1a8-ee53-4dd3-9d1c-d56329941ae2",
+    "timestamp": "2025-05-30T23:00:59.074896",
+    "execution_id": "3f4640db-26a4-4ce2-ba97-a8fabafa91e0"
+  },
+  "feedback_analysis_1748646136": {
+    "data": {
+      "topics": [
+        "product satisfaction",
+        "technical issues",
+        "app update"
+      ],
+      "sentiment": "mixed",
+      "key_points": [
+        "User is happy with the product",
+        "User is facing issues with the latest update",
+        "App is crashing frequently"
+      ],
+      "priority": "high"
+    },
+    "version": "ee6e0b8a-f2d4-4a80-b362-6a60d85fd92a",
+    "timestamp": "2025-05-30T23:02:23.042214",
+    "execution_id": "d7da3706-7e51-4f91-87ee-fa6ab2336c93"
+  },
+  "sentiment_analysis_1748646136": {
+    "data": {
+      "overall_sentiment": "mixed",
+      "emotional_tones": [
+        "satisfaction",
+        "frustration"
+      ],
+      "pain_points": [
+        "issues with latest update",
+        "app crashing frequently"
+      ],
+      "positive_aspects": [
+        "happy with the product"
+      ]
+    },
+    "version": "45409aaf-2f25-4a2c-bedb-e651ff7f66e7",
+    "timestamp": "2025-05-30T23:02:28.979502",
+    "execution_id": "d7da3706-7e51-4f91-87ee-fa6ab2336c93"
+  },
+  "feedback_analysis_1748646207": {
+    "data": {
+      "topics": [
+        "app update",
+        "user experience",
+        "design",
+        "loading time"
+      ],
+      "sentiment": "positive",
+      "key_points": [
+        "User loves the new update",
+        "The app is more user-friendly",
+        "Beautiful design",
+        "Loading time needs improvement"
+      ],
+      "priority": "medium"
+    },
+    "version": "a428eeb2-66f7-4668-9d2d-fe42e4db4097",
+    "timestamp": "2025-05-30T23:03:33.356720",
+    "execution_id": "82415b17-2777-4187-ba72-34ed5262d606"
+  },
+  "sentiment_analysis_1748646207": {
+    "data": {
+      "overall_sentiment": "mixed",
+      "emotional_tones": [
+        "appreciation",
+        "satisfaction",
+        "frustration"
+      ],
+      "pain_points": [
+        "Loading time needs improvement"
+      ],
+      "positive_aspects": [
+        "User loves the new update",
+        "The app is more user-friendly",
+        "Beautiful design"
+      ]
+    },
+    "version": "1cbabbdf-0a38-4d3a-8d3a-0a551dfe5bf4",
+    "timestamp": "2025-05-30T23:03:37.794595",
+    "execution_id": "82415b17-2777-4187-ba72-34ed5262d606"
+  },
+  "recommendations_1748646207": {
+    "data": {
+      "immediate_actions": [
+        "Investigate and address the loading time issue"
+      ],
+      "short_term": [
+        "Gather user feedback on specific aspects of the new user interface",
+        "A/B test different loading time optimization strategies"
+      ],
+      "long_term": [
+        "Develop a comprehensive user experience (UX) improvement plan",
+        "Implement performance monitoring and optimization tools"
+      ],
+      "priority_order": [
+        "Investigate and address the loading time issue",
+        "Gather user feedback on specific aspects of the new user interface",
+        "A/B test different loading time optimization strategies",
+        "Develop a comprehensive user experience (UX) improvement plan",
+        "Implement performance monitoring and optimization tools"
+      ]
+    },
+    "version": "d57e9059-9eaf-4a2c-a7ee-edb4f5e190bf",
+    "timestamp": "2025-05-30T23:03:39.530549",
+    "execution_id": "82415b17-2777-4187-ba72-34ed5262d606"
+  },
+  "feedback_analysis_1748646345": {
+    "data": {
+      "topics": [
+        "app update",
+        "user interface",
+        "new features",
+        "app crashes"
+      ],
+      "sentiment": "mixed",
+      "key_points": [
+        "User loves new update",
+        "App interface is user-friendly",
+        "New features are innovative",
+        "App crashes often"
+      ],
+      "priority": "high"
+    },
+    "version": "6e02b575-17fb-4fc8-a519-0be73e3b06c0",
+    "timestamp": "2025-05-30T23:05:49.412180",
+    "execution_id": "52ab70bb-74a0-475c-967d-708c250c5681"
+  },
+  "sentiment_analysis_1748646345": {
+    "data": {
+      "overall_sentiment": "mixed",
+      "emotional_tones": [
+        "appreciation",
+        "excitement",
+        "frustration"
+      ],
+      "pain_points": [
+        "App crashes often"
+      ],
+      "positive_aspects": [
+        "User loves new update",
+        "App interface is user-friendly",
+        "New features are innovative"
+      ]
+    },
+    "version": "51602958-976a-4418-a176-5b5c2db04e8e",
+    "timestamp": "2025-05-30T23:05:53.866993",
+    "execution_id": "52ab70bb-74a0-475c-967d-708c250c5681"
+  },
+  "recommendations_1748646345": {
+    "data": {
+      "immediate_actions": [
+        "Investigate and fix frequent app crashes"
+      ],
+      "short_term": [
+        "Improve app stability",
+        "Gather user feedback on new features",
+        "Address user-reported bugs"
+      ],
+      "long_term": [
+        "Develop a more robust app architecture",
+        "Implement comprehensive testing procedures",
+        "Explore user interface improvements based on feedback"
+      ],
+      "priority_order": [
+        "Investigate and fix frequent app crashes",
+        "Improve app stability",
+        "Gather user feedback on new features",
+        "Address user-reported bugs",
+        "Develop a more robust app architecture",
+        "Implement comprehensive testing procedures",
+        "Explore user interface improvements based on feedback"
+      ]
+    },
+    "version": "ade3e2fa-a383-4849-be10-1f6e5f300df0",
+    "timestamp": "2025-05-30T23:05:55.519391",
+    "execution_id": "52ab70bb-74a0-475c-967d-708c250c5681"
   }
 }
