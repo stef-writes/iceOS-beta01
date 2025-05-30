@@ -4,6 +4,7 @@ from google.generativeai.types import GenerationConfig
 from app.models.config import LLMConfig, ModelProvider
 from .base_handler import BaseLLMHandler
 import logging
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -18,14 +19,15 @@ class GoogleGeminiHandler(BaseLLMHandler):
         tools: Optional[list] = None
     ) -> Tuple[str, Optional[Dict[str, int]], Optional[str]]:
         """Generate text using the Google Gemini API. 'tools' is ignored for now."""
-        if not llm_config.api_key:
+        api_key = llm_config.api_key or os.getenv("GOOGLE_API_KEY")
+        if not api_key:
             return "", None, "API key for Google Gemini is missing."
 
         try:
             # Configuring the API key for each call might be slightly inefficient
             # but ensures thread safety and that the correct key is used if it can change.
             # Alternatively, this could be done once at application startup if the key is static.
-            genai.configure(api_key=llm_config.api_key)
+            genai.configure(api_key=api_key)
             
             model = genai.GenerativeModel(llm_config.model)
 

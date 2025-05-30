@@ -71,8 +71,6 @@ class AiNode(BaseNode):
         self.callbacks = callbacks or []
         self.llm_service = llm_service or LLMService()
         self.tool_service = tool_service or ToolService()
-        if not llm_config.api_key:
-            raise ValueError(f"API key is required for provider {llm_config.provider}")
     
     def build_tool_preamble(self, tools: list) -> str:
         """Generate a human-readable preamble describing available tools, their parameters, and usage examples."""
@@ -92,10 +90,10 @@ class AiNode(BaseNode):
         Returns:
             Truncated prompt
         """
-        max_tokens = self.llm_config.max_context_tokens
+        max_tokens = self.llm_config.max_context_tokens if self.llm_config.max_context_tokens is not None else 4096
         if current_tokens <= max_tokens:
             return prompt
-            
+        
         # Calculate how many tokens to remove
         tokens_to_remove = current_tokens - max_tokens
         
@@ -107,7 +105,7 @@ class AiNode(BaseNode):
         last_period = truncated.rfind('.')
         if last_period > 0:
             truncated = truncated[:last_period + 1]
-            
+        
         return truncated
 
     def _prepare_messages(self, context: Optional[Dict] = None) -> List[Dict[str, str]]:

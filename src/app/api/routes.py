@@ -40,8 +40,9 @@ async def create_text_generation_node(request: NodeRequest):
     try:
         # Extract llm_config from the config object
         llm_config = request.config.llm_config
-        if not llm_config.api_key:
-            raise HTTPException(status_code=422, detail="API key is required")
+        # Remove API key check; assume server-side env vars are used
+        # if not llm_config.api_key:
+        #     raise HTTPException(status_code=422, detail="API key is required")
         node = node_factory(request.config, context_manager, llm_config, tool_service=singleton_tool_service)
         result = await node.execute(request.context or {})
         

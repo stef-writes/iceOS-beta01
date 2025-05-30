@@ -21,7 +21,7 @@ class DeepSeekHandler(BaseLLMHandler):
         tools: Optional[list] = None
     ) -> Tuple[str, Optional[Dict[str, int]], Optional[str]]:
         """Generate text using the DeepSeek API via OpenAI SDK. 'tools' is ignored for now."""
-        api_key = llm_config.api_key or os.getenv("DEEPSEEK_API_KEY") # Prioritize llm_config key
+        api_key = llm_config.api_key or os.getenv("DEEPSEEK_API_KEY")
         if not api_key:
             return "", None, "API key for DeepSeek is missing."
 

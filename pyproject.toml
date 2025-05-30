@@ -62,3 +62,7 @@ profile = "black"
 multi_line_output = 3
 line_length = 88
 
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["app"]
+

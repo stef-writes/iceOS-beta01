@@ -7,6 +7,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
+from pathlib import Path
 
 from app.api.routes import router
 from app.utils.logging import setup_logger
@@ -18,7 +19,10 @@ logger = setup_logger()
 async def lifespan(app: FastAPI):
     """Application lifespan manager"""
     # Startup
-    load_dotenv()
+    # Get the project root directory (where .env should be)
+    project_root = Path(__file__).parent.parent.parent
+    env_path = project_root / '.env'
+    load_dotenv(dotenv_path=env_path)
     
     # Load all relevant API keys from environment and make them available if needed by SDKs
     # The actual key used by an LLM call will be the one specified in the Node's LLMConfig.
@@ -33,9 +37,9 @@ async def lifespan(app: FastAPI):
     
     for key_name in api_keys_to_load:
         key_value = os.getenv(key_name)
-        if key_value:
-            os.environ[key_name] = key_value # Make it available to any SDK that might look for it
-            api_keys_to_load[key_name] = True # Mark as found
+        if key_value is not None and key_value.strip():  # Check for non-empty string
+            os.environ[key_name] = key_value  # Make it available to any SDK that might look for it
+            api_keys_to_load[key_name] = True  # Mark as found
             logger.info(f"{key_name} loaded from environment.")
         else:
             api_keys_to_load[key_name] = False

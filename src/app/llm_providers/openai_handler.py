@@ -4,6 +4,7 @@ from app.models.config import LLMConfig, ModelProvider
 from .base_handler import BaseLLMHandler
 import logging
 import json
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -18,10 +19,11 @@ class OpenAIHandler(BaseLLMHandler):
         tools: Optional[list] = None
     ) -> Tuple[str, Optional[Dict[str, int]], Optional[str]]:
         """Generate text using the OpenAI API with optional function/tool calling support."""
-        if not llm_config.api_key:
+        api_key = llm_config.api_key or os.getenv("OPENAI_API_KEY")
+        if not api_key:
             return "", None, "API key for OpenAI is missing."
 
-        client = AsyncOpenAI(api_key=llm_config.api_key)
+        client = AsyncOpenAI(api_key=api_key)
         messages = []
         
         # Check for system prompt in context or templates (if you plan to support it via context)

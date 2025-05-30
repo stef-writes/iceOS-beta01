@@ -3,6 +3,7 @@ from anthropic import AsyncAnthropic # Ensure this matches your installed packag
 from app.models.config import LLMConfig, ModelProvider
 from .base_handler import BaseLLMHandler
 import logging
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -17,10 +18,11 @@ class AnthropicHandler(BaseLLMHandler):
         tools: Optional[list] = None
     ) -> Tuple[str, Optional[Dict[str, int]], Optional[str]]:
         """Generate text using the Anthropic API. 'tools' is ignored for now."""
-        if not llm_config.api_key:
+        api_key = llm_config.api_key or os.getenv("ANTHROPIC_API_KEY")
+        if not api_key:
             return "", None, "API key for Anthropic is missing."
 
-        client = AsyncAnthropic(api_key=llm_config.api_key)
+        client = AsyncAnthropic(api_key=api_key)
         
         # Anthropic's `messages.create` is preferred. It takes a list of messages.
         # The `prompt` we receive here is the fully formatted user message.

@@ -175,53 +175,46 @@ class MessageTemplate(BaseModel):
 
 class LLMConfig(BaseModel):
     """Configuration for language models"""
-    provider: ModelProvider = Field(ModelProvider.OPENAI, description="Model provider (openai, anthropic, google, deepseek, custom)")
-    model: str = Field(..., description="Model identifier (e.g., gpt-4)")
-    temperature: float = Field(0.7, ge=0.0, le=1.0, description="Sampling temperature")
-    max_tokens: int = Field(500, gt=0, description="Maximum tokens to generate")
-    max_context_tokens: int = Field(4000, gt=0, description="Maximum context window size")
-    api_key: str = Field(..., description="API key for the model service")
-    top_p: float = Field(1.0, ge=0.0, le=1.0, description="Nucleus sampling parameter")
-    frequency_penalty: float = Field(0.0, ge=-2.0, le=2.0, description="Frequency penalty")
-    presence_penalty: float = Field(0.0, ge=-2.0, le=2.0, description="Presence penalty")
-    stop_sequences: Optional[list[str]] = Field(None, description="Stop sequences for generation")
+    provider: Optional[str] = None
+    model: Optional[str] = None
+    temperature: Optional[float] = None
+    max_tokens: Optional[int] = None
+    max_context_tokens: Optional[int] = None
+    api_key: Optional[str] = None
+    top_p: Optional[float] = None
+    frequency_penalty: Optional[float] = None
+    presence_penalty: Optional[float] = None
+    stop_sequences: Optional[list[str]] = None
     custom_parameters: Dict[str, Any] = Field(default_factory=dict, description="Provider-specific parameters")
+    model_config = ConfigDict(extra="allow")
 
     @field_validator('api_key')
     @classmethod
-    def validate_api_key(cls, v: str, info) -> str:
+    def validate_api_key(cls, v: Optional[str], info) -> Optional[str]:
         """Validate API key format based on provider."""
         provider = info.data.get('provider', ModelProvider.OPENAI)
-        
-        if not v: # All providers require an API key
+        if v is None:
+            # Allow missing api_key (will be loaded from env)
+            return v
+        if not v: # All providers require an API key if provided
             raise ValueError(f"API key for provider {provider.value} cannot be empty.")
-
         # Allow test keys for any provider
         if v.startswith('test-'):
             return v
-            
         if provider == ModelProvider.OPENAI:
-            # Original OpenAI key format check
             if not (v.startswith('sk-') and len(v) == 51) and not v.startswith('sk-proj-'):
                 logger.warning("OpenAI API key does not match standard formats (sk-..., sk-proj-...). Proceeding, but please verify.")
         elif provider == ModelProvider.ANTHROPIC:
-            # Anthropic keys often start with sk-ant-
             if not v.startswith('sk-ant-'):
                 logger.warning("Anthropic API key does not start with 'sk-ant-'. Proceeding, but please verify.")
         elif provider == ModelProvider.GOOGLE:
-            # Gemini API keys (via Google AI Studio) typically don't have a fixed prefix but are long alphanumeric strings.
-            # Let's check for a reasonable length, e.g., > 30 chars.
             if len(v) < 30:
                 logger.warning("Google (Gemini) API key seems short. Proceeding, but please verify.")
         elif provider == ModelProvider.DEEPSEEK:
-            # DeepSeek keys might also start with sk- or be long tokens.
-            # For now, we'll be permissive.
             if not v.startswith('sk-'):
                  logger.warning("DeepSeek API key does not start with 'sk-'. Proceeding, but please verify its format.")
         elif provider == ModelProvider.CUSTOM:
-            # For custom providers, we don't enforce any specific format
             pass
-            
         return v
 
     @field_validator('model')
@@ -234,8 +227,6 @@ class LLMConfig(BaseModel):
             return v
         except ValueError as e:
             raise ValueError(f"Invalid model for provider {provider}: {str(e)}")
-
-    model_config = ConfigDict(extra="forbid")
 
 class AppConfig(BaseModel):
     """Application configuration"""

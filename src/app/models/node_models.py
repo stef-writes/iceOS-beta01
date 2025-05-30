@@ -151,7 +151,7 @@ class NodeConfig(BaseModel):
                 if not template.is_compatible_with_model(model):
                     raise ValueError(f"Model {model} is too old for template requiring {template.min_model_version}")
 
-    model_config = ConfigDict(extra="forbid")  # Prevent unexpected arguments
+    model_config = ConfigDict(extra="allow")  # Allow extra fields for future-proofing
 
 class NodeExecutionRecord(BaseModel):
     """Execution statistics and historical data"""
