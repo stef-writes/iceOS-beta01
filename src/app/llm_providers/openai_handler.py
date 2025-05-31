@@ -36,6 +36,7 @@ class OpenAIHandler(BaseLLMHandler):
 
         try:
             async with client:
+                logger.info(f"🔄 Making OpenAI API call: model={llm_config.model}, max_tokens={llm_config.max_tokens}")
                 logger.debug(f"Sending request to OpenAI: model={llm_config.model}, messages={messages}, temp={llm_config.temperature}, max_tokens={llm_config.max_tokens}, tools={tools}")
                 response = await client.chat.completions.create(
                     model=llm_config.model,
@@ -48,6 +49,14 @@ class OpenAIHandler(BaseLLMHandler):
                     stop=llm_config.stop_sequences,
                     functions=tools if tools else None
                 )
+                logger.info(f"✅ OpenAI API call completed: {len(response.choices[0].message.content) if response.choices and response.choices[0].message and response.choices[0].message.content else 0} chars")
+                
+                # Add content preview
+                if response.choices and response.choices[0].message and response.choices[0].message.content:
+                    content = response.choices[0].message.content
+                    preview = content[:200] + "..." if len(content) > 200 else content
+                    logger.info(f"📝 Generated content preview:\n{preview}")
+                
                 logger.debug(f"Received response from OpenAI: {response}")
 
                 text_content = ""

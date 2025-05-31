@@ -21,10 +21,16 @@ class DeepSeekHandler(BaseLLMHandler):
         tools: Optional[list] = None
     ) -> Tuple[str, Optional[Dict[str, int]], Optional[str]]:
         """Generate text using the DeepSeek API via OpenAI SDK. 'tools' is ignored for now."""
-        api_key = llm_config.api_key or os.getenv("DEEPSEEK_API_KEY")
+        # Prioritize DEEPSEEK_API_KEY from environment for DeepSeek provider
+        api_key = os.getenv("DEEPSEEK_API_KEY")
+        
+        # If not in env, try the one from llm_config (e.g. passed in request for this specific provider)
+        if not api_key:
+            api_key = llm_config.api_key
 
         if not api_key:
-            return "", None, "API key for DeepSeek is missing."
+            logger.error("API key for DeepSeek is missing. Ensure DEEPSEEK_API_KEY is set in .env or llm_config.api_key is provided for DeepSeek requests.")
+            return "", None, "API key for DeepSeek is missing. Set DEEPSEEK_API_KEY or provide in llm_config specifically for DeepSeek."
 
         client = AsyncOpenAI(
             api_key=api_key,
@@ -40,6 +46,7 @@ class DeepSeekHandler(BaseLLMHandler):
             messages.insert(0, {"role": "system", "content": system_prompt_content})
 
         try:
+            logger.info(f"🔄 Making DeepSeek API call: model={llm_config.model}, max_tokens={llm_config.max_tokens}")
             logger.debug(f"Sending request to DeepSeek (via OpenAI SDK): model={llm_config.model}, messages_count={len(messages)}, temp={llm_config.temperature}, max_tokens={llm_config.max_tokens}")
             
             # Ensure custom_parameters are passed correctly if any
@@ -57,12 +64,19 @@ class DeepSeekHandler(BaseLLMHandler):
 
             response = await client.chat.completions.create(**request_params)
             
-            logger.debug(f"Received response from DeepSeek (via OpenAI SDK): {response}")
-
             text_content = ""
             if response.choices and response.choices[0].message and response.choices[0].message.content:
                 text_content = response.choices[0].message.content.strip()
             
+            logger.info(f"✅ DeepSeek API call completed: {len(text_content) if text_content else 0} chars")
+            
+            # Add content preview
+            if text_content:
+                preview = text_content[:200] + "..." if len(text_content) > 200 else text_content
+                logger.info(f"📝 Generated content preview:\n{preview}")
+            
+            logger.debug(f"Received response from DeepSeek (via OpenAI SDK): {response}")
+
             if not text_content:
                 finish_reason = response.choices[0].finish_reason if response.choices else None
                 if finish_reason == "length":

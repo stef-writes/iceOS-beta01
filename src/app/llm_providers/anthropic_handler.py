@@ -52,6 +52,7 @@ class AnthropicHandler(BaseLLMHandler):
 
         try:
             async with client: # AsyncAnthropic client can be used as a context manager
+                logger.info(f"🔄 Making Anthropic API call: model={llm_config.model}, max_tokens={llm_config.max_tokens}")
                 logger.debug(f"Sending request to Anthropic: model={llm_config.model}, system_prompt_present={bool(system_param)}, messages_count={len(messages)}, temp={llm_config.temperature}, max_tokens={llm_config.max_tokens}")
                 logger.info(f"ANTHROPIC_HANDLER: Preparing to call messages.create.")
                 logger.info(f"ANTHROPIC_HANDLER: llm_config.model = {llm_config.model}")
@@ -84,6 +85,13 @@ class AnthropicHandler(BaseLLMHandler):
                     # Assuming the first content block is the primary text response
                     if hasattr(response.content[0], 'text'):
                         text_content = response.content[0].text.strip()
+                
+                logger.info(f"✅ Anthropic API call completed: {len(text_content) if text_content else 0} chars")
+                
+                # Add content preview
+                if text_content:
+                    preview = text_content[:200] + "..." if len(text_content) > 200 else text_content
+                    logger.info(f"📝 Generated content preview:\n{preview}")
                 
                 if not text_content:
                     logger.warning(f"Anthropic response missing expected text content: {response}")
