@@ -1,10 +1,10 @@
 import pytest
-from src.app.nodes.ai_node import AiNode
-from src.app.models.node_models import NodeConfig, NodeExecutionResult
-from src.app.models.config import LLMConfig
-from src.app.utils.context import GraphContextManager
-from src.app.services.tool_service import ToolService
-from src.app.tools.calculator import CalculatorTool
+from app.nodes.ai_node import AiNode
+from app.models.node_models import NodeConfig, NodeExecutionResult
+from app.models.config import LLMConfig
+from app.utils.context import GraphContextManager
+from app.services.tool_service import ToolService
+from app.tools.calculator import CalculatorTool
 
 class DummyConfig(NodeConfig):
     model: str = "dummy-model"
@@ -22,24 +22,45 @@ class DummyConfig(NodeConfig):
     type: str = "ai"
 
 class MockLLMService:
-    def __init__(self, response):
+    def __init__(self, response, final_response=None):
         self.response = response
+        self.final_response = final_response
+        self.call_count = 0
+        
     async def generate(self, llm_config, prompt, context=None, tools=None):
+        self.call_count += 1
+        if self.final_response and self.call_count > 1:
+            return (self.final_response, None, None)
         return (self.response, None, None)
 
 @pytest.mark.asyncio
-async def test_valid_tool_call_detection():
+async def test_successful_tool_call():
     tool_service = ToolService()
     tool_service.register_tool(CalculatorTool())
     config = DummyConfig(llm_config=LLMConfig(provider='openai', model='gpt-3.5-turbo', api_key='fake'), prompt="Use the calculator to add 2 and 3.")
-    # Mock LLM service that always returns a tool call
+    # Mock LLM service that returns a tool call first, then a final result
+    llm_service = MockLLMService(
+        '{"function_call": {"name": "calculator", "arguments": {"a": 2, "b": 3}}}',
+        '{"result": 5}'  # Final response after tool call
+    )
+    node = AiNode(config, GraphContextManager(), config.llm_config, llm_service=llm_service, tool_service=tool_service)
+    result: NodeExecutionResult = await node.execute({})
+    assert result.success
+    assert result.output['result'] == 5
+    assert result.error is None
+
+@pytest.mark.asyncio
+async def test_max_steps_limit():
+    tool_service = ToolService()
+    tool_service.register_tool(CalculatorTool())
+    config = DummyConfig(llm_config=LLMConfig(provider='openai', model='gpt-3.5-turbo', api_key='fake'), prompt="Use the calculator to add 2 and 3.")
+    # Mock LLM service that always returns a tool call to trigger max steps
     llm_service = MockLLMService('{"function_call": {"name": "calculator", "arguments": {"a": 2, "b": 3}}}')
     node = AiNode(config, GraphContextManager(), config.llm_config, llm_service=llm_service, tool_service=tool_service)
     result: NodeExecutionResult = await node.execute({})
-    # Since we're using a mock that always returns a tool call, we expect to hit max steps
     assert not result.success
     assert "Max agentic steps" in result.error
-    assert result.error_type == "MaxStepsReached"
+    assert result.metadata.error_type == "MaxStepsReached"
 
 @pytest.mark.asyncio
 async def test_invalid_json_tool_call_detection():
