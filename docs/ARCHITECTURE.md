@@ -1,147 +1,209 @@
-# ScriptChain 3.0: Architecture Overview
+# iceOS: Current Implementation Architecture
 
-## 1. High-Level Architecture Diagram (Text/ASCII)
+## Core Components
 
-```
-+-------------------+         +-------------------+         +-------------------+
-|                   |         |                   |         |                   |
-|   API Endpoint    |  --->   |  ScriptChain      |  --->   |  GraphContextMgr  |
-|  /chains/execute  |         |  (Orchestrator)   |         |  (Context Store)  |
-|                   |         |                   |         |                   |
-+-------------------+         +-------------------+         +-------------------+
-                                      |
-                                      v
-                          +-------------------------+
-                          |  Dependency Graph (DAG) |
-                          +-------------------------+
-                                      |
-                                      v
-+-------------------+    +-------------------+    +-------------------+
-|                   |    |                   |    |                   |
-|   Node (Level 0)  |    |   Node (Level 0)  |    |   Node (Level 0)  |
-|   (OpenAI)        |    |   (Gemini)        |    |   (Anthropic)     |
-+-------------------+    +-------------------+    +-------------------+
-         |                        |                        |
-         +-----------+------------+------------+-----------+
-                     |                         |
-                     v                         v
-              +-------------------+    +-------------------+
-              |   Node (Level 1)  |    |   Node (Level 1)  |
-              |   (OpenAI)        |    |   (Gemini)        |
-              +-------------------+    +-------------------+
-                     |                         |
-                     +-----------+-------------+
-                                 |
-                                 v
-                        +-------------------+
-                        |   Node (Level 2)  |
-                        |   (Anthropic)     |
-                        +-------------------+
+### 1. Node System
+Currently implemented with:
+- `BaseNode`: Abstract base class defining node interface
+- `AiNode`: Concrete implementation for AI-powered nodes
+- Node Factory: Creates appropriate node instances based on type
+
+```python
+# Current node types
+node_types = {
+    "ai": "AiNode",  # Implemented
+    "tool": "ToolNode",  # Planned
+    "router": "RouterNode"  # Planned
+}
 ```
 
----
+### 2. LLM Integration
+Implemented providers:
+- OpenAI
+- Anthropic
+- Google Gemini
+- DeepSeek
 
-## 2. Component Breakdown
+Each provider has:
+- Handler class implementing `BaseLLMHandler`
+- Configuration management
+- API key handling
+- Error handling
 
-### A. API Layer
-- **Receives**: Workflow definition (nodes, dependencies, models, schemas).
-- **Calls**: `ScriptChain` orchestrator.
+### 3. Context Management
+`GraphContextManager` provides:
+- Context storage and retrieval
+- Dependency tracking
+- Token management
+- File-based persistence
 
-### B. ScriptChain (Orchestrator)
-- **Builds**: Dependency graph (DAG) from node configs.
-- **Assigns**: Levels to nodes based on dependencies.
-- **Executes**: Each level sequentially; nodes within a level in parallel (asyncio).
-- **Dispatches**: Each node to the correct LLM handler (OpenAI, Gemini, Anthropic, etc.).
-- **Handles**: Errors, metrics, and callbacks.
+### 4. Tool System
+Current implementation:
+- `BaseTool` abstract class
+- Tool registration system
+- Parameter validation
+- Output schema support
 
-### C. Node Execution
-- **Each Node**:
-  - Has its own model/provider, prompt, input/output schema.
-  - Receives context (outputs from dependencies) via the context manager.
-  - Executes via the appropriate LLM handler.
-  - Validates output against schema.
+### 5. Chain System
+`ScriptChain` orchestrates:
+- Node execution
+- Dependency management
+- Parallel processing
+- Error handling
 
-### D. GraphContextManager
-- **Stores**: All intermediate and final outputs.
-- **Provides**: Context to nodes as needed (based on input mappings or default rules).
-- **Ensures**: Data integrity and type safety (via schema validation).
+## Data Flow
 
-### E. LLM Handlers
-- **Abstracted**: Each provider (OpenAI, Gemini, Anthropic, etc.) has its own handler.
-- **Plug-and-play**: Nodes can use any supported LLM, even within the same workflow.
+1. **API Layer** (`main.py`)
+   - FastAPI application
+   - Environment configuration
+   - API key management
+   - CORS handling
 
----
+2. **Node Execution**
+   ```python
+   # Current flow
+   API Request -> ScriptChain -> Node Factory -> AiNode -> LLM Handler -> Response
+   ```
 
-## 3. Data Flow Example
+3. **Context Management**
+   ```python
+   # Context flow
+   Node Execution -> GraphContextManager -> Context Store -> Next Node
+   ```
 
-1. **API** receives a workflow with 5 nodes, each specifying its model and dependencies.
-2. **ScriptChain** builds the DAG, assigns levels:
-   - Level 0: Nodes A, B, C (no dependencies)
-   - Level 1: Nodes D, E (depend on outputs from A, B, C)
-   - Level 2: Node F (depends on D, E)
-3. **Execution**:
-   - Level 0 nodes run in parallel (each with its own LLM handler).
-   - Outputs are stored in the context manager.
-   - Level 1 nodes start once their dependencies are done, using outputs from Level 0 as context.
-   - Level 2 node runs last, using outputs from Level 1.
-4. **Context** is passed and validated at each step.
-5. **Results** are aggregated and returned via the API.
+## Current Limitations
 
----
+1. **Node Types**
+   - Only `AiNode` is fully implemented
+   - `ToolNode` and `RouterNode` are planned
 
-## 4. Key Technical Features
+2. **Tool System**
+   - Basic tool framework in place
+   - Limited tool implementations
+   - Need more specialized tools
 
-- **Parallelism**: Asyncio + semaphore for concurrency control.
-- **Multi-LLM**: Per-node model/provider selection.
-- **Context Management**: Centralized, schema-validated, supports complex mappings.
-- **Error Handling**: Skips or fails dependents if a node fails, but continues where possible.
-- **Extensibility**: New LLMs or node types can be added with minimal changes.
+3. **UI/UX**
+   - No visual interface yet
+   - API-only interaction
+   - Limited monitoring capabilities
 
----
+## Next Steps
 
-## 5. Mermaid Diagram (for Markdown Viewers)
+1. **Immediate**
+   - Implement remaining node types
+   - Add more specialized tools
+   - Enhance error handling
+   - Improve monitoring
 
-Paste this into a Markdown viewer that supports [Mermaid](https://mermaid-js.github.io/mermaid/):
+2. **Short-term**
+   - Add visual interface
+   - Implement workflow editor
+   - Add debugging tools
+   - Enhance security
 
-```mermaid
-flowchart TD
-    API[/API: /chains/execute/]
-    ScriptChain[ScriptChain Orchestrator]
-    ContextMgr[GraphContextManager]
-    subgraph Level 0
-        A[Node A (OpenAI)]
-        B[Node B (Gemini)]
-        C[Node C (Anthropic)]
-    end
-    subgraph Level 1
-        D[Node D (OpenAI)]
-        E[Node E (Gemini)]
-    end
-    F[Node F (Anthropic)]
-    API --> ScriptChain
-    ScriptChain --> ContextMgr
-    ScriptChain --> A
-    ScriptChain --> B
-    ScriptChain --> C
-    A --> D
-    B --> D
-    C --> E
-    D --> F
-    E --> F
-    A --> ContextMgr
-    B --> ContextMgr
-    C --> ContextMgr
-    D --> ContextMgr
-    E --> ContextMgr
-    F --> ContextMgr
+3. **Long-term**
+   - Spatial computing support
+   - Quantum readiness
+   - Autonomous optimization
+   - Advanced security features
+
+## Technical Details
+
+### Node Configuration
+```python
+node_config = {
+    "metadata": {
+        "node_id": "unique_id",
+        "node_type": "ai",
+        "name": "node_name",
+        "description": "node_description"
+    },
+    "input_schema": {
+        "field_name": "type_string"
+    },
+    "output_schema": {
+        "field_name": "type_string"
+    },
+    "templates": {
+        "system": "template_string",
+        "user": "template_string"
+    }
+}
 ```
 
----
+### LLM Configuration
+```python
+llm_config = {
+    "provider": "openai",
+    "model": "gpt-4",
+    "api_key": "optional_key",
+    "max_tokens": 4000,
+    "temperature": 0.7
+}
+```
 
-## 6. Summary
+### Tool Definition
+```python
+tool_config = {
+    "name": "tool_name",
+    "description": "tool_description",
+    "parameters_schema": {
+        "type": "object",
+        "properties": {
+            "param_name": {
+                "type": "string",
+                "description": "param_description"
+            }
+        }
+    }
+}
+```
 
-Your system flexibly orchestrates complex, multi-level workflows using multiple LLMs, with robust context management, parallel execution, and error handling—enabling advanced, modular AI pipelines.
+## Security Considerations
 
----
+1. **API Key Management**
+   - Environment variable based
+   - Per-node configuration
+   - Secure storage
 
-**For further details, see the code in `app/chains/script_chain.py`, `app/models/node_models.py`, and related modules.** 
+2. **Context Security**
+   - File-based storage
+   - Locking mechanism
+   - Version tracking
+
+3. **Execution Security**
+   - Input validation
+   - Output validation
+   - Error handling
+
+## Monitoring and Metrics
+
+1. **Current Capabilities**
+   - Basic logging
+   - Token usage tracking
+   - Execution timing
+
+2. **Planned Features**
+   - Performance metrics
+   - Cost tracking
+   - Usage analytics
+   - Health monitoring
+
+## Development Guidelines
+
+1. **Code Structure**
+   - Modular design
+   - Clear interfaces
+   - Type hints
+   - Documentation
+
+2. **Testing**
+   - Unit tests
+   - Integration tests
+   - Performance tests
+
+3. **Documentation**
+   - Code comments
+   - API documentation
+   - Architecture docs
+   - User guides 
