@@ -484,13 +484,20 @@ class AiNode(BaseNode):
                     if expected_type == "str":
                         output[key] = generated_text.strip()
                     elif expected_type == "int":
-                        # Extract first number
+                        # Extract first number, fail if no valid number found
                         numbers = re.findall(r'-?\d+', generated_text)
-                        output[key] = int(numbers[0]) if numbers else 0
+                        if not numbers:
+                            return {}, False, f"Output schema validation failed: No valid integer found in '{generated_text}'"
+                        try:
+                            output[key] = int(numbers[0])
+                        except ValueError:
+                            return {}, False, f"Output schema validation failed: Could not convert '{numbers[0]}' to integer"
                     elif expected_type == "float":
-                        # Extract first float
+                        # Extract first float, fail if no valid float found
                         numbers = re.findall(r'-?\d*\.?\d+', generated_text)
-                        output[key] = float(numbers[0]) if numbers else 0.0
+                        if not numbers:
+                            return {}, False, f"Output schema validation failed: No valid float found in '{generated_text}'"
+                        output[key] = float(numbers[0])
                     else:
                         # For other types, convert string
                         output[key] = generated_text.strip()
@@ -518,8 +525,8 @@ class AiNode(BaseNode):
                         output[key] = int(output[key])
                     elif expected_type == "float" and not isinstance(output[key], (int, float)):
                         output[key] = float(output[key])
-                except (ValueError, TypeError):
-                    return {}, False, f"Output schema validation failed: Cannot convert '{output[key]}' to {expected_type} for key '{key}'"
+                except (ValueError, TypeError) as e:
+                    return {}, False, f"Output schema validation failed: Cannot convert '{output[key]}' to {expected_type} for key '{key}': {str(e)}"
         
         logger.debug(f"[_PVP] Final output: {output}")
         return output, True, None

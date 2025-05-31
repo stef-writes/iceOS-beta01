@@ -114,18 +114,11 @@
 
 - [ ] **Dependency Injection**
   - Pass dependencies (e.g., services, configurations) into components rather than hardcoding them.
-  - This makes testing and swapping implementations easier.
 
 ## 3. Testing and Quality Assurance
 
 - [ ] **Unit Tests**
-  - Write unit tests for each component in isolation.
-  - This ensures components work correctly even if others change.
-
 - [ ] **End-to-End Tests**
-  - Test the entire system from start to finish.
-  - This catches integration issues.
-
 - [ ] **Property-Based Testing**
   - Use property-based testing (e.g., Hypothesis) to generate random inputs and verify invariants.
 
