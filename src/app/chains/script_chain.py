@@ -77,6 +77,7 @@ class ScriptChain:
     def __init__(
         self,
         nodes: List[NodeConfig],
+        name: Optional[str] = None,
         context_manager: Optional[GraphContextManager] = None,
         callbacks: Optional[List[ScriptChainCallback]] = None,
         max_parallel: int = 5,
@@ -87,6 +88,7 @@ class ScriptChain:
         
         Args:
             nodes: List of node configurations
+            name: Optional name for the chain (defaults to 'chain-{uuid}')
             context_manager: Optional context manager for global context persistence.
             callbacks: Optional list of callbacks
             max_parallel: Maximum number of parallel executions
@@ -99,12 +101,14 @@ class ScriptChain:
         self.callbacks = callbacks or []
         self.max_parallel = max_parallel
         self.chain_id = str(uuid4())
+        self.name = name or f"chain-{self.chain_id[:8]}"  # Use first 8 chars of UUID if no name provided
         self.persist_intermediate_outputs = persist_intermediate_outputs
         self.metrics = {
             'total_tokens': 0,
             'node_execution_times': {},
             'provider_usage': {},
-            'token_usage': {}
+            'token_usage': {},
+            'chain_name': self.name
         }
         self.tool_service = tool_service
         
@@ -154,6 +158,8 @@ class ScriptChain:
         results = {}
         errors = []
         
+        logger.info(f"Starting execution of chain '{self.name}' (ID: {self.chain_id})")
+        
         # Execute each level in sequence
         for level_num in sorted(self.levels.keys()):
             level_start_time = datetime.utcnow()
@@ -177,6 +183,8 @@ class ScriptChain:
         end_time = datetime.utcnow()
         duration = (end_time - start_time).total_seconds()
         
+        logger.info(f"Completed execution of chain '{self.name}' (ID: {self.chain_id}) in {duration:.2f} seconds")
+        
         return NodeExecutionResult(
             success=len(errors) == 0,
             output=results,
@@ -184,6 +192,7 @@ class ScriptChain:
             metadata=NodeMetadata(
                 node_id=self.chain_id,
                 node_type="script_chain",
+                name=self.name,  # Include chain name in metadata
                 version="1.0.0",
                 start_time=start_time,
                 end_time=end_time,
@@ -193,7 +202,8 @@ class ScriptChain:
             token_stats={
                 "total_tokens": self.metrics["total_tokens"],
                 "provider_usage": self.metrics["provider_usage"],
-                "token_usage": self.metrics["token_usage"]
+                "token_usage": self.metrics["token_usage"],
+                "chain_name": self.name
             }
         )
         

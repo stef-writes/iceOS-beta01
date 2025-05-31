@@ -33,13 +33,14 @@ class NodeMetadata(BaseModel):
     """Metadata model for node versioning and ownership"""
     node_id: str = Field(..., description="Unique node identifier")
     node_type: str = Field(..., description="Type of node (ai)")
+    name: Optional[str] = None
     version: str = Field("1.0.0", pattern=r"^\d+\.\d+\.\d+$", description="Semantic version of node configuration")
     owner: Optional[str] = Field(None, description="Node owner/maintainer")
-    created_at: datetime = Field(default_factory=datetime.utcnow, description="Creation timestamp")
-    modified_at: datetime = Field(default_factory=datetime.utcnow, description="Last modification timestamp")
+    created_at: Optional[datetime] = None
+    modified_at: Optional[datetime] = None
     description: Optional[str] = Field(None, description="Description of the node")
     error_type: Optional[str] = Field(None, description="Type of error if execution failed")
-    timestamp: datetime = Field(default_factory=datetime.utcnow, description="Execution timestamp")
+    timestamp: Optional[datetime] = None
     start_time: Optional[datetime] = Field(None, description="Execution start time")
     end_time: Optional[datetime] = Field(None, description="Execution end time")
     duration: Optional[float] = Field(None, description="Execution duration in seconds")
