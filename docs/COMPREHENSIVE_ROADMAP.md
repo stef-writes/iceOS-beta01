@@ -18,6 +18,12 @@ iceOS is an AI-native operating system that combines a co-pilot interface with p
   - Manage context and state
   - Execute agentic loops for complex tasks
 
+- **CustomNode**: Base class for custom implementations
+  - Extends BaseNode
+  - Supports custom ML/AI models
+  - Allows custom execution logic
+  - Enables custom data processing
+
 ### Tool System
 - **BaseTool**: Abstract base class for all tools
   - Defines tool interface and schema
@@ -124,59 +130,59 @@ Requirements:
 - Co-pilot visual guidance
 - Interactive help system
 
-### 2.3 Workflow Management (Week 7)
+### 2.3 Custom Node Framework (Week 7)
 Success Criteria: Users can:
-- Create, edit, and version workflows
-- Execute and monitor workflows
-- Debug and optimize workflows
-- Share and collaborate on workflows
+- Create custom nodes with specific behaviors
+- Integrate custom ML/AI models
+- Define custom data processing logic
+- Share and reuse custom nodes
 
 Requirements:
-- Workflow composition tools
-- Execution control
-- Version management
-- Co-pilot workflow optimization
+- CustomNode base implementation
+- Model integration framework
+- Custom execution engine
+- Node packaging and distribution
 
-### 2.4 Debugging System (Week 8)
+### 2.4 ML/AI Model Integration (Week 8)
 Success Criteria: Users can:
-- Identify and fix issues quickly
-- Understand system state and data flow
-- Get intelligent debugging assistance
-- Prevent common errors
+- Import and use custom ML models
+- Train and fine-tune models
+- Monitor model performance
+- Version and manage models
 
 Requirements:
-- Inspection and control tools
-- Intelligent debugging assistance
-- Error analysis and prevention
-- Debug guidance system
+- Model registry and management
+- Training pipeline integration
+- Performance monitoring
+- Version control for models
 
 ## Phase 3: Advanced Features (Weeks 9-12)
 
-### 3.1 Performance (Week 9)
+### 3.1 Custom Block System (Week 9)
 Success Criteria: Users can:
-- Monitor system performance
-- Identify bottlenecks
-- Optimize resource usage
-- Scale workflows efficiently
+- Create reusable workflow blocks
+- Combine blocks into complex workflows
+- Share and version blocks
+- Get assistance in block creation
 
 Requirements:
-- Profiling and optimization tools
-- Resource management
-- Intelligent optimization
-- Performance monitoring
+- Block definition framework
+- Block composition system
+- Block versioning
+- Block documentation
 
-### 3.2 Security (Week 10)
+### 3.2 Model Optimization (Week 10)
 Success Criteria: Users can:
-- Manage access and permissions
-- Monitor security events
-- Prevent vulnerabilities
-- Maintain compliance
+- Optimize model performance
+- Reduce resource usage
+- Monitor model metrics
+- Automate optimization
 
 Requirements:
-- Authentication and authorization
-- Security monitoring
-- Vulnerability detection
-- Compliance management
+- Performance profiling
+- Resource optimization
+- Metric collection
+- Automated tuning
 
 ### 3.3 Monitoring (Week 11)
 Success Criteria: Users can:
@@ -359,6 +365,50 @@ Requirements:
 - Continuous feedback loop
 
 ## Technical Implementation Details
+
+### Custom Node Architecture
+
+#### 1. CustomNode Definition
+```python
+class CustomNode(BaseNode):
+    """Base class for custom node implementations"""
+    
+    def __init__(self, config: NodeConfig):
+        super().__init__(config)
+        self.model = None  # Custom ML/AI model
+        self.processor = None  # Custom data processor
+        
+    async def load_model(self):
+        """Load custom ML/AI model"""
+        pass
+        
+    async def process_data(self, data: Any) -> Any:
+        """Custom data processing"""
+        pass
+        
+    async def execute(self, context: Dict[str, Any]) -> NodeExecutionResult:
+        """Custom execution logic"""
+        pass
+```
+
+#### 2. Model Integration
+- Model registry and versioning
+- Model loading and caching
+- Input/output processing
+- Error handling and recovery
+
+#### 3. Custom Block System
+- Block definition and composition
+- Block versioning and sharing
+- Block documentation
+- Block testing framework
+
+#### 4. Development Guidelines
+- Inherit from CustomNode
+- Define clear interfaces
+- Implement proper error handling
+- Document model requirements
+- Include usage examples
 
 ### Tool System Architecture
 
