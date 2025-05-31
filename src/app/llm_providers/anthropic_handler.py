@@ -4,6 +4,7 @@ from app.models.config import LLMConfig, ModelProvider
 from .base_handler import BaseLLMHandler
 import logging
 import os
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -82,8 +83,19 @@ class AnthropicHandler(BaseLLMHandler):
 
                 text_content = ""
                 if response.content and isinstance(response.content, list) and len(response.content) > 0:
-                    # Assuming the first content block is the primary text response
-                    if hasattr(response.content[0], 'text'):
+                    # Check for function calls first
+                    if hasattr(response.content[0], 'function_call') and response.content[0].function_call:
+                        # If it's a function call, return it as a JSON string
+                        text_content = json.dumps({
+                            "function_call": {
+                                "name": response.content[0].function_call.name,
+                                "arguments": json.loads(response.content[0].function_call.arguments)
+                            }
+                        })
+                        logger.info(f"📝 Generated content preview:\n{text_content}")
+                        return text_content, None, None
+                    # Then check for regular text content
+                    elif hasattr(response.content[0], 'text'):
                         text_content = response.content[0].text.strip()
                 
                 logger.info(f"✅ Anthropic API call completed: {len(text_content) if text_content else 0} chars")

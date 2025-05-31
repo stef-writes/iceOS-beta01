@@ -49,6 +49,8 @@ async def lifespan(app: FastAPI):
     # if not api_keys_to_load["OPENAI_API_KEY"] and not api_keys_to_load["ANTHROPIC_API_KEY"] etc.:
     #     logger.error("No API keys found for any supported providers. Application might not function correctly.")
     
+    logger.info("Starting up the application...")
+    
     yield
     
     # Shutdown
@@ -74,3 +76,8 @@ app.add_middleware(
 
 # Include routers
 app.include_router(router)
+
+@app.get("/")
+async def root():
+    logger.info("Root endpoint accessed")
+    return {"message": "Hello World"}

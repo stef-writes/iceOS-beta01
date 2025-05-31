@@ -4,6 +4,7 @@ from app.models.config import LLMConfig, ModelProvider
 from .base_handler import BaseLLMHandler
 import logging
 import os
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -65,8 +66,20 @@ class DeepSeekHandler(BaseLLMHandler):
             response = await client.chat.completions.create(**request_params)
             
             text_content = ""
-            if response.choices and response.choices[0].message and response.choices[0].message.content:
-                text_content = response.choices[0].message.content.strip()
+            if response.choices and response.choices[0].message:
+                msg = response.choices[0].message
+                if hasattr(msg, 'function_call') and msg.function_call:
+                    # If it's a function call, return it as a JSON string
+                    text_content = json.dumps({
+                        "function_call": {
+                            "name": msg.function_call.name,
+                            "arguments": json.loads(msg.function_call.arguments)
+                        }
+                    })
+                    logger.info(f"📝 Generated content preview:\n{text_content}")
+                    return text_content, None, None
+                elif msg.content:
+                    text_content = msg.content.strip()
             
             logger.info(f"✅ DeepSeek API call completed: {len(text_content) if text_content else 0} chars")
             

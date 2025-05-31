@@ -18,7 +18,7 @@ class ContextFormat(str, Enum):
 class InputMapping(BaseModel):
     """Mapping configuration for node inputs"""
     source_node_id: str = Field(..., description="Source node ID (UUID of the dependency)")
-    source_output_key: str = Field(..., description="Key from the source node's output object to use (e.g., 'text', 'result')")
+    source_output_key: str = Field(..., description="Key from the source node's output object to use (e.g., 'text', 'result', 'data.items.0')")
     rules: Dict[str, Any] = Field(default_factory=dict, description="Optional mapping/transformation rules (currently unused)")
 
 class ContextRule(BaseModel):
@@ -33,17 +33,13 @@ class NodeMetadata(BaseModel):
     """Metadata model for node versioning and ownership"""
     node_id: str = Field(..., description="Unique node identifier")
     node_type: str = Field(..., description="Type of node (ai)")
-    version: str = Field("1.0.0", pattern=r"^\d+\.\d+\.\d+$",
-                        description="Semantic version of node configuration")
+    version: str = Field("1.0.0", pattern=r"^\d+\.\d+\.\d+$", description="Semantic version of node configuration")
     owner: Optional[str] = Field(None, description="Node owner/maintainer")
-    created_at: datetime = Field(default_factory=datetime.utcnow,
-                               description="Creation timestamp")
-    modified_at: datetime = Field(default_factory=datetime.utcnow,
-                                description="Last modification timestamp")
+    created_at: datetime = Field(default_factory=datetime.utcnow, description="Creation timestamp")
+    modified_at: datetime = Field(default_factory=datetime.utcnow, description="Last modification timestamp")
     description: Optional[str] = Field(None, description="Description of the node")
     error_type: Optional[str] = Field(None, description="Type of error if execution failed")
-    timestamp: datetime = Field(default_factory=datetime.utcnow,
-                               description="Execution timestamp")
+    timestamp: datetime = Field(default_factory=datetime.utcnow, description="Execution timestamp")
     start_time: Optional[datetime] = Field(None, description="Execution start time")
     end_time: Optional[datetime] = Field(None, description="Execution end time")
     duration: Optional[float] = Field(None, description="Execution duration in seconds")
@@ -80,8 +76,8 @@ class NodeConfig(BaseModel):
     templates: Dict[str, Any] = Field(default_factory=dict, description="Message templates for the node")
     llm_config: Optional[LLMConfig] = Field(None, description="LLM configuration for the node")
     metadata: Optional[NodeMetadata] = None
-    input_schema: Dict[str, Any] = Field(default_factory=dict, description="Input schema for the node")
-    output_schema: Dict[str, Any] = Field(default_factory=dict, description="Output schema for the node")
+    input_schema: Dict[str, str] = Field(default_factory=dict, description="Input schema for the node")
+    output_schema: Dict[str, str] = Field(default_factory=dict, description="Output schema for the node")
     input_mappings: Dict[str, InputMapping] = Field(default_factory=dict, description="Input mappings for the node's prompt placeholders")
     input_selection: Optional[List[str]] = None
     context_rules: Dict[str, ContextRule] = Field(default_factory=dict, description="Context rules for the node")
@@ -109,28 +105,21 @@ class NodeConfig(BaseModel):
             raise ValueError(f"Node {node_id} cannot depend on itself")
         return v
 
-    @field_validator('token_management')
+    @field_validator('input_mappings')
     @classmethod
-    def validate_token_management(cls, v: Dict[str, Any]) -> Dict[str, Any]:
-        """Validate token management configuration."""
-        if not isinstance(v, dict):
-            raise ValueError("token_management must be a dictionary")
+    def validate_input_mappings(cls, v: Dict[str, InputMapping], info) -> Dict[str, InputMapping]:
+        """Validate input mappings against dependencies."""
+        data = info.data
+        dependencies = data.get('dependencies', [])
         
-        # Validate max_context_tokens
-        if 'max_context_tokens' in v:
-            if not isinstance(v['max_context_tokens'], int) or v['max_context_tokens'] <= 0:
-                raise ValueError("max_context_tokens must be a positive integer")
-        
-        # Validate max_completion_tokens
-        if 'max_completion_tokens' in v:
-            if not isinstance(v['max_completion_tokens'], int) or v['max_completion_tokens'] <= 0:
-                raise ValueError("max_completion_tokens must be a positive integer")
-        
-        # Validate boolean fields
-        if 'truncate' in v and not isinstance(v['truncate'], bool):
-            raise ValueError("truncate must be a boolean")
-        if 'preserve_sentences' in v and not isinstance(v['preserve_sentences'], bool):
-            raise ValueError("preserve_sentences must be a boolean")
+        # Only validate if there are dependencies
+        if dependencies:
+            for placeholder, mapping in v.items():
+                if mapping.source_node_id not in dependencies:
+                    raise ValueError(
+                        f"Input mapping for '{placeholder}' references non-existent dependency '{mapping.source_node_id}'. "
+                        f"Available dependencies: {dependencies}"
+                    )
         
         return v
 
@@ -144,12 +133,6 @@ class NodeConfig(BaseModel):
                 description=f"Node {self.id} of type {self.type}",
                 provider=self.provider
             )
-        # Check model compatibility for all templates
-        if 'templates' in data and 'model' in data:
-            model = data['model']
-            for template in self.templates.values():
-                if not template.is_compatible_with_model(model):
-                    raise ValueError(f"Model {model} is too old for template requiring {template.min_model_version}")
 
     model_config = ConfigDict(extra="allow")  # Allow extra fields for future-proofing
 

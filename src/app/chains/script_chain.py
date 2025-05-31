@@ -32,6 +32,45 @@ class CircularDependencyError(ScriptChainError):
     """Exception raised when circular dependencies are detected"""
     pass
 
+def resolve_nested_path(data: Any, path: str) -> Any:
+    """Resolve a nested path like 'concepts.0' or 'data.items.1.name' in the data structure.
+    
+    Args:
+        data: The data structure to traverse
+        path: Dot-separated path (supports array indexing with integers)
+        
+    Returns:
+        The value at the specified path
+        
+    Raises:
+        KeyError: If the path doesn't exist
+        IndexError: If array index is out of bounds
+        TypeError: If trying to index a non-indexable type
+    """
+    if not path:
+        return data
+        
+    parts = path.split('.')
+    current = data
+    
+    for part in parts:
+        if isinstance(current, dict):
+            if part not in current:
+                raise KeyError(f"Key '{part}' not found in dict. Available keys: {list(current.keys())}")
+            current = current[part]
+        elif isinstance(current, (list, tuple)):
+            try:
+                index = int(part)
+                if index < 0 or index >= len(current):
+                    raise IndexError(f"Index {index} out of bounds for array of length {len(current)}")
+                current = current[index]
+            except ValueError:
+                raise TypeError(f"Cannot use non-integer key '{part}' to index array")
+        else:
+            raise TypeError(f"Cannot access '{part}' on type {type(current)}")
+    
+    return current
+
 class ScriptChain:
     """Advanced workflow orchestrator with level-based parallel execution"""
     
@@ -192,6 +231,7 @@ class ScriptChain:
                     # Get context for node
                     context = {}
                     missing_dependencies = []
+                    validation_errors = []
                     
                     # Add dependencies' outputs to context
                     for dep_id in node.dependencies:
@@ -200,47 +240,43 @@ class ScriptChain:
                             missing_dependencies.append(dep_id)
                             continue
                             
-                        if dep_result.output:
-                            if node.input_mappings: # NodeConfig.input_mappings
-                                # Explicit mapping: current_prompt_placeholder -> InputMapping(source_node_id, source_output_key)
-                                for current_prompt_placeholder, mapping_config in node.input_mappings.items():
-                                    if mapping_config.source_node_id == dep_id:
-                                        value_from_dependency = dep_result.output.get(mapping_config.source_output_key)
-                                        if value_from_dependency is not None:
-                                            context[current_prompt_placeholder] = value_from_dependency
-                                        else:
-                                            logger.warning(
-                                                f"Node '{node.id}': Source output key '{mapping_config.source_output_key}' not found "
-                                                f"in dependency '{dep_id}' output for placeholder '{current_prompt_placeholder}'. "
-                                                f"Available keys: {list(dep_result.output.keys())}"
-                                            )
-                            else:
-                                # No explicit input_mappings defined for this node.
-                                # Default behavior: try to get 'text' or 'result' from dependency output,
-                                # and key it by the dependency's ID for the prompt.
-                                # This is useful for simple chains where prompt placeholders match dependency IDs.
-                                if isinstance(dep_result.output, dict):
-                                    if 'text' in dep_result.output:
-                                        context[dep_id] = str(dep_result.output['text'])
-                                    elif 'result' in dep_result.output: # For nodes with numeric/structured results
-                                        context[dep_id] = dep_result.output['result']
-                                    else:
-                                        # If neither 'text' nor 'result' is found, but it's a dict,
-                                        # log a warning and provide the whole object. This might be noisy.
-                                        logger.warning(
-                                            f"Node '{node.id}': No explicit input_mappings and dependency '{dep_id}' output has no 'text' or 'result' key. "
-                                            f"Using entire output object for placeholder '{dep_id}'. Output keys: {list(dep_result.output.keys())}"
-                                        )
-                                        context[dep_id] = dep_result.output
-                                elif isinstance(dep_result.output, (str, int, float, bool)):
-                                    # If the output is already a primitive type
-                                    context[dep_id] = dep_result.output
-                                else:
-                                    logger.warning(
-                                        f"Node '{node.id}': Dependency '{dep_id}' produced an unexpected output type: {type(dep_result.output)}. Cannot auto-map."
+                        if not dep_result.output:
+                            validation_errors.append(f"Dependency '{dep_id}' produced no output")
+                            continue
+                            
+                        # Use explicit input mappings if defined
+                        if node.input_mappings:
+                            for current_prompt_placeholder, mapping_config in node.input_mappings.items():
+                                if mapping_config.source_node_id != dep_id:
+                                    continue
+                                    
+                                try:
+                                    value_from_dependency = resolve_nested_path(
+                                        dep_result.output, 
+                                        mapping_config.source_output_key
                                     )
+                                except (KeyError, IndexError, TypeError) as e:
+                                    validation_errors.append(
+                                        f"Node '{node.id}': Failed to resolve path '{mapping_config.source_output_key}' "
+                                        f"in dependency '{dep_id}' output: {str(e)}"
+                                    )
+                                    continue
+                                    
+                                context[current_prompt_placeholder] = value_from_dependency
+                        else:
+                            # Fallback: use dependency output directly
+                            # This maintains backward compatibility
+                            if isinstance(dep_result.output, dict):
+                                if 'text' in dep_result.output:
+                                    context[dep_id] = str(dep_result.output['text'])
+                                elif 'result' in dep_result.output:
+                                    context[dep_id] = dep_result.output['result']
+                                else:
+                                    context[dep_id] = dep_result.output
+                            else:
+                                context[dep_id] = dep_result.output
                     
-                    # Check if we have missing critical dependencies
+                    # Check for missing dependencies
                     if missing_dependencies:
                         error_msg = f"Node '{node.id}' skipped: Required dependencies failed or missing: {missing_dependencies}"
                         logger.warning(error_msg)
@@ -253,6 +289,25 @@ class ScriptChain:
                                 start_time=start_time,
                                 end_time=datetime.utcnow(),
                                 error_type="MissingDependencyError",
+                                provider=node.provider
+                            )
+                        )
+                        await self._trigger_callbacks('node_error', error_result)
+                        return node_id, error_result
+                        
+                    # Check for validation errors
+                    if validation_errors:
+                        error_msg = f"Node '{node.id}' validation failed:\n" + "\n".join(validation_errors)
+                        logger.error(error_msg)
+                        error_result = NodeExecutionResult(
+                            success=False,
+                            error=error_msg,
+                            metadata=NodeMetadata(
+                                node_id=node_id,
+                                node_type=node.type,
+                                start_time=start_time,
+                                end_time=datetime.utcnow(),
+                                error_type="ValidationError",
                                 provider=node.provider
                             )
                         )

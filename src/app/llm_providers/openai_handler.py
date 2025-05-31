@@ -64,8 +64,15 @@ class OpenAIHandler(BaseLLMHandler):
                 if response.choices and response.choices[0].message:
                     msg = response.choices[0].message
                     if hasattr(msg, 'function_call') and msg.function_call:
-                        # Return the function call as the text_content (for now)
-                        text_content = json.dumps({"function_call": msg.function_call})
+                        # If it's a function call, return it as a JSON string
+                        text_content = json.dumps({
+                            "function_call": {
+                                "name": msg.function_call.name,
+                                "arguments": json.loads(msg.function_call.arguments)
+                            }
+                        })
+                        logger.info(f"📝 Generated content preview:\n{text_content}")
+                        return text_content, None, None
                     elif msg.content:
                         text_content = msg.content.strip()
                 else:

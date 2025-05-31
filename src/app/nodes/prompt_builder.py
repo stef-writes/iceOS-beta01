@@ -74,7 +74,8 @@ def prepare_prompt(config: NodeConfig, context_manager, llm_config: LLMConfig, t
             llm_config.model,
             llm_config.provider
         )
-        if total_tokens > llm_config.max_context_tokens:
+        # Only check token limits if max_context_tokens is set
+        if llm_config.max_context_tokens is not None and total_tokens > llm_config.max_context_tokens:
             # Truncate prompt if needed
             prompt_with_preamble = prompt_with_preamble[:llm_config.max_context_tokens * 4]  # rough estimate
     except ValueError:
