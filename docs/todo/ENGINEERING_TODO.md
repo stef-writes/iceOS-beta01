@@ -25,10 +25,11 @@ _See also: [STRATEGY.md](STRATEGY.md) for high-level roadmap and conceptual requ
 - [ ] End-to-end tests for workflows and chains
 - [ ] Property-based testing (e.g., Hypothesis)
 
-## 4. Logging and Observability
+## 4. Logging, Observability, and Evaluation
 - [ ] Structured logging (e.g., JSON)
 - [ ] Distributed tracing (OpenTelemetry)
 - [ ] Metrics and dashboards (Grafana, etc.)
+- [ ] Built-in evaluation for scriptchains and nodes (quality, performance)
 
 ## 5. Error Handling and Resilience
 - [ ] Circuit breakers for external services
@@ -46,7 +47,9 @@ _See also: [STRATEGY.md](STRATEGY.md) for high-level roadmap and conceptual requ
 - [ ] Runbooks for common operations
 
 ## 8. Extensibility and Plugins
-- [ ] Plugin system for third-party extensions
+- [ ] Plugin system for third-party extensions (nodes, tools, agents, chains)
+- [ ] Integration adapters for LangChain, CrewAI, LlamaIndex, etc.
+- [ ] API for external tool and agent registration
 - [ ] Hooks and middleware for request interception
 
 ## 9. Performance and Scalability
@@ -57,6 +60,15 @@ _See also: [STRATEGY.md](STRATEGY.md) for high-level roadmap and conceptual requ
 ## 10. Versioning and Compatibility
 - [ ] API versioning (`/api/v1/...`)
 - [ ] Backward compatibility and migration paths
+
+---
+
+## 11. Scriptchain Interoperability & Protocols
+- [ ] Design a minimal protocol for ScriptChain-to-ScriptChain communication (inspiration: A2A)
+- [ ] Define message/task formats for cross-chain requests and responses
+- [ ] Implement service discovery for ScriptChains (local and distributed)
+- [ ] Add authentication and authorization for inter-chain calls
+- [ ] Document protocol and provide usage examples
 
 ---
 
@@ -71,8 +83,17 @@ _See also: [STRATEGY.md](STRATEGY.md) for high-level roadmap and conceptual requ
 - [ ] Metrics and observability for chain execution
 
 ## Copilot & Builders (See STRATEGY.md Part 4)
-- [ ] Node builder (UI/logic)
-- [ ] Tool builder (UI/logic)
-- [ ] Agent builder (composition logic)
-- [ ] Chain builder (visual/programmatic)
-- [ ] Copilot engine (LLM-powered workflow suggestion)
+- [ ] Node builder (UI/logic, schema-driven)
+- [ ] Tool builder (UI/logic, schema-driven)
+- [ ] Agent builder (composition logic, memory/goals)
+- [ ] Chain builder (visual/programmatic, canvas view)
+- [ ] Copilot engine (LLM-powered workflow suggestion, prompt-to-architecture)
+- [ ] Iterative refinement (re-prompt, edit, versioning)
+- [ ] Human-in-the-loop collaboration (multi-user editing, feedback)
+
+## Frosty Copilot
+- [ ] Natural language prompt interface for workflow creation
+- [ ] Draft architecture generation and explanation
+- [ ] Canvas view for visual editing and feedback
+- [ ] Integration with Node/Tool/Agent/Chain builders
+- [ ] User feedback loop and learning from edits
