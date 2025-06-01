@@ -86,10 +86,15 @@ class AnthropicHandler(BaseLLMHandler):
                     # Check for function calls first
                     if hasattr(response.content[0], 'function_call') and response.content[0].function_call:
                         # If it's a function call, return it as a JSON string
+                        try:
+                            arguments = json.loads(response.content[0].function_call.arguments)
+                        except json.JSONDecodeError as e:
+                            logger.error(f"Malformed function_call arguments: {response.content[0].function_call.arguments}")
+                            return "", None, f"Malformed function_call arguments: {response.content[0].function_call.arguments}"
                         text_content = json.dumps({
                             "function_call": {
                                 "name": response.content[0].function_call.name,
-                                "arguments": json.loads(response.content[0].function_call.arguments)
+                                "arguments": arguments
                             }
                         })
                         logger.info(f"📝 Generated content preview:\n{text_content}")

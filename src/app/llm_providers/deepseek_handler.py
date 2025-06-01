@@ -70,10 +70,15 @@ class DeepSeekHandler(BaseLLMHandler):
                 msg = response.choices[0].message
                 if hasattr(msg, 'function_call') and msg.function_call:
                     # If it's a function call, return it as a JSON string
+                    try:
+                        arguments = json.loads(msg.function_call.arguments)
+                    except json.JSONDecodeError as e:
+                        logger.error(f"Malformed function_call arguments: {msg.function_call.arguments}")
+                        return "", None, f"Malformed function_call arguments: {msg.function_call.arguments}"
                     text_content = json.dumps({
                         "function_call": {
                             "name": msg.function_call.name,
-                            "arguments": json.loads(msg.function_call.arguments)
+                            "arguments": arguments
                         }
                     })
                     logger.info(f"📝 Generated content preview:\n{text_content}")
