@@ -2485,9 +2485,9 @@
     "data": {
       "result": 5
     },
-    "version": "4aec2756-ed3e-483c-9323-facd26bbc0d2",
-    "timestamp": "2025-05-30T06:18:14.302208",
-    "execution_id": "9ecce45a-ce2c-4b08-b644-dca8c2206a6a"
+    "version": "60c1adf4-ccde-4ddf-8efa-454b2b67d4dc",
+    "timestamp": "2025-06-05T14:07:55.541201",
+    "execution_id": "f14205de-8896-4aac-b794-c9afa7664272"
   },
   "intent-01": {
     "data": {
@@ -3925,58 +3925,1322 @@
   },
   "philosophical_generator": {
     "data": {
-      "text": "\"Consciousness is the mirror through which reality manifests its existence.\""
+      "text": "\"Reality is merely an illusion, albeit a very persistent one, and consciousness is the bridge between the physical and the metaphysical realm of existence.\""
     },
-    "version": "27111391-24ec-4652-b7e9-60c860f8618b",
-    "timestamp": "2025-05-31T02:04:04.709848",
-    "execution_id": "12629953-0139-4ea7-aaee-ac0268fe043a"
+    "version": "da28cf5b-ef95-4732-ac48-40b2583643e6",
+    "timestamp": "2025-06-05T07:20:05.641110",
+    "execution_id": "84fed632-8abb-49f1-8d41-74c79a1b20f5"
   },
   "sentiment_analyzer": {
     "data": {
-      "text": "The statement \"Consciousness is the mirror through which reality manifests its existence\" has a contemplative and philosophical tone. It presents a certain degree of optimism as it suggests the power and importance of consciousness in perceiving and understanding reality, implying that individuals have the agency to shape their own reality through their consciousness. There is a sense of certainty in the way it defines the role of consciousness. The overall philosophical mood is introspective and profound, encouraging deeper thought about the nature of reality and our perception of it."
+      "text": "The statement carries a neutral to slightly pessimistic tone. It expresses a level of certainty in its claims, as it definitively states that reality is an illusion and consciousness serves as a bridge between the physical and metaphysical. The overall philosophical mood is contemplative and introspective, questioning the nature of reality and existence."
     },
-    "version": "f63f189a-86f4-4d70-97bc-582528977d77",
-    "timestamp": "2025-05-31T02:04:08.228306",
-    "execution_id": "12629953-0139-4ea7-aaee-ac0268fe043a"
+    "version": "396640f7-b5ab-4b7b-8d53-92e04fb8f222",
+    "timestamp": "2025-06-05T07:20:09.430130",
+    "execution_id": "84fed632-8abb-49f1-8d41-74c79a1b20f5"
   },
   "assumption_analyzer": {
     "data": {
-      "text": "This philosophical statement contains several key assumptions and implicit beliefs that are worth unpacking:\n\n1. Dualistic Perspective:\n- Assumes a distinction between consciousness and reality as separate entities\n- Implies consciousness is a medium or interface rather than reality itself\n- Suggests a subject-object relationship between consciousness and reality\n\n2. Mirror Metaphor Assumptions:\n- Presupposes consciousness is reflective rather than generative\n- Implies a faithful or accurate representation of reality\n- Assumes consciousness is passive rather than actively constructing reality\n- Suggests a one-to-one correspondence between reality and its reflection\n\n3. Ontological Assumptions:\n- Presumes reality exists independently of consciousness\n- Implies reality needs consciousness to \"manifest\" or become apparent\n- Suggests reality is something that can be manifested or revealed\n\n4. Epistemological Assumptions:\n- Assumes consciousness can accurately capture or represent reality\n- Implies consciousness is a reliable tool for understanding reality\n- Presupposes that reality is knowable or comprehensible\n\n5. Causal Relationship:\n- Suggests reality takes precedence and consciousness serves it\n- Implies a directional flow from reality to consciousness\n- Assumes consciousness has a specific purpose or function\n\n6. Universal Application:\n- Implies this relationship applies to all forms of consciousness\n- Assumes consciousness operates similarly across different beings\n- Pres"
+      "text": "This philosophical statement contains several key assumptions and implicit beliefs that are worth unpacking:\n\n1. Metaphysical Dualism:\n- The statement presupposes that reality is divided into two distinct realms: physical and metaphysical\n- It assumes these realms are separate but can be connected\n- This reflects a Cartesian-like dualistic worldview\n\n2. Reality as Illusion:\n- Assumes that what we perceive as reality is not fundamentally \"real\"\n- Implies there exists some \"truer\" form of reality beyond our perceptions\n- Bears similarity to Eastern philosophical concepts (Maya) and Plato's Cave allegory\n- Presupposes that illusions can be \"persistent\" while still being illusions\n\n3. Nature of Consciousness:\n- Assumes consciousness is a distinct phenomenon from physical reality\n- Presupposes consciousness has special properties that allow it to bridge different realms\n- Implies consciousness is more fundamental than physical reality\n- Assumes consciousness can exist independently of physical matter\n\n4. Bridging Function:\n- Presupposes that the physical and metaphysical realms need or can have a bridge\n- Implies that consciousness has a unique mediating role\n- Assumes that different realms of existence can meaningfully interact\n\n5. Implicit Epistemological Claims:\n- Suggests that our normal perception of reality is unreliable"
     },
-    "version": "d5ee0e8a-7bae-42c1-b160-0f122921216d",
-    "timestamp": "2025-05-31T02:04:12.634796",
-    "execution_id": "12629953-0139-4ea7-aaee-ac0268fe043a"
+    "version": "e3ad69e3-8ea6-4796-8873-64b716e63ddb",
+    "timestamp": "2025-06-05T07:20:11.887815",
+    "execution_id": "84fed632-8abb-49f1-8d41-74c79a1b20f5"
   },
   "axiom_analyzer": {
     "data": {
-      "text": "The statement *\"Consciousness is the mirror through which reality manifests its existence\"* assumes several core philosophical axioms. Here are 3-5 fundamental ones:\n\n1. **Primacy of Consciousness** \u2013 The statement assumes that consciousness is not merely a byproduct of physical reality but is essential for reality to \"manifest\" or be known. This implies that existence is dependent on or co-emergent with conscious perception.\n\n2. **Idealism or Non-Materialism** \u2013 It presupposes that reality is not purely material or independent of mind; instead, consciousness plays an active role in shaping or revealing reality. This aligns with idealist philosophies (e.g., Berkeley, Husserl, or some interpretations of Vedanta).\n\n3. **Epistemic Mediation** \u2013 The metaphor of a \"mirror\" suggests that consciousness does not create reality but reflects or mediates it, implying a distinction between noumenal reality (the thing-in-itself) and phenomenal reality (the experienced world), akin to Kantian epistemology.\n\n4. **Intentionality of Consciousness** \u2013 The statement assumes that consciousness is inherently directed toward objects (a Husserlian or phenomenological view), meaning it is always \"consciousness *of* something,\" and thus reality \"manifests\" through this relational structure.\n\n5. **Unity of Perception and Existence** \u2013 It implies that existence is not standalone but is inextricably tied to being perceived or known, echoing solipsistic or participatory ontology (e"
+      "text": "The philosophical statement *\"Reality is merely an illusion, albeit a very persistent one, and consciousness is the bridge between the physical and the metaphysical realm of existence\"* assumes several core axioms. Here are 3-5 fundamental ones:\n\n1. **The Illusory Nature of Reality (Maya/Simulation Axiom)** \u2013 The statement assumes that what we perceive as \"reality\" is not fundamentally real but rather a constructed or deceptive appearance, akin to philosophical idealism or certain interpretations of quantum mechanics.\n\n2. **Primacy of Consciousness (Mind-Over-Matter Axiom)** \u2013 It presupposes that consciousness is not merely a byproduct of physical processes but has an independent, foundational role in shaping or mediating reality.\n\n3. **Dualism or Non-Physical Ontology (Metaphysical Divide Axiom)** \u2013 The claim assumes a division between the physical (material) and metaphysical (non-material) realms, implying that existence is not purely materialistic.\n\n4. **Persistent Illusion (Perceptual Stability Axiom)** \u2013 Even if reality is illusory, the illusion is coherent and stable enough to function as a consistent framework for experience, suggesting an underlying order or \"programming.\"\n\n5. **Consciousness as Mediator (Bridge Axiom)** \u2013 Consciousness is not passive but actively bridges or interprets between the physical (observable) and metaphysical (unknowable or abstract) dimensions of existence.\n\nThese axioms align with traditions like Adv"
     },
-    "version": "4060ec6c-2750-43ca-97f5-4967ab0ba75d",
-    "timestamp": "2025-05-31T02:04:22.869432",
-    "execution_id": "12629953-0139-4ea7-aaee-ac0268fe043a"
+    "version": "f62ba93a-aa53-4bb0-8a9f-f3af89b9da7b",
+    "timestamp": "2025-06-05T07:20:26.020703",
+    "execution_id": "84fed632-8abb-49f1-8d41-74c79a1b20f5"
   },
   "outline_creator": {
     "data": {
-      "text": "I. Introduction\n    A. Briefly introduce the philosophical statement\n    B. Brief overview of the essay's aim and scope\n\nII. Axiomatic Analysis\n    A. Discussion on the Primacy of Consciousness\n    B. Exploration of Idealism or Non-Materialism\n    C. Examination of Epistemic Mediation\n    D. Analysis on the Intentionality of Consciousness\n    E. Delve into the Unity of Perception and Existence\n\nIII. Assumptions Analysis\n    A. Examination of the Dualistic Perspective\n        1. Discuss the distinction between consciousness and reality\n        2. Explore the concept of consciousness as an interface\n        3. Discuss the subject-object relationship\n    B. Analysis of the Mirror Metaphor Assumptions\n        1. Discuss the reflective nature of consciousness\n        2. Explore the implication of a faithful representation of reality\n        3. Discuss the passivity of consciousness\n        4. Explore the concept of one-to-one correspondence\n    C. Examination of Ontological Assumptions\n        1. Discuss the independent existence of reality\n        2. Explore the necessity of consciousness for manifestation\n        3. Discuss the concept of reality as something that can be revealed\n    D. Analysis of Epistemological Assumptions\n        1. Discuss the ability of consciousness to capture reality\n        2. Explore the reliability of consciousness as a tool\n        3. Discuss the knowability of reality\n    E. Examination of the Causal Relationship\n        1. Discuss the precedence of reality\n        2. Explore the directional flow from reality to consciousness\n        3. Discuss the purpose or function of consciousness\n    F. Analysis of the Universal Application\n        1. Discuss the applicability to all forms of consciousness\n        2. Explore the similarity of consciousness operations across beings\n\nIV. Sentiment Analysis\n    A. Discuss the contemplative and philosophical tone\n    B. Explore the sense of optimism and the power of consciousness\n    C. Discuss the certainty in defining the role of consciousness\n    D. Delve into the introspective and profound mood\n\nV. Conclusion\n    A. Recap of the main points and findings\n    B. Closing thoughts on the philosophical statement and its implications"
+      "text": "I. Introduction\n   A. Brief overview of the philosophical statement\n   B. Definition of key terms\n      1. Reality\n      2. Illusion\n      3. Consciousness\n      4. Physical and metaphysical realm\n\nII. Analysis of the Axioms\n   A. The Illusory Nature of Reality (Maya/Simulation Axiom)\n   B. Primacy of Consciousness (Mind-Over-Matter Axiom)\n   C. Dualism or Non-Physical Ontology (Metaphysical Divide Axiom)\n   D. Persistent Illusion (Perceptual Stability Axiom)\n   E. Consciousness as Mediator (Bridge Axiom)\n\nIII. Unpacking Assumptions in the Statement\n   A. Metaphysical Dualism\n      1. Concept of two distinct realms\n      2. Connection between the realms\n   B. Reality as Illusion\n      1. Perception vs reality\n      2. Concept of a \"truer\" reality\n   C. Nature of Consciousness\n      1. Consciousness vs physical reality\n      2. Special properties of consciousness\n   D. Bridging Function\n      1. Need for a bridge between realms\n      2. Mediating role of consciousness\n   E. Implicit Epistemological Claims\n      1. Reliability of perception\n\nIV. Sentiment Analysis of the Statement\n   A. Tone of the statement\n   B. Certainty and doubt in the claims\n   C. Overall philosophical mood\n\nV. Conclusion\n   A. Recap of key points\n   B. Implications of the philosophical statement\n   C. Personal reflection on the statement"
     },
-    "version": "d8cef3f0-73cb-4432-82bb-2d51fa484aa4",
-    "timestamp": "2025-05-31T02:04:37.210203",
-    "execution_id": "12629953-0139-4ea7-aaee-ac0268fe043a"
+    "version": "4209d1fd-ba2f-44a6-8182-72a030d27fcd",
+    "timestamp": "2025-06-05T07:20:39.537418",
+    "execution_id": "84fed632-8abb-49f1-8d41-74c79a1b20f5"
   },
   "essay_writer": {
     "data": {
-      "text": "I. Introduction\nThe philosophical statement under examination, \"Consciousness is the mirror through which reality manifests its existence,\" encompasses a deep exploration of the relationship between consciousness and reality. This essay aims to dissect this assertion through a comprehensive analysis of its inherent axioms, assumptions, and sentiments, and to engage with the profound implications of this perspective of consciousness.\n\nII. Axiomatic Analysis\nThe statement \"Consciousness is the mirror through which reality manifests its existence\" assumes several fundamental philosophical axioms:\n\n1. **Primacy of Consciousness** - This axiom recognizes consciousness as a principal feature of existence, inferring that reality is dependent on consciousness for it to be known or \"manifest\". This suggests that consciousness is not merely a byproduct of physical reality, but an essential co-emergent facet of existence.\n\n2. **Idealism or Non-Materialism** - The statement presupposes a non-materialistic perspective of reality. It implies that consciousness plays an active role in shaping or revealing reality, aligning with idealist philosophies that propose the mind as an essential participant in the formation of reality.\n\n3. **Epistemic Mediation** - The metaphor of consciousness as a \"mirror\" suggests a mediating role of consciousness, distinguishing between noumenal reality (the thing-in-itself) and phenomenal reality (the experienced world). This draws parallels with Kantian epistemology, which also distinguishes between the world as we perceive it and the world in itself.\n\n4. **Intentionality of Consciousness** - This axiom posits that consciousness is inherently directed towards objects, implying that reality \"manifests\" through this relational structure. This concept aligns with the phenomenological view that consciousness is always \"consciousness of something.\"\n\n5. **Unity of Perception and Existence** - The statement implies that existence is inextricably tied to being perceived or known, paralleling views of solipsistic or participatory ontology where perception and existence are unified.\n\nIII. Assumptions Analysis\nEmbedded within this philosophical statement are several assumptions that provide a foundation for its interpretation:\n\n1. Dualistic Perspective - The statement assumes a distinction between consciousness and reality, positing consciousness as an interface rather than reality itself, and suggesting a subject-object relationship between the two.\n\n2. Mirror Metaphor Assumptions - It infers that consciousness is reflective rather than generative, and that it provides a faithful representation of reality. It also assumes a passive role for consciousness, suggesting a one-to-one correspondence between reality and its reflection.\n\n3. Ontological Assumptions - The statement assumes the independent existence of reality, implying that consciousness is required for reality to manifest or become apparent.\n\n4. Epistemological Assumptions - It suggests consciousness can accurately capture reality, inferring it as a reliable tool for understanding reality, and presupposes that reality is knowable and comprehensible.\n\n5. Causal Relationship - The philosophical statement implies a precedence of reality, with consciousness serving as a reflective medium. It suggests a directional flow from reality to consciousness, and assigns a specific function to consciousness.\n\n6. Universal Application - The statement assumes this relationship applies to all forms of consciousness, implying a similarity in consciousness operations across different beings.\n\nIV. Sentiment Analysis\nThe philosophical statement \"Consciousness is the mirror through which reality manifests its existence\" exudes a contemplative and philosophical tone, infused with optimism about the power of consciousness. It instills a sense of certainty in defining the role of consciousness, and the philosophical mood is introspective and profound, encouraging contemplation on the nature of reality and our perception of it.\n\nV. Conclusion\nIn conclusion, the philosophical statement \"Consciousness is the mirror through which reality manifests its existence,\" is a rich tapestry of axioms, assumptions, and sentiments that offer a profound view of the relationship between consciousness and reality. It underscores the significance of consciousness in understanding and interpreting reality, and invites deeper exploration of this fascinating interface. The implications of this perspective are far-reaching, challenging us to reconsider the nature and agency of consciousness in our interpretation of reality."
+      "text": "I. Introduction\n\nThe philosophical statement: \"Reality is merely an illusion, albeit a very persistent one, and consciousness is the bridge between the physical and the metaphysical realm of existence.\" presents a profound examination of the nature of reality. This essay seeks to delve into the axioms, assumptions, and sentiments surrounding this philosophical assertion.\n\nII. Analysis of the Axioms\n\nA. The Illusory Nature of Reality (Maya/Simulation Axiom) \n\nThe essay's core tenet that reality is essentially illusory suggests that we, as conscious beings, are experiencing a sophisticated form of deception. This notion aligns with philosophical idealism and interpretations of quantum mechanics which propose that our observed 'reality' is not fundamentally real.\n\nB. Primacy of Consciousness (Mind-Over-Matter Axiom)\n\nThis axiom illustrates the foundational role consciousness plays. It is not a mere byproduct of physical processes; instead, it shapes or mediates reality, thus elevating the significance of consciousness above physical matter.\n\nC. Dualism or Non-Physical Ontology (Metaphysical Divide Axiom)\n\nImplicit in the statement is a division between the physical and the metaphysical realms of existence, thus proposing a non-materialistic ontological perspective. \n\nD. Persistent Illusion (Perceptual Stability Axiom)\n\nAlthough the reality we perceive is regarded as illusory, it presents a coherent and stable framework for experience, suggesting an underlying order or 'programming'.\n\nE. Consciousness as Mediator (Bridge Axiom)\n\nThe statement perceives consciousness as active, bridging or interpreting the physical and metaphysical dimensions of existence, thereby expanding the role of consciousness beyond a passive observer.\n\nIII. Unpacking Assumptions in the Statement\n\nA. Metaphysical Dualism\n\nIntrinsically, the statement assumes that reality is divided into two distinct realms: the physical and metaphysical, with the latter accessible through consciousness, reflecting a Cartesian-like dualistic worldview.\n\nB. Reality as Illusion\n\nThere is an assumption that reality is not fundamentally 'real,' hinting at a 'truer' form of reality, thus aligning with Eastern philosophy (Maya) and Plato's Cave allegory.\n\nC. Nature of Consciousness\n\nThe philosophical statement presumes consciousness as distinct from physical reality and attributes special properties to it that allow bridging different realms.\n\nD. Bridging Function\n\nThe proposal that consciousness serves as a bridge between physical and metaphysical realms presupposes a meaningful interaction between these realms.\n\nE. Implicit Epistemological Claims\n\nThe statement implies that our perception of reality is unreliable, exhibiting epistemological skepticism.\n\nIV. Sentiment Analysis of the Statement\n\nThe statement carries a neutral to slightly pessimistic tone, expressing certainty in its claims and the contemplative mood of the philosopher questioning the nature of reality and existence.\n\nV. Conclusion\n\nIn sum, the philosophical statement: \"Reality is merely an illusion, albeit a very persistent one, and consciousness is the bridge between the physical and the metaphysical realm of existence.\" unravels profound mysteries about the nature of reality, consciousness, and existence. It proposes a non-materialistic ontology, questions the reliability of perception, and assigns consciousness a crucial role in bridging the physical and metaphysical realms. The exploration of this statement provides an enriching and introspective journey into philosophy's depth, challenging our fundamental beliefs about reality."
     },
-    "version": "c94828df-c9e6-4b31-912d-f413f3a06378",
-    "timestamp": "2025-05-31T02:04:56.974841",
-    "execution_id": "12629953-0139-4ea7-aaee-ac0268fe043a"
+    "version": "fb2a66ca-27cd-4aed-98ab-c036455dbc0b",
+    "timestamp": "2025-06-05T07:21:05.637824",
+    "execution_id": "84fed632-8abb-49f1-8d41-74c79a1b20f5"
   },
   "math_solver": {
     "data": {
-      "text": "```json\n{\"function_call\": {\"name\": \"calculator\", \"arguments\": {\"a\": 42, \"b\": 1337}}}\n```"
+      "result": 1379.0,
+      "text": "1379.0"
     },
-    "version": "161f58ca-42e5-47af-b1e9-e2ba827e8c41",
-    "timestamp": "2025-05-31T05:29:04.845033",
-    "execution_id": "50a5dbc7-44ab-4d76-92c4-bc56253be005"
+    "version": "b996bcdb-5812-4a58-abc3-eab8017880db",
+    "timestamp": "2025-06-05T12:49:58.009453",
+    "execution_id": "7bbb2034-68f4-40d9-84d4-8f2248730464"
+  },
+  "calc1": {
+    "data": {
+      "result": 1379
+    },
+    "version": "0045ce5a-406d-42ac-a906-88f0d1220af7",
+    "timestamp": "2025-06-01T17:35:26.563313",
+    "execution_id": "ff581cc0-bdfd-48de-b273-12b687313069"
+  },
+  "deepseek1": {
+    "data": {
+      "explanation": "The number 1379 is like a secret code from the universe! Here's a fun breakdown:\n\n- **1**: The solo star of the show, standing tall and leading the way.  \n- **3**: A trio of mischief\u2014maybe three little aliens waving hello.  \n- **7**: The luckiest number, bringing cosmic good vibes.  \n- **9**: The grand finale, flipping upside down to become a 6 if it\u2019s feeling playful.  \n\nTogether, **137"
+    },
+    "version": "93a0f6c1-1fc5-48fe-9e98-fe2ed407ef5b",
+    "timestamp": "2025-06-01T17:35:37.112188",
+    "execution_id": "ff581cc0-bdfd-48de-b273-12b687313069"
+  },
+  "anthropic1": {
+    "data": {
+      "explanation": "1379 is a pretty cool number! It's like a secret code that unlocks a hidden treasure. Imagine you're on a quest and you need to enter a 4-digit number to open a magical door. You try 1379 and voila! The door swings open, revealing a room filled with shimmering gold coins and sparkling gems. It's like hitting the jackpot in a video game or finding the golden ticket in a Wonka"
+    },
+    "version": "e1615274-855d-4a74-aadf-264a2dd0e3ab",
+    "timestamp": "2025-06-01T17:34:40.688741",
+    "execution_id": "5ae6e5e9-548b-4e4a-ae6b-4ff7fede354b"
+  },
+  "context_test_1749103704": {
+    "data": {
+      "text": "```json\n{\"function_call\": {\"name\": \"calculator\", \"arguments\": {\"a\": 2, \"b\": 3}}}\n```"
+    },
+    "version": "3d6e9ad6-4fd5-4af8-ac0f-684fccffc011",
+    "timestamp": "2025-06-05T06:08:25.170516"
+  },
+  "openai_test_1749103709": {
+    "data": {
+      "text": "{\"function_call\": {\"name\": \"calculator\", \"arguments\": {\"a\": 2, \"b\": 3}}}\nParis"
+    },
+    "version": "c4c567fb-5e43-4fe9-a8a1-b9d3656e30f1",
+    "timestamp": "2025-06-05T06:08:30.100483"
+  },
+  "mp_openai_1749103710": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "73c87d0e-70b9-447d-8123-9267d4661266",
+    "timestamp": "2025-06-05T06:08:30.426733",
+    "execution_id": "cb0ceb6d-3364-406d-8b35-74cad0de7470"
+  },
+  "openai_test_1749103841": {
+    "data": {
+      "text": "{\"function_call\": {\"name\": \"calculator\", \"arguments\": {\"a\": 2, \"b\": 3}}}\nParis"
+    },
+    "version": "175b8a20-9742-4b9f-9498-84a85a520441",
+    "timestamp": "2025-06-05T06:10:42.526032"
+  },
+  "mp_openai_1749103849": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "b6e7f816-f947-44b0-85f3-9bfb9b92317a",
+    "timestamp": "2025-06-05T06:10:49.763592",
+    "execution_id": "4739a50e-dd6b-4185-a88e-43c31102665a"
+  },
+  "mp_openai_1749104180": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "463f4e92-a579-4a3e-8111-31634aa5eaae",
+    "timestamp": "2025-06-05T06:16:21.652178",
+    "execution_id": "a5f6f34f-73a6-49ba-96a3-1283bbf02aa8"
+  },
+  "openai_test_1749104181": {
+    "data": {
+      "text": "{\"function_call\": {\"name\": \"calculator\", \"arguments\": {\"a\": 2, \"b\": 2}}}\nParis"
+    },
+    "version": "62b694f2-52dc-4a07-b562-352d7a01463f",
+    "timestamp": "2025-06-05T06:16:23.323497"
+  },
+  "mp_openai_1749104254": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "32429f7b-77d4-4858-a455-98e4610fcecb",
+    "timestamp": "2025-06-05T06:17:35.308395",
+    "execution_id": "080c49bb-7cf7-4af4-aca8-23009d107f83"
+  },
+  "openai_test_1749104259": {
+    "data": {
+      "text": "{\"function_call\": {\"name\": \"calculator\", \"arguments\": {\"a\": 2, \"b\": 3}}}\nParis"
+    },
+    "version": "2de574c9-a765-4428-8a86-15cdec476d5d",
+    "timestamp": "2025-06-05T06:17:40.282684"
+  },
+  "openai_test_1749104807": {
+    "data": {
+      "text": "{\"function_call\": {\"name\": \"calculator\", \"arguments\": {\"a\": 1, \"b\": 1}}}\nParis"
+    },
+    "version": "3f827727-a89e-4735-82cc-57a3de08eef9",
+    "timestamp": "2025-06-05T06:26:48.082837"
+  },
+  "calc_test_1749104808": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "590f5fe4-0ec9-462a-8da6-107e49098d3c",
+    "timestamp": "2025-06-05T06:26:48.095547",
+    "execution_id": "6174eb43-97a8-4139-b41e-b2a29e50e5aa"
+  },
+  "mp_openai_1749104811": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "d348844c-4aab-4efa-bbb4-8df4cc13478b",
+    "timestamp": "2025-06-05T06:26:53.495675",
+    "execution_id": "6470d35d-9926-4dc9-b008-7d20ece8c90c"
+  },
+  "calc_test_1749105226": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "cfed6938-1ca3-4d64-8e5d-8982d86aa932",
+    "timestamp": "2025-06-05T06:33:46.201461",
+    "execution_id": "6a1279bc-0907-4cca-a013-1dae7f4d097a"
+  },
+  "context_test_1749105226": {
+    "data": {
+      "text": "{\"function_call\": {\"name\": \"calculator\", \"arguments\": {\"a\": 2, \"b\": 3}}}\n{\"function_call\": {\"name\": \"calculator\", \"arguments\": {\"a\": 3, \"b\": 2}}}"
+    },
+    "version": "d0e75c8a-c3b1-46d4-8018-be66485f68ac",
+    "timestamp": "2025-06-05T06:33:48.997590"
+  },
+  "mp_openai_1749105229": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "ed8d1b09-b24f-4f1d-84e3-fb23b40d1a12",
+    "timestamp": "2025-06-05T06:33:49.444172",
+    "execution_id": "6e0172b0-352f-400d-a21d-7a6eca51f8be"
+  },
+  "openai_test_1749105229": {
+    "data": {
+      "text": "{\"function_call\": {\"name\": \"calculator\", \"arguments\": {\"a\": 6, \"b\": 5}}}\nParis"
+    },
+    "version": "0ae2dde3-9af3-44b7-9c5d-385f91ed0f9c",
+    "timestamp": "2025-06-05T06:33:50.980666"
+  },
+  "dummy": {
+    "data": {
+      "result": 5
+    },
+    "version": "173ddd58-d81d-4350-9c8f-19b12e42d28e",
+    "timestamp": "2025-06-05T14:07:45.642202"
+  },
+  "calc_test_1749105901": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "5d8b3eb4-3672-4ca8-8add-54e25fac0541",
+    "timestamp": "2025-06-05T06:45:01.938799",
+    "execution_id": "9f087e16-8776-441c-a1f6-e033dae1243f"
+  },
+  "openai_test_1749105901": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "0bedfd33-ac4c-4126-a93d-f704d54e2be0",
+    "timestamp": "2025-06-05T06:45:02.345496"
+  },
+  "mp_openai_1749105902": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "1c903bcd-dcec-41ff-9a7a-763fe12c2ad4",
+    "timestamp": "2025-06-05T06:45:02.692823",
+    "execution_id": "48a3be11-9f10-48ea-ab2a-559158577c58"
+  },
+  "context_test_1749105902": {
+    "data": {
+      "text": "Hello Alice."
+    },
+    "version": "4c0c9b0f-6308-40ad-bc03-a6e33f9803cc",
+    "timestamp": "2025-06-05T06:45:03.234812"
+  },
+  "simple_test_1749105963": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "58f552c3-254e-494c-8aec-fcbcca7765a6",
+    "timestamp": "2025-06-05T06:46:04.077638"
+  },
+  "openai_test_1749107163": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "d99c4660-af49-4d9a-826b-b38dfe504e5a",
+    "timestamp": "2025-06-05T07:06:03.642146"
+  },
+  "calc_test_1749107163": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "cf535c95-e316-4887-baea-d5aacf4410d4",
+    "timestamp": "2025-06-05T07:06:03.650408",
+    "execution_id": "a87317c5-0c5d-4932-8b6f-c5d12c97ca49"
+  },
+  "context_test_1749107163": {
+    "data": {
+      "text": "Hello Alice."
+    },
+    "version": "b34f421f-1d31-404c-8d6f-7606d51ad691",
+    "timestamp": "2025-06-05T07:06:04.013925"
+  },
+  "mp_openai_1749107164": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "7a2883e8-0f10-4093-9932-b40a830e238e",
+    "timestamp": "2025-06-05T07:06:04.557418",
+    "execution_id": "b34d3dfc-01a0-47f8-87ca-1ff8c4957053"
+  },
+  "mp_anthropic_1749107164": {
+    "data": {
+      "text": "The Eiffel Tower"
+    },
+    "version": "74a25681-15f0-44a9-8423-f1778cdda6b5",
+    "timestamp": "2025-06-05T07:06:06.464299",
+    "execution_id": "b34d3dfc-01a0-47f8-87ca-1ff8c4957053"
+  },
+  "mp_google_1749107164": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris, France."
+    },
+    "version": "28bab0eb-e420-46c2-81db-79af25ed9306",
+    "timestamp": "2025-06-05T07:06:07.122646",
+    "execution_id": "b34d3dfc-01a0-47f8-87ca-1ff8c4957053"
+  },
+  "mp_deepseek_1749107164": {
+    "data": {
+      "text": "May"
+    },
+    "version": "534213e3-70e9-4a51-af82-5431e146d527",
+    "timestamp": "2025-06-05T07:06:12.864776",
+    "execution_id": "b34d3dfc-01a0-47f8-87ca-1ff8c4957053"
+  },
+  "simple_test_1749107251": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "dc47abd7-2553-4fb7-9da2-920022b44841",
+    "timestamp": "2025-06-05T07:07:31.604167"
+  },
+  "calc_test_1749107496": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "f91dbe5b-c4d6-43d4-9326-b6c69263b6d9",
+    "timestamp": "2025-06-05T07:11:36.407944",
+    "execution_id": "86d254aa-6627-42fd-b311-8c4b7a692019"
+  },
+  "openai_test_1749107496": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "a88087cb-fe59-461b-8fde-7a81ae89f113",
+    "timestamp": "2025-06-05T07:11:37.062648"
+  },
+  "context_test_1749107497": {
+    "data": {
+      "text": "Hello Alice."
+    },
+    "version": "e81171c9-1c49-409c-9c25-3ec2b95c003a",
+    "timestamp": "2025-06-05T07:11:37.472816"
+  },
+  "mp_openai_1749107497": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "c6987b3c-32fb-4a59-9255-f7658ffde374",
+    "timestamp": "2025-06-05T07:11:37.885728",
+    "execution_id": "abc2de72-3cd6-4fa2-b1da-fd839f657400"
+  },
+  "mp_anthropic_1749107497": {
+    "data": {
+      "text": "The Eiffel Tower"
+    },
+    "version": "b8a3ea5d-2799-4b83-9ec7-6fe746fbd6d9",
+    "timestamp": "2025-06-05T07:11:39.186470",
+    "execution_id": "abc2de72-3cd6-4fa2-b1da-fd839f657400"
+  },
+  "mp_google_1749107497": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris, France."
+    },
+    "version": "86c84cfa-546e-48f6-9d6a-1579fc44fd5d",
+    "timestamp": "2025-06-05T07:11:39.825209",
+    "execution_id": "abc2de72-3cd6-4fa2-b1da-fd839f657400"
+  },
+  "mp_deepseek_1749107497": {
+    "data": {
+      "text": "May"
+    },
+    "version": "19683718-8572-4b63-be8f-77e16739802f",
+    "timestamp": "2025-06-05T07:11:43.769206",
+    "execution_id": "abc2de72-3cd6-4fa2-b1da-fd839f657400"
+  },
+  "simple_test_1749107834": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "8422cb50-6977-4275-b11b-de7862c9d167",
+    "timestamp": "2025-06-05T07:17:15.652772"
+  },
+  "openai_test_1749107854": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "d8382745-33d6-44c7-bd38-e78ff6da4027",
+    "timestamp": "2025-06-05T07:17:35.005070"
+  },
+  "calc_test_1749107855": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "f732d95b-bc20-42b4-afba-adcc20a787ac",
+    "timestamp": "2025-06-05T07:17:35.013168",
+    "execution_id": "1c625bbc-176a-466f-9ca8-db39a87b5ae4"
+  },
+  "context_test_1749107855": {
+    "data": {
+      "text": "Hello Alice."
+    },
+    "version": "844b3350-3eec-41d7-b55a-49790bd01bc4",
+    "timestamp": "2025-06-05T07:17:35.457903"
+  },
+  "mp_openai_1749107855": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "06cd12f9-4da2-4029-a922-32040dd868d5",
+    "timestamp": "2025-06-05T07:17:35.926349",
+    "execution_id": "29bdd71b-0d2e-4179-9f23-66b75ef33330"
+  },
+  "mp_anthropic_1749107855": {
+    "data": {
+      "text": "Eiffel Tower"
+    },
+    "version": "02ffe86b-4f23-49b8-a43b-b996e3602b2d",
+    "timestamp": "2025-06-05T07:17:36.647849",
+    "execution_id": "29bdd71b-0d2e-4179-9f23-66b75ef33330"
+  },
+  "mp_google_1749107855": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris, France."
+    },
+    "version": "d8b0de9c-1268-4763-b0fb-e49dd4312376",
+    "timestamp": "2025-06-05T07:17:37.258157",
+    "execution_id": "29bdd71b-0d2e-4179-9f23-66b75ef33330"
+  },
+  "mp_deepseek_1749107855": {
+    "data": {
+      "text": "May"
+    },
+    "version": "595280fa-bbfc-4ce8-89b9-231ef8ca1f2a",
+    "timestamp": "2025-06-05T07:17:44.632236",
+    "execution_id": "29bdd71b-0d2e-4179-9f23-66b75ef33330"
+  },
+  "mp_openai_1749107989": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "b177f132-f619-42fa-ad6c-e66c83b37843",
+    "timestamp": "2025-06-05T07:19:49.877590",
+    "execution_id": "7959708d-cacf-428d-8174-9c128faf3e7d"
+  },
+  "mp_anthropic_1749107989": {
+    "data": {
+      "text": "The Eiffel Tower"
+    },
+    "version": "58f19ba5-c29c-4f27-bd7d-dbbbb5694854",
+    "timestamp": "2025-06-05T07:19:51.682819",
+    "execution_id": "7959708d-cacf-428d-8174-9c128faf3e7d"
+  },
+  "mp_google_1749107989": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "86e5af42-7937-49e9-b3ae-9e10485c8f78",
+    "timestamp": "2025-06-05T07:19:52.360248",
+    "execution_id": "7959708d-cacf-428d-8174-9c128faf3e7d"
+  },
+  "mp_deepseek_1749107989": {
+    "data": {
+      "text": "May"
+    },
+    "version": "0bd47f94-b66c-4730-93ab-f92a64ea339f",
+    "timestamp": "2025-06-05T07:19:59.188941",
+    "execution_id": "7959708d-cacf-428d-8174-9c128faf3e7d"
+  },
+  "context_test_1749107999": {
+    "data": {
+      "text": "Hello Alice."
+    },
+    "version": "fe8a96af-6bf7-4331-9327-7a34c53938aa",
+    "timestamp": "2025-06-05T07:19:59.526987"
+  },
+  "calc_test_1749107999": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "17b46028-a9e7-4fee-8964-2d852f0057d5",
+    "timestamp": "2025-06-05T07:19:59.542516",
+    "execution_id": "c4d1498d-7700-4002-97e6-e6a6ac4c1fa9"
+  },
+  "openai_test_1749107999": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "086d178f-16f8-4930-a487-db6d240399d0",
+    "timestamp": "2025-06-05T07:20:00.157904"
+  },
+  "simple_test_1749108002": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "71007195-18a7-486f-9adc-21af950bf0df",
+    "timestamp": "2025-06-05T07:20:03.392333"
+  },
+  "openai_test_1749108072": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "4818978f-ddce-4b95-9441-114ea27d5d7e",
+    "timestamp": "2025-06-05T07:21:12.816441"
+  },
+  "calc_test_1749108072": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "a895a288-da27-4d19-a215-9f36bf53db2e",
+    "timestamp": "2025-06-05T07:21:12.826824",
+    "execution_id": "1ced9aed-7096-4358-bac6-fdaa60f402c3"
+  },
+  "mp_openai_1749108072": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "8d067d90-f4b1-4a6f-b637-d4b09dceb2cb",
+    "timestamp": "2025-06-05T07:21:13.328749",
+    "execution_id": "913e079a-79fa-47ef-be26-c41b3feedcef"
+  },
+  "mp_anthropic_1749108072": {
+    "data": {
+      "text": "Eiffel Tower"
+    },
+    "version": "1007de7d-7048-4e45-9702-4cbaed34b9f4",
+    "timestamp": "2025-06-05T07:21:14.198308",
+    "execution_id": "913e079a-79fa-47ef-be26-c41b3feedcef"
+  },
+  "mp_google_1749108072": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "992a04d1-987e-4ba8-8011-d84a0c7d5814",
+    "timestamp": "2025-06-05T07:21:14.732090",
+    "execution_id": "913e079a-79fa-47ef-be26-c41b3feedcef"
+  },
+  "mp_deepseek_1749108072": {
+    "data": {
+      "text": "May"
+    },
+    "version": "8921bd59-3d4b-443c-abe5-af767f767bd7",
+    "timestamp": "2025-06-05T07:21:20.501434",
+    "execution_id": "913e079a-79fa-47ef-be26-c41b3feedcef"
+  },
+  "context_test_1749108080": {
+    "data": {
+      "text": "Hello Alice."
+    },
+    "version": "c33a310a-51bc-47d2-8193-b9b642366f2b",
+    "timestamp": "2025-06-05T07:21:20.885953"
+  },
+  "simple_test_1749108084": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "ce2435b6-edb2-43dc-8299-06047303e703",
+    "timestamp": "2025-06-05T07:21:24.592383"
+  },
+  "calc_test_1749108389": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "23ea33a9-71bb-49a8-a7e4-d3afdde6e29b",
+    "timestamp": "2025-06-05T07:26:29.085367",
+    "execution_id": "97b62500-7400-41ae-b3fc-31a0024d0685"
+  },
+  "mp_openai_1749108389": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "5f4205a2-08b2-41f6-8cf5-c2d555063832",
+    "timestamp": "2025-06-05T07:26:29.436867",
+    "execution_id": "27ad613f-87da-4fdf-a051-d84c24276f10"
+  },
+  "mp_anthropic_1749108389": {
+    "data": {
+      "text": "Eiffel Tower"
+    },
+    "version": "a35c5508-7f6e-4105-8b6f-eb31aa0d7e41",
+    "timestamp": "2025-06-05T07:26:30.208721",
+    "execution_id": "27ad613f-87da-4fdf-a051-d84c24276f10"
+  },
+  "mp_google_1749108389": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris, France."
+    },
+    "version": "00359ed1-6b9e-4d51-818a-e4294d5b6033",
+    "timestamp": "2025-06-05T07:26:30.983835",
+    "execution_id": "27ad613f-87da-4fdf-a051-d84c24276f10"
+  },
+  "mp_deepseek_1749108389": {
+    "data": {
+      "text": "May"
+    },
+    "version": "e32e8dce-55ce-41ec-abab-5a82f94dfc26",
+    "timestamp": "2025-06-05T07:26:39.692689",
+    "execution_id": "27ad613f-87da-4fdf-a051-d84c24276f10"
+  },
+  "context_test_1749108399": {
+    "data": {
+      "response": "Say hello to Alice.",
+      "text": "Say hello to Alice."
+    },
+    "version": "ab2ccba4-2f71-4031-85e1-258c0f512bf2",
+    "timestamp": "2025-06-05T07:26:40.200668"
+  },
+  "openai_test_1749108400": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "85ff720a-ca11-4212-842a-6d901003595c",
+    "timestamp": "2025-06-05T07:26:40.622489"
+  },
+  "simple_test_1749108400": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "13c85339-5bd9-4a97-a543-0da50dd4731e",
+    "timestamp": "2025-06-05T07:26:41.221602"
+  },
+  "simple_test_1749108578": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "71783267-c628-435b-9bb3-101a0fc7176f",
+    "timestamp": "2025-06-05T07:29:39.309500"
+  },
+  "mp_openai_1749108587": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "c2cd79a7-64cb-48c3-b4f6-5770522fbb72",
+    "timestamp": "2025-06-05T07:29:47.583539",
+    "execution_id": "fa957752-34f1-4fe6-805a-5725645c2269"
+  },
+  "mp_anthropic_1749108587": {
+    "data": {
+      "text": "Eiffel Tower"
+    },
+    "version": "1d4d09cc-ea2a-420e-bf8a-ab6241911328",
+    "timestamp": "2025-06-05T07:29:48.217750",
+    "execution_id": "fa957752-34f1-4fe6-805a-5725645c2269"
+  },
+  "mp_google_1749108587": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris, France."
+    },
+    "version": "c2d20732-b0be-4d83-a516-4f0260a2bb21",
+    "timestamp": "2025-06-05T07:29:48.820521",
+    "execution_id": "fa957752-34f1-4fe6-805a-5725645c2269"
+  },
+  "mp_deepseek_1749108587": {
+    "data": {
+      "text": "May"
+    },
+    "version": "da8b5656-3979-4b55-8233-ee5328dfcdea",
+    "timestamp": "2025-06-05T07:29:53.033778",
+    "execution_id": "fa957752-34f1-4fe6-805a-5725645c2269"
+  },
+  "calc_test_1749108593": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "66555bf8-e5fd-4534-9ad5-0281d37168e1",
+    "timestamp": "2025-06-05T07:29:53.046565",
+    "execution_id": "84a0a9ab-978c-442d-a22e-3207e07abfac"
+  },
+  "context_test_1749108593": {
+    "data": {
+      "text": "Hello Alice."
+    },
+    "version": "a787aa04-62fd-491a-b444-c4937b66ef80",
+    "timestamp": "2025-06-05T07:29:53.370733"
+  },
+  "openai_test_1749108593": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "c0c23913-88d0-4ca7-8104-6902b295d0fe",
+    "timestamp": "2025-06-05T07:29:54.045541"
+  },
+  "calc_test_1749108852": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "faadf0ba-ef34-4241-8a1c-38d6c65faf6d",
+    "timestamp": "2025-06-05T07:34:12.631977",
+    "execution_id": "889707d0-e5bc-445c-a041-cad1904c0eb1"
+  },
+  "mp_openai_1749108965": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "2979e57d-5f60-4f90-b0f4-3dbe5443ebf5",
+    "timestamp": "2025-06-05T07:36:05.772774",
+    "execution_id": "0f5d62d4-13f6-4d23-a822-09d7c2638aba"
+  },
+  "mp_anthropic_1749108965": {
+    "data": {
+      "text": "Eiffel Tower"
+    },
+    "version": "6f837385-839b-4543-ab72-f7adbeb46e1e",
+    "timestamp": "2025-06-05T07:36:07.165615",
+    "execution_id": "0f5d62d4-13f6-4d23-a822-09d7c2638aba"
+  },
+  "mp_google_1749108965": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "b0766c76-0da1-463e-b56b-4988d328662c",
+    "timestamp": "2025-06-05T07:36:07.923926",
+    "execution_id": "0f5d62d4-13f6-4d23-a822-09d7c2638aba"
+  },
+  "mp_deepseek_1749108965": {
+    "data": {
+      "text": "May"
+    },
+    "version": "3281cc5a-bed5-4426-afba-fa891e7feebe",
+    "timestamp": "2025-06-05T07:36:17.557977",
+    "execution_id": "0f5d62d4-13f6-4d23-a822-09d7c2638aba"
+  },
+  "context_test_1749108977": {
+    "data": {
+      "text": "Hello Alice."
+    },
+    "version": "9474f848-fe35-45cc-882d-ea3d74d2149d",
+    "timestamp": "2025-06-05T07:36:18.469691"
+  },
+  "calc_test_1749108978": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "3aecc270-60e2-4b7a-b071-b03c96c989c5",
+    "timestamp": "2025-06-05T07:36:18.486484",
+    "execution_id": "0dfda379-6e3a-47b6-9a15-b7dfbbfb5e5d"
+  },
+  "openai_test_1749108978": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "4a0887a2-fef9-4ad4-9490-85070e7e03f8",
+    "timestamp": "2025-06-05T07:36:19.089771"
+  },
+  "simple_test_1749108979": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "78898f55-d7bd-4060-aa4b-469cafd67bc3",
+    "timestamp": "2025-06-05T07:36:19.700590"
+  },
+  "calc_test_1749109307": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "43e99c8e-5422-4a40-9d3f-20c1afa72ae2",
+    "timestamp": "2025-06-05T07:41:47.446340",
+    "execution_id": "fb114b0d-ed96-4ffe-8167-655c1e6aacc0"
+  },
+  "openai_test_1749109307": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "e7e4a8e8-3fcf-4ae6-95b1-da3b1313d7ba",
+    "timestamp": "2025-06-05T07:41:47.899809"
+  },
+  "context_test_1749109307": {
+    "data": {
+      "text": "Hello Alice."
+    },
+    "version": "c783a1b7-b9f1-4b55-86a7-f99b8f20dcf4",
+    "timestamp": "2025-06-05T07:41:48.821028"
+  },
+  "mp_openai_1749109308": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "2a6be507-616e-4239-b1fb-9bb441adb221",
+    "timestamp": "2025-06-05T07:41:49.369860",
+    "execution_id": "b69b5ace-8207-4809-8191-f1d8c49e89c3"
+  },
+  "mp_anthropic_1749109308": {
+    "data": {
+      "text": "Eiffel Tower"
+    },
+    "version": "785142e2-1017-4921-baa9-a9df96fd8cc4",
+    "timestamp": "2025-06-05T07:41:50.159973",
+    "execution_id": "b69b5ace-8207-4809-8191-f1d8c49e89c3"
+  },
+  "mp_google_1749109308": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris, France."
+    },
+    "version": "be85d33c-b106-4052-97ce-7521af9ab1ce",
+    "timestamp": "2025-06-05T07:41:50.768244",
+    "execution_id": "b69b5ace-8207-4809-8191-f1d8c49e89c3"
+  },
+  "mp_deepseek_1749109308": {
+    "data": {
+      "text": "May"
+    },
+    "version": "539781f0-8923-469a-82ec-87dce3a7f759",
+    "timestamp": "2025-06-05T07:41:56.095049",
+    "execution_id": "b69b5ace-8207-4809-8191-f1d8c49e89c3"
+  },
+  "simple_test_1749109325": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "2ee02f3d-0b8f-445f-9fba-f62f5e07d122",
+    "timestamp": "2025-06-05T07:42:05.614667"
+  },
+  "simple_test_1749127801": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "8e3c716b-8455-4f0d-8541-f188934ba739",
+    "timestamp": "2025-06-05T12:50:02.134877"
+  },
+  "mp_openai_1749127803": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "3f05c29b-3b97-4f5c-8104-32e34197112f",
+    "timestamp": "2025-06-05T12:50:03.859146",
+    "execution_id": "82c141ed-7962-4c27-8378-a617e37ee4f6"
+  },
+  "mp_anthropic_1749127803": {
+    "data": {
+      "result": 5.0,
+      "text": "5.0"
+    },
+    "version": "19aac131-d3f5-4186-83f8-f5c7e343cfe0",
+    "timestamp": "2025-06-05T12:50:05.897986",
+    "execution_id": "82c141ed-7962-4c27-8378-a617e37ee4f6"
+  },
+  "mp_google_1749127803": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "2ce5dbb3-4fff-4960-a8b6-9930542cd045",
+    "timestamp": "2025-06-05T12:50:06.481673",
+    "execution_id": "82c141ed-7962-4c27-8378-a617e37ee4f6"
+  },
+  "mp_deepseek_1749127803": {
+    "data": {
+      "text": "May"
+    },
+    "version": "253ee836-e26b-40c1-aa2a-25cabe94b786",
+    "timestamp": "2025-06-05T12:50:10.983587",
+    "execution_id": "82c141ed-7962-4c27-8378-a617e37ee4f6"
+  },
+  "calc_test_1749127810": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "794c73ff-8cc4-4cc8-9908-69ce1e57cd76",
+    "timestamp": "2025-06-05T12:50:10.998304",
+    "execution_id": "4df061b9-ef40-4acf-8211-38cd5d589b2d"
+  },
+  "openai_test_1749127811": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "d1b0c674-2f7a-4570-96a8-0834de28cab0",
+    "timestamp": "2025-06-05T12:50:11.423052"
+  },
+  "context_test_1749127811": {
+    "data": {
+      "text": "Hello Alice!"
+    },
+    "version": "82ed5d99-8fb7-4006-968d-0926fb1045e0",
+    "timestamp": "2025-06-05T12:50:12.126637"
+  },
+  "simple_test_1749128168": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "d81886b4-ef88-4aef-9ec5-3acbc3bd0e11",
+    "timestamp": "2025-06-05T12:56:09.522747"
+  },
+  "mp_openai_1749128175": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "9d95bcad-d0cc-47fc-9c6f-385dcfedb696",
+    "timestamp": "2025-06-05T12:56:15.873805",
+    "execution_id": "de9872c5-57a1-4d19-8d19-8a719349c026"
+  },
+  "mp_anthropic_1749128175": {
+    "data": {
+      "text": "The Eiffel Tower"
+    },
+    "version": "dc65370e-c1f1-4721-bfd2-4936c8493f18",
+    "timestamp": "2025-06-05T12:56:16.898435",
+    "execution_id": "de9872c5-57a1-4d19-8d19-8a719349c026"
+  },
+  "mp_google_1749128175": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris, France."
+    },
+    "version": "f534421b-e250-4830-b36a-b7d505365bd1",
+    "timestamp": "2025-06-05T12:56:17.508679",
+    "execution_id": "de9872c5-57a1-4d19-8d19-8a719349c026"
+  },
+  "mp_deepseek_1749128175": {
+    "data": {
+      "text": "May"
+    },
+    "version": "9a717ae5-b8af-43a4-a2e2-828e883e98c2",
+    "timestamp": "2025-06-05T12:56:23.924451",
+    "execution_id": "de9872c5-57a1-4d19-8d19-8a719349c026"
+  },
+  "context_test_1749128183": {
+    "data": {
+      "text": "Hello Alice."
+    },
+    "version": "bc7093b8-c812-4c79-b6ea-fb0d6fade945",
+    "timestamp": "2025-06-05T12:56:24.499321"
+  },
+  "calc_test_1749128184": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "6392b2e0-faa2-4f7c-bbad-46a3f7faf609",
+    "timestamp": "2025-06-05T12:56:24.510145",
+    "execution_id": "ab6baf32-fe6a-4b77-9893-9c20aec0ac3c"
+  },
+  "openai_test_1749128184": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "558f1d0d-3abb-4b4f-a8f3-0338af46bf53",
+    "timestamp": "2025-06-05T12:56:25.187760"
+  },
+  "calc_test_1749128482": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "c5fac1cf-3863-4153-a8f2-f0af8b72fc7a",
+    "timestamp": "2025-06-05T13:01:22.054808",
+    "execution_id": "28bb8e56-d434-4644-91d4-56dff317a380"
+  },
+  "openai_test_1749128482": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "ffe5a2b9-870c-46f6-b649-cacbc1f42a90",
+    "timestamp": "2025-06-05T13:01:22.471807"
+  },
+  "context_test_1749128482": {
+    "data": {
+      "text": "Hello Alice."
+    },
+    "version": "c926aa7f-7535-4306-8152-29518e3abef1",
+    "timestamp": "2025-06-05T13:01:23.761192"
+  },
+  "mp_openai_1749128483": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "58a568f3-7403-432d-9f54-24535cc88794",
+    "timestamp": "2025-06-05T13:01:24.121784",
+    "execution_id": "f85a13b6-43ad-4d47-a6d6-5efa505c9107"
+  },
+  "simple_test_1749128486": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "773bdd18-d7f1-4b29-838f-0fd593b8c729",
+    "timestamp": "2025-06-05T13:01:26.723785"
+  },
+  "openai_test_1749128658": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "a3bf39df-2bc7-49d0-8336-8051bd1ecf1b",
+    "timestamp": "2025-06-05T13:04:19.386535"
+  },
+  "mp_openai_1749128659": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "2dc8bde3-2789-42de-a147-a2bc7969ec0a",
+    "timestamp": "2025-06-05T13:04:19.982496",
+    "execution_id": "98301419-784b-4f90-b46a-2b4f4c4e0782"
+  },
+  "mp_anthropic_1749128659": {
+    "data": {
+      "text": "The Eiffel Tower"
+    },
+    "version": "12e6cdcf-30ee-40d3-b3d1-e4a391e6942a",
+    "timestamp": "2025-06-05T13:04:20.935437",
+    "execution_id": "98301419-784b-4f90-b46a-2b4f4c4e0782"
+  },
+  "mp_google_1749128659": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "c370b97c-10ed-4e1a-971c-1664ecefcfe4",
+    "timestamp": "2025-06-05T13:04:21.589766",
+    "execution_id": "98301419-784b-4f90-b46a-2b4f4c4e0782"
+  },
+  "mp_deepseek_1749128659": {
+    "data": {
+      "text": "May"
+    },
+    "version": "6f75e5fd-861e-4cab-8646-8a685d97abf0",
+    "timestamp": "2025-06-05T13:04:26.097369",
+    "execution_id": "98301419-784b-4f90-b46a-2b4f4c4e0782"
+  },
+  "context_test_1749128666": {
+    "data": {
+      "text": "Hello Alice."
+    },
+    "version": "98f21969-479c-4577-b11f-abcbdf500cc0",
+    "timestamp": "2025-06-05T13:04:27.171027"
+  },
+  "calc_test_1749128667": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "72884876-070f-48a5-a9c9-b9180c2e9a70",
+    "timestamp": "2025-06-05T13:04:27.181574",
+    "execution_id": "f397a25e-573e-4b0b-a368-7ce879759c3f"
+  },
+  "simple_test_1749128674": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "19b0f5d0-64c8-458d-905e-74bdd8cb12bd",
+    "timestamp": "2025-06-05T13:04:35.523914"
+  },
+  "calc_test_1749128856": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "3b21c432-2b20-4232-bf63-72921e5327b4",
+    "timestamp": "2025-06-05T13:07:36.332282",
+    "execution_id": "8160311c-152a-4eb2-b85e-e8748c0953cf"
+  },
+  "context_test_1749128856": {
+    "data": {
+      "text": "Hello Alice."
+    },
+    "version": "7b3acf44-c80d-47dc-a139-d36fb0c32dc9",
+    "timestamp": "2025-06-05T13:07:36.825891"
+  },
+  "mp_openai_1749128856": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "8811e79b-00d5-47ce-bf37-bc05fd0bcb3f",
+    "timestamp": "2025-06-05T13:07:37.323363",
+    "execution_id": "e9ca1492-928e-4431-9ea9-c4eb8f04a0b0"
+  },
+  "mp_anthropic_1749128856": {
+    "data": {
+      "text": "Eiffel Tower"
+    },
+    "version": "f026de0f-a05e-4b3b-8928-2d6a53d2e698",
+    "timestamp": "2025-06-05T13:07:38.783599",
+    "execution_id": "e9ca1492-928e-4431-9ea9-c4eb8f04a0b0"
+  },
+  "mp_google_1749128856": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "bf3e275a-d071-4d7f-82bc-93a17223687a",
+    "timestamp": "2025-06-05T13:07:39.345998",
+    "execution_id": "e9ca1492-928e-4431-9ea9-c4eb8f04a0b0"
+  },
+  "mp_deepseek_1749128856": {
+    "data": {
+      "text": "May"
+    },
+    "version": "1237d6b9-bc18-460e-bad0-d2c596adc78b",
+    "timestamp": "2025-06-05T13:07:43.052537",
+    "execution_id": "e9ca1492-928e-4431-9ea9-c4eb8f04a0b0"
+  },
+  "simple_test_1749128863": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "3d19d2a7-b0c8-4783-8a76-f00095713214",
+    "timestamp": "2025-06-05T13:07:44.010580"
+  },
+  "context_test_1749129168": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "589b9239-a526-4006-8fca-b7d22d66b60d",
+    "timestamp": "2025-06-05T13:12:49.425073"
+  },
+  "calc_test_1749129169": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "0341b02c-6690-4c3e-a416-97f6c0bbca68",
+    "timestamp": "2025-06-05T13:12:49.447049",
+    "execution_id": "aad21728-5e75-406f-8c1d-35e555d2c56a"
+  },
+  "openai_test_1749129169": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "56f70b51-245a-46d2-a8ef-241887378e02",
+    "timestamp": "2025-06-05T13:12:49.942701"
+  },
+  "mp_openai_1749129169": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "6f45ab39-6a8a-43fe-bec6-002abd4eac8c",
+    "timestamp": "2025-06-05T13:12:50.461706",
+    "execution_id": "63bfa3ad-95e4-468a-b3a5-37570eb33673"
+  },
+  "mp_anthropic_1749129169": {
+    "data": {
+      "text": "Eiffel Tower"
+    },
+    "version": "2c794e55-3cd3-4e41-ab6e-82c13f128b89",
+    "timestamp": "2025-06-05T13:12:52.021025",
+    "execution_id": "63bfa3ad-95e4-468a-b3a5-37570eb33673"
+  },
+  "mp_google_1749129169": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "a255ee5c-7d7f-4fec-ae1b-b2c4c1bcb3ba",
+    "timestamp": "2025-06-05T13:12:52.551433",
+    "execution_id": "63bfa3ad-95e4-468a-b3a5-37570eb33673"
+  },
+  "mp_deepseek_1749129169": {
+    "data": {
+      "text": "May"
+    },
+    "version": "19e05488-040a-49f0-9730-7a56c1c2bd04",
+    "timestamp": "2025-06-05T13:12:56.651841",
+    "execution_id": "63bfa3ad-95e4-468a-b3a5-37570eb33673"
+  },
+  "simple_test_1749129184": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "a6b35011-71ae-4920-87ac-e6f922f40701",
+    "timestamp": "2025-06-05T13:13:05.061192"
+  },
+  "mp_openai_1749129384": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "96902a63-7a6b-4e49-956f-8583b5472ec0",
+    "timestamp": "2025-06-05T13:16:25.344162",
+    "execution_id": "7d573ad8-f86b-4d53-bcde-ce87f69b6d8e"
+  },
+  "mp_anthropic_1749129384": {
+    "data": {
+      "text": "Eiffel Tower"
+    },
+    "version": "0f1f5952-6fac-429a-b9b9-9e39e654ed00",
+    "timestamp": "2025-06-05T13:16:26.322503",
+    "execution_id": "7d573ad8-f86b-4d53-bcde-ce87f69b6d8e"
+  },
+  "mp_google_1749129384": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris, France."
+    },
+    "version": "a9e6649f-009e-4822-a564-d7dfcd06f8fa",
+    "timestamp": "2025-06-05T13:16:26.891479",
+    "execution_id": "7d573ad8-f86b-4d53-bcde-ce87f69b6d8e"
+  },
+  "mp_deepseek_1749129384": {
+    "data": {
+      "text": "May"
+    },
+    "version": "68fb6499-b6dc-4d07-8991-0677f246fa9d",
+    "timestamp": "2025-06-05T13:16:31.221395",
+    "execution_id": "7d573ad8-f86b-4d53-bcde-ce87f69b6d8e"
+  },
+  "context_test_1749129391": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "0b69c0e3-f4eb-40b5-9d4e-9edaeb4e1cae",
+    "timestamp": "2025-06-05T13:16:31.771666"
+  },
+  "openai_test_1749129391": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "ac959774-e57d-4835-86eb-f1fd1f565d13",
+    "timestamp": "2025-06-05T13:16:32.188191"
+  },
+  "calc_test_1749129392": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "381635f5-f732-4b5d-9bc6-962c52608891",
+    "timestamp": "2025-06-05T13:16:32.201522",
+    "execution_id": "1c19a7a6-12a5-4f1e-8f3a-3b28d2fcb896"
+  },
+  "simple_test_1749129393": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "971da866-1012-4407-a8dc-a3733be5c698",
+    "timestamp": "2025-06-05T13:16:33.495724"
+  },
+  "get_cat_fact": {
+    "data": {
+      "status_code": 200,
+      "body": {
+        "fact": "Cats have 30 vertebrae (humans have 33 vertebrae during early development; 26 after the sacral and coccygeal regions fuse)",
+        "length": 122
+      }
+    },
+    "version": "9b9991e6-0ee0-41e0-82c8-85da52a6a9bb",
+    "timestamp": "2025-06-05T13:32:22.196357",
+    "execution_id": "1f1e4b9d-91b2-4801-b95d-045921fd30e1"
+  },
+  "openai_test_1749131498": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "1d110375-563f-4995-a470-4719043e0864",
+    "timestamp": "2025-06-05T13:51:38.726540"
+  },
+  "mp_openai_1749131498": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "3b7fd372-5b34-462c-93e6-6b92395418eb",
+    "timestamp": "2025-06-05T13:51:39.114309",
+    "execution_id": "e5cefc17-199e-461a-bf9e-a195a12d0508"
+  },
+  "mp_anthropic_1749131498": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "9f6e7c04-5b73-468a-b8a9-4f11180163b6",
+    "timestamp": "2025-06-05T13:51:41.332677",
+    "execution_id": "e5cefc17-199e-461a-bf9e-a195a12d0508"
+  },
+  "mp_google_1749131498": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "4ce1888e-338a-49f4-81c0-0330767b7166",
+    "timestamp": "2025-06-05T13:51:41.989891",
+    "execution_id": "e5cefc17-199e-461a-bf9e-a195a12d0508"
+  },
+  "mp_deepseek_1749131498": {
+    "data": {
+      "text": "May"
+    },
+    "version": "2e8771ce-5072-4643-8841-e42a978bf123",
+    "timestamp": "2025-06-05T13:51:46.357654",
+    "execution_id": "e5cefc17-199e-461a-bf9e-a195a12d0508"
+  },
+  "context_test_1749131506": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "14ed72fd-4673-40a9-9795-bdb36b9c9482",
+    "timestamp": "2025-06-05T13:51:47.961899"
+  },
+  "calc_test_1749131507": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "3af04b0b-5866-4525-876f-f6853b043e00",
+    "timestamp": "2025-06-05T13:51:47.975159",
+    "execution_id": "57f4479f-aa72-4b48-bd93-2a6a9843e904"
+  },
+  "simple_test_1749131509": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "6c44fd13-b330-4644-9f9f-d434f80b9b1f",
+    "timestamp": "2025-06-05T13:51:49.473294"
+  },
+  "calc_test_1749132467": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "a80427ab-86dc-421b-90b4-0788328a6438",
+    "timestamp": "2025-06-05T14:07:47.846850",
+    "execution_id": "a5b78b42-34ae-4e61-bfe0-4f2fa9e9d073"
+  },
+  "openai_test_1749132467": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "bd7d54bc-2b53-469d-b8ca-46c265c2a432",
+    "timestamp": "2025-06-05T14:07:48.378059"
+  },
+  "context_test_1749132468": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "5332561a-04c8-43ab-b51f-ee490ccc02de",
+    "timestamp": "2025-06-05T14:07:48.860541"
+  },
+  "mp_openai_1749132468": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "1bee8d94-edba-4784-9313-ce8e23b443d3",
+    "timestamp": "2025-06-05T14:07:49.385874",
+    "execution_id": "886429d8-d4c8-4704-91c7-1e5ce18e5791"
+  },
+  "mp_anthropic_1749132468": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "ba8ae92d-3bc7-424f-8a5c-c715e6b0336c",
+    "timestamp": "2025-06-05T14:07:50.096012",
+    "execution_id": "886429d8-d4c8-4704-91c7-1e5ce18e5791"
+  },
+  "mp_google_1749132468": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "4c16c830-2265-41b2-850c-40726263184e",
+    "timestamp": "2025-06-05T14:07:50.796233",
+    "execution_id": "886429d8-d4c8-4704-91c7-1e5ce18e5791"
+  },
+  "mp_deepseek_1749132468": {
+    "data": {
+      "text": "May"
+    },
+    "version": "e4a2abd7-bdfe-4c4d-ae3c-9ff18c8b440b",
+    "timestamp": "2025-06-05T14:07:55.527453",
+    "execution_id": "886429d8-d4c8-4704-91c7-1e5ce18e5791"
   }
 }

@@ -1,6 +1,9 @@
 import pytest
 from app.services.tool_service import ToolService
 from app.tools.calculator import CalculatorTool
+import os
+
+API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:8000/api/v1")
 
 @pytest.fixture
 def tool_service():

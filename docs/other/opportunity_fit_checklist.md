@@ -15,6 +15,7 @@ For each new opportunity, answer the following:
 ## C. Agentic/Autonomous Behavior
 - [ ] Should the system be able to make decisions, loop, or adapt based on intermediate results?
 - [ ] Is there a need for agent-like behavior (e.g., "thought loops," retries, or conditional logic)?
+- **Note:** Agentic/plan-based workflows are a future feature and will be handled by ScriptChain-level plan execution, not by looping within nodes. Nodes are single-step and stateless.
 
 ## D. Observability & Metrics
 - [ ] Is tracking of token usage, costs, or execution metrics important?

@@ -42,6 +42,12 @@ def parse_model_version(model_name: str, provider: ModelProvider = ModelProvider
             return "4.0.1"
         elif model_name == "gpt-3.5-turbo":
             return "3.5.0"
+        elif model_name == "gpt-4o":
+            return "4.2.0"
+        elif model_name == "gpt-4.1":
+            return "4.1.0"
+        elif model_name == "gpt-4-1106-preview":
+            return "4.1.0"
         else:
             raise ValueError(f"Unsupported OpenAI model: {model_name}")
     

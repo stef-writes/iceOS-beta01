@@ -96,6 +96,8 @@ class NodeConfig(BaseModel):
         description="Token management configuration"
     )
     tools: Optional[List[ToolConfig]] = None
+    output_format: str = Field('plain', description="Expected output format from the LLM: 'plain', 'json', or 'function_call'")
+    coerce_output_types: bool = Field(default=True, description="Attempt to coerce LLM output types to match output_schema")
 
     @field_validator('dependencies')
     @classmethod

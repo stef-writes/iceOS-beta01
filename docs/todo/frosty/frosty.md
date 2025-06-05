@@ -13,6 +13,7 @@ Frosty is an AI-powered copilot designed to help users create, refine, and deplo
 ### 1. **Unified Agentic Abstraction**
 - Treat **nodes**, **tools**, **agents**, and **chains** as modular, composable building blocks.
 - Enable seamless composition and reuse of these components.
+- **Note:** Nodes themselves are single-step and stateless. Agentic/plan-based workflows are achieved by having the LLM output a plan, which ScriptChain (or a similar orchestrator) parses and executes.
 
 ### 2. **Copilot-Driven Creation**
 - Users prompt Frosty in natural language.
@@ -49,6 +50,7 @@ Frosty is an AI-powered copilot designed to help users create, refine, and deplo
 - Compose nodes and tools into agents with goals, memory, and policies.
 - Define agent instructions, context, and accessible tools.
 - Support for hierarchical and collaborative agent structures.
+- **Note:** Agents themselves do not perform multi-step tool calls internally; instead, they can output plans for ScriptChain to execute.
 
 ### 4. **Chain Builder**
 - Visual and code-based editor for chaining agents/nodes/tools.

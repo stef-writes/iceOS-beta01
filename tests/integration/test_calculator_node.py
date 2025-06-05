@@ -13,11 +13,12 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../.
 
 from app.models.config import ModelProvider
 
+API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:8000/api/v1")
 
 def test_calculator_node(provider: ModelProvider = ModelProvider.OPENAI):
     """Test a single node that uses the calculator tool with the specified provider."""
     
-    base_url = "http://localhost:8000"
+    base_url = API_BASE_URL
     
     # Map providers to their appropriate models
     model_map = {
@@ -57,7 +58,7 @@ def test_calculator_node(provider: ModelProvider = ModelProvider.OPENAI):
     
     # Make the API request
     response = requests.post(
-        f"{base_url}/api/v1/chains/execute",
+        f"{base_url}/chains/execute",
         json=node_config,
         timeout=30  # 30 second timeout
     )

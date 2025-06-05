@@ -29,6 +29,18 @@ class BaseNode(ABC):
         """Get the node's type"""
         return self.config.metadata.node_type
     
+    @property
+    def id(self):
+        return self.config.id
+
+    @property
+    def llm_config(self):
+        return getattr(self, '_llm_config', getattr(self.config, 'llm_config', None))
+    
+    @property
+    def dependencies(self):
+        return self.config.dependencies
+    
     async def pre_execute(self, context: Dict[str, Any]) -> Dict[str, Any]:
         """Validate and modify context before execution.
         

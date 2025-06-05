@@ -16,6 +16,7 @@ import re
 from pydantic import ValidationError
 from anthropic import AsyncAnthropic
 import google.generativeai as genai
+from app.utils.type_coercion import coerce_types
 
 # Existing imports
 # This is a test comment to trigger reload
@@ -59,7 +60,7 @@ class AiNode(BaseNode):
         """Initialize AI node with LLM and Tool services."""
         super().__init__(config)
         self.context_manager = context_manager
-        self.llm_config = llm_config
+        self._llm_config = llm_config
         self.callbacks = callbacks or []
         self.llm_service = llm_service or LLMService()
         self.tool_service = tool_service or ToolService()
@@ -70,7 +71,7 @@ class AiNode(BaseNode):
 
     async def prepare_prompt(self, inputs: Dict[str, Any]) -> str:
         """Prepare prompt with selected context from inputs, including a tool preamble if tools are available."""
-        return prepare_prompt(self.config, self.context_manager, self.llm_config, self.tool_service, inputs)
+        return prepare_prompt(self.config, self.context_manager, self._llm_config, self.tool_service, inputs)
 
     def _truncate_prompt(self, prompt: str, current_tokens: int) -> str:
         """Truncate prompt to fit within token limit.
@@ -82,7 +83,7 @@ class AiNode(BaseNode):
         Returns:
             Truncated prompt
         """
-        max_tokens = self.llm_config.max_context_tokens if self.llm_config.max_context_tokens is not None else 4096
+        max_tokens = self._llm_config.max_context_tokens if self._llm_config.max_context_tokens is not None else 4096
         if current_tokens <= max_tokens:
             return prompt
         
@@ -137,21 +138,31 @@ class AiNode(BaseNode):
 
     async def execute(self, context: Dict[str, Any] = None, max_steps: int = 5) -> NodeExecutionResult:
         """
-        Execute the text generation node using the appropriate LLM service and handle tool/function calls.
-        Implements an agentic 'thought loop':
-        - If the LLM requests a tool call, execute the tool and send the result back to the LLM for further reasoning.
-        - Repeat up to max_steps, or until the LLM returns a normal text answer.
+        Execute the node with a single-step tool call approach:
+        - Send the prompt to the LLM.
+        - If the LLM requests a tool call, execute the tool ONCE and return the tool's output as the final answer.
+        - If the LLM does not request a tool call, return the LLM's answer as the final answer.
+        (max_steps is kept for future agentic support, but is unused)
         """
         start_time = datetime.utcnow()
+        usage_metadata = None  # Always initialize
         context = context or {}
-        error_message_prefix = f"Node '{self.config.id}' (Name: '{self.config.name}', Provider: {self.llm_config.provider}, Model: {self.llm_config.model}): "
-        messages = []
-        tool_outputs = []
-        step = 0
+        output_format = getattr(self.config, 'output_format', 'plain')
+        # Add strong system prompt for output format
+        system_prompt = None
+        if output_format == 'json':
+            system_prompt = 'Respond ONLY with a JSON object: {"tweet": "<your tweet here>"}'
+        elif output_format == 'function_call':
+            system_prompt = 'If you want to use a tool, respond with a function_call JSON as shown in the examples below.'
+        elif output_format == 'plain':
+            system_prompt = 'Respond with a short answer in plain English.'
+        error_message_prefix = f"Node '{self.config.id}' (Name: '{self.config.name}', Provider: {self._llm_config.provider}, Model: {self._llm_config.model}): "
         try:
             # Prepare the initial prompt
             try:
                 prompt_template_for_handler = await self.prepare_prompt(context)
+                if system_prompt:
+                    prompt_template_for_handler = system_prompt + "\n" + prompt_template_for_handler
             except KeyError as e:
                 logger.error(f"{error_message_prefix}Missing key '{str(e)}' for prompt template. Context: {json.dumps(context, indent=2, default=str)}", exc_info=True)
                 return NodeExecutionResult(
@@ -162,81 +173,47 @@ class AiNode(BaseNode):
                 )
 
             # Pass tools to the LLM service if present
-            tools = None
-            if self.config.tools:
-                tools = [tool.model_dump() for tool in self.config.tools]
-            else:
-                tools = self.tool_service.list_tools_with_schemas() if hasattr(self, 'tool_service') else []
+            tools = [tool.model_dump() for tool in self.config.tools] if self.config.tools else None
 
-            # Start the agentic loop
-            last_llm_output = None
-            usage_metadata = None
-            while step < max_steps:
-                step += 1
-                logger.debug(f"{error_message_prefix}Agentic loop step {step}")
-                if step == 1:
-                    llm_input = prompt_template_for_handler
-                else:
-                    # Use the utility for tool output formatting
-                    tool_output_strs = [
-                        format_tool_output(t['tool_name'], t['output']) for t in tool_outputs if t['success']
-                    ]
-                    llm_input = prompt_template_for_handler + "\n" + "\n".join(tool_output_strs)
+            # Single LLM call
+            generated_text, usage_dict, handler_error = await self.llm_service.generate(
+                self._llm_config,
+                prompt_template_for_handler,
+                context=context,
+                tools=tools
+            )
+            logger.info(f"{error_message_prefix}Raw LLM output: {repr(generated_text)}")
 
-                generated_text, usage_dict, handler_error = await self.llm_service.generate(
-                    llm_config=self.llm_config,
-                    prompt=llm_input,
-                    context=context,
-                    tools=tools
-                )
-                last_llm_output = generated_text
+            # Tool/function call detection
+            tool_name, tool_args = detect_tool_call(generated_text)
+            tool_call_detected = tool_name is not None
 
-                # --- Tool/function call detection and handling ---
-                tool_name, tool_args = detect_tool_call(generated_text)
-                tool_call_detected = tool_name is not None
-                tool_result = None
-                tool_error = None
-
-                if tool_call_detected:
-                    logger.info(f"Tool/function call detected: {tool_name} with args: {tool_args}")
-                    tool_exec_result = await self.tool_service.execute(tool_name, tool_args or {})
-                    tool_outputs.append(tool_exec_result)
-                    if not tool_exec_result["success"]:
-                        tool_error = tool_exec_result["error"]
-                        end_time = datetime.utcnow()
-                        duration = (end_time - start_time).total_seconds()
-                        return NodeExecutionResult(
-                            success=False,
-                            output=None,
-                            error=f"{error_message_prefix}{tool_error}" if tool_error else None,
-                            metadata=NodeMetadata(
-                                node_id=self.config.id,
-                                node_type=self.config.type,
-                                version=self.config.metadata.version if self.config.metadata else "1.0.0",
-                                start_time=start_time,
-                                end_time=end_time,
-                                duration=duration,
-                                provider=self.config.provider,
-                                error_type="ToolExecutionError"
-                            ),
-                            usage=None,
-                            execution_time=duration
-                        )
-                    # Continue the loop: send tool output back to LLM for further reasoning
-                    continue
-                # --- End tool/function call handling ---
-
-                if handler_error:
-                    logger.error(f"{error_message_prefix}Handler error: {handler_error}")
+            if tool_call_detected:
+                logger.info(f"Tool/function call detected: {tool_name} with args: {tool_args}")
+                tool_exec_result = await self.tool_service.execute(tool_name, tool_args or {})
+                if not tool_exec_result["success"]:
+                    tool_error = tool_exec_result["error"]
+                    end_time = datetime.utcnow()
+                    duration = (end_time - start_time).total_seconds()
                     return NodeExecutionResult(
                         success=False,
-                        error=f"{error_message_prefix}{handler_error}",
-                        metadata=self._create_error_metadata(start_time, "LLMHandlerError"),
-                        execution_time=(datetime.utcnow() - start_time).total_seconds()
+                        output=None,
+                        error=f"{error_message_prefix}{tool_error}" if tool_error else None,
+                        metadata=NodeMetadata(
+                            node_id=self.config.id,
+                            node_type=self.config.type,
+                            version=self.config.metadata.version if self.config.metadata else "1.0.0",
+                            start_time=start_time,
+                            end_time=end_time,
+                            duration=duration,
+                            provider=self.config.provider,
+                            error_type="ToolExecutionError"
+                        ),
+                        usage=usage_metadata,
+                        execution_time=duration
                     )
-
-                # If no tool call detected, treat as final answer
-                output_data, validation_success, validation_error = self._process_and_validate_output(generated_text)
+                # Return the tool output as the final answer
+                output_data, validation_success, validation_error = self._process_and_validate_output(json.dumps(tool_exec_result["output"]))
                 final_success = validation_success
                 final_error = validation_error if not validation_success else None
                 end_time = datetime.utcnow()
@@ -247,7 +224,7 @@ class AiNode(BaseNode):
                             prompt_tokens=usage_dict.get("prompt_tokens", 0),
                             completion_tokens=usage_dict.get("completion_tokens", 0),
                             total_tokens=usage_dict.get("total_tokens", 0),
-                            model=self.llm_config.model,
+                            model=self._llm_config.model,
                             node_id=self.config.id,
                             provider=self.config.provider
                         )
@@ -270,14 +247,66 @@ class AiNode(BaseNode):
                     usage=usage_metadata,
                     execution_time=duration
                 )
-            # If we reach here, max_steps was hit
-            logger.warning(f"{error_message_prefix}Max agentic steps ({max_steps}) reached.")
+
+            # Output parsing/validation logic based on output_format
+            if output_format == 'json':
+                # Try to parse as JSON, fallback to single-field wrap
+                try:
+                    output_data, validation_success, validation_error = self._process_and_validate_output(generated_text)
+                except Exception as e:
+                    output_data, validation_success, validation_error = { }, False, str(e)
+                if not validation_success and self.config.output_schema and len(self.config.output_schema) == 1:
+                    # Fallback: wrap as {field: value}
+                    key = list(self.config.output_schema.keys())[0]
+                    logger.warning(f"{error_message_prefix}Output was not valid JSON, wrapping as single-field: {key}")
+                    output_data = {key: generated_text.strip()}
+                    validation_success = True
+                    validation_error = None
+                final_success = validation_success
+                final_error = validation_error if not validation_success else None
+            elif output_format == 'plain':
+                # Treat as plain text, wrap if single-field schema
+                if self.config.output_schema and len(self.config.output_schema) == 1:
+                    key = list(self.config.output_schema.keys())[0]
+                    output_data = {key: generated_text.strip()}
+                    final_success = True
+                    final_error = None
+                else:
+                    output_data, final_success, final_error = self._process_and_validate_output(generated_text)
+            else:
+                # Default/fallback: use existing logic
+                output_data, final_success, final_error = self._process_and_validate_output(generated_text)
+
+            end_time = datetime.utcnow()
+            duration = (end_time - start_time).total_seconds()
+            if usage_dict:
+                try:
+                    usage_metadata = UsageMetadata(
+                        prompt_tokens=usage_dict.get("prompt_tokens", 0),
+                        completion_tokens=usage_dict.get("completion_tokens", 0),
+                        total_tokens=usage_dict.get("total_tokens", 0),
+                        model=self._llm_config.model,
+                        node_id=self.config.id,
+                        provider=self.config.provider
+                    )
+                except Exception as e_usage:
+                    logger.error(f"{error_message_prefix}Failed to create UsageMetadata: {str(e_usage)}", exc_info=True)
             return NodeExecutionResult(
-                success=False,
-                output=None,
-                error=f"{error_message_prefix}Max agentic steps ({max_steps}) reached.",
-                metadata=self._create_error_metadata(start_time, "MaxStepsReached"),
-                execution_time=(datetime.utcnow() - start_time).total_seconds()
+                success=final_success,
+                output=output_data,
+                error=f"{error_message_prefix}{final_error}" if final_error else None,
+                metadata=NodeMetadata(
+                    node_id=self.config.id,
+                    node_type=self.config.type,
+                    version=self.config.metadata.version if self.config.metadata else "1.0.0",
+                    start_time=start_time,
+                    end_time=end_time,
+                    duration=duration,
+                    provider=self.config.provider,
+                    error_type="SchemaValidationError" if not final_success and final_error else None
+                ),
+                usage=usage_metadata,
+                execution_time=duration
             )
         except Exception as e:
             logger.error(f"{error_message_prefix}Unexpected error in execute method: {str(e)}", exc_info=True)
@@ -387,17 +416,17 @@ class AiNode(BaseNode):
         Returns:
             Truncated list of messages
         """
-        if current_tokens <= self.llm_config.max_context_tokens:
+        if current_tokens <= self._llm_config.max_context_tokens:
             return messages
             
         # Remove oldest messages first
-        while current_tokens > self.llm_config.max_context_tokens and len(messages) > 1:
+        while current_tokens > self._llm_config.max_context_tokens and len(messages) > 1:
             removed = messages.pop(0)
             try:
                 removed_tokens = TokenCounter.count_tokens(
                     removed["content"],
-                    self.llm_config.model,
-                    self.llm_config.provider
+                    self._llm_config.model,
+                    self._llm_config.provider
                 )
                 current_tokens -= removed_tokens
             except ValueError:
@@ -418,9 +447,9 @@ class AiNode(BaseNode):
         text_content = response.choices[0].message.content
         text = text_content.strip() if text_content else ""
         usage = UsageMetadata(
-            model=self.llm_config.model,
+            model=self._llm_config.model,
             node_id=self.config.id,
-            provider=self.llm_config.provider,
+            provider=self._llm_config.provider,
             prompt_tokens=response.usage.prompt_tokens,
             completion_tokens=response.usage.completion_tokens,
             total_tokens=response.usage.total_tokens
@@ -435,7 +464,7 @@ class AiNode(BaseNode):
         """Update execution statistics."""
         if result.usage:
             self.metrics["total_tokens"] += result.usage["total_tokens"]
-            self.metrics["token_usage"][self.llm_config.provider] = result.usage
+            self.metrics["token_usage"][self._llm_config.provider] = result.usage
 
     def _create_error_metadata(self, start_time: datetime, error_type_str: str) -> NodeMetadata:
         """Helper to create metadata for error results."""
@@ -451,82 +480,49 @@ class AiNode(BaseNode):
         )
 
     def _process_and_validate_output(self, generated_text: str) -> Tuple[Dict[str, Any], bool, Optional[str]]:
-        """Processes the raw text from LLM and validates against output_schema.
-        
-        Simple, flexible approach:
-        1. Try JSON parsing first
-        2. If that fails, handle as plain text based on schema
-        3. Default to wrapping in 'text' key if no schema
-        """
+        from pydantic import BaseModel, ValidationError, create_model
         logger.debug(f"[_PVP] Raw generated_text: '{generated_text}'")
         output = {}
-        
-        # Strategy 1: Try JSON parsing (for structured responses)
+        # Step 1: Parse output as JSON or fallback to dict for single-field schemas
         try:
             parsed_json = json.loads(generated_text.strip())
             if isinstance(parsed_json, dict):
                 output = parsed_json
-                logger.debug(f"[_PVP] Successfully parsed as JSON: {output}")
             else:
-                # JSON but not a dict (e.g., just a string or number)
-                raise ValueError("Not a dictionary")
-        except (json.JSONDecodeError, ValueError):
-            # Strategy 2: Handle as plain text
-            logger.debug(f"[_PVP] Not JSON, handling as plain text")
-            
-            if self.config.output_schema:
-                # If schema exists, try to fit the text into it
-                if len(self.config.output_schema) == 1:
-                    # Single field schema - put entire text there
+                # If not a dict, treat as plain text for single-field schemas
+                if self.config.output_schema and len(self.config.output_schema) == 1:
                     key = list(self.config.output_schema.keys())[0]
-                    expected_type = self.config.output_schema[key]
-                    
-                    if expected_type == "str":
-                        output[key] = generated_text.strip()
-                    elif expected_type == "int":
-                        # Extract first number, fail if no valid number found
-                        numbers = re.findall(r'-?\d+', generated_text)
-                        if not numbers:
-                            return {}, False, f"Output schema validation failed: No valid integer found in '{generated_text}'"
-                        try:
-                            output[key] = int(numbers[0])
-                        except ValueError:
-                            return {}, False, f"Output schema validation failed: Could not convert '{numbers[0]}' to integer"
-                    elif expected_type == "float":
-                        # Extract first float, fail if no valid float found
-                        numbers = re.findall(r'-?\d*\.?\d+', generated_text)
-                        if not numbers:
-                            return {}, False, f"Output schema validation failed: No valid float found in '{generated_text}'"
-                        output[key] = float(numbers[0])
-                    else:
-                        # For other types, convert string
-                        output[key] = generated_text.strip()
+                    output = {key: parsed_json}
                 else:
-                    # Multiple fields - try to extract or put in first string field
-                    for key, expected_type in self.config.output_schema.items():
-                        if expected_type == "str":
-                            output[key] = generated_text.strip()
-                            break
+                    return {}, False, "Output is not a dict and schema is not single-field."
+        except Exception:
+            # Fallback: treat as plain text for single-field schemas
+            if self.config.output_schema and len(self.config.output_schema) == 1:
+                key = list(self.config.output_schema.keys())[0]
+                output = {key: generated_text.strip()}
             else:
-                # No schema - default behavior
-                output["text"] = generated_text.strip()
-        
-        # Validate against schema
+                return {}, False, "Output is not valid JSON and schema is not single-field."
+
+        # Step 2: Type coercion before Pydantic validation
         if self.config.output_schema:
-            for key, expected_type in self.config.output_schema.items():
-                if key not in output:
-                    return {}, False, f"Output schema validation failed: Missing key '{key}' (expected type '{expected_type}')"
-                    
-                # Type conversion if needed
-                try:
-                    if expected_type == "str" and not isinstance(output[key], str):
-                        output[key] = str(output[key])
-                    elif expected_type == "int" and not isinstance(output[key], int):
-                        output[key] = int(output[key])
-                    elif expected_type == "float" and not isinstance(output[key], (int, float)):
-                        output[key] = float(output[key])
-                except (ValueError, TypeError) as e:
-                    return {}, False, f"Output schema validation failed: Cannot convert '{output[key]}' to {expected_type} for key '{key}': {str(e)}"
-        
-        logger.debug(f"[_PVP] Final output: {output}")
-        return output, True, None
+            try:
+                if getattr(self.config, "coerce_output_types", True):
+                    output = coerce_types(output, self.config.output_schema)
+                # Map string type names to Python types
+                type_map = {"str": str, "int": int, "float": float, "bool": bool}
+                fields = {}
+                for k, v in self.config.output_schema.items():
+                    py_type = type_map.get(v, str)  # Default to str if unknown
+                    fields[k] = (py_type, ...)
+                OutputModel = create_model("OutputModel", **fields)
+                validated = OutputModel(**output)
+                return validated.dict(), True, None
+            except ValueError as e:
+                return {}, False, f"Type coercion failed: {e}"
+            except ValidationError as e:
+                return {}, False, f"Output schema validation failed: {e}"
+            except Exception as e:
+                return {}, False, f"Output schema validation error: {e}"
+        else:
+            # No output schema, just return the output as-is
+            return output, True, None

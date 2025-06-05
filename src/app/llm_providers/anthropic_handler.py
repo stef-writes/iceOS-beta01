@@ -51,29 +51,42 @@ class AnthropicHandler(BaseLLMHandler):
         else:
             system_param = []
 
+        DEFAULT_MAX_TOKENS = 256
+        DEFAULT_TEMPERATURE = 1.0
+        DEFAULT_TOP_P = 1.0
+        max_tokens = llm_config.max_tokens if llm_config.max_tokens is not None else DEFAULT_MAX_TOKENS
+        temperature = llm_config.temperature if llm_config.temperature is not None else DEFAULT_TEMPERATURE
+        top_p = llm_config.top_p if llm_config.top_p is not None else DEFAULT_TOP_P
+        if llm_config.max_tokens is None:
+            logger.info(f"AnthropicHandler: max_tokens not set, using default {DEFAULT_MAX_TOKENS}")
+        if llm_config.temperature is None:
+            logger.info(f"AnthropicHandler: temperature not set, using default {DEFAULT_TEMPERATURE}")
+        if llm_config.top_p is None:
+            logger.info(f"AnthropicHandler: top_p not set, using default {DEFAULT_TOP_P}")
+
         try:
             async with client: # AsyncAnthropic client can be used as a context manager
-                logger.info(f"🔄 Making Anthropic API call: model={llm_config.model}, max_tokens={llm_config.max_tokens}")
-                logger.debug(f"Sending request to Anthropic: model={llm_config.model}, system_prompt_present={bool(system_param)}, messages_count={len(messages)}, temp={llm_config.temperature}, max_tokens={llm_config.max_tokens}")
+                logger.info(f"🔄 Making Anthropic API call: model={llm_config.model}, max_tokens={max_tokens}")
+                logger.debug(f"Sending request to Anthropic: model={llm_config.model}, system_prompt_present={bool(system_param)}, messages_count={len(messages)}, temp={temperature}, max_tokens={max_tokens}")
                 logger.info(f"ANTHROPIC_HANDLER: Preparing to call messages.create.")
                 logger.info(f"ANTHROPIC_HANDLER: llm_config.model = {llm_config.model}")
                 logger.info(f"ANTHROPIC_HANDLER: system_param = {system_param}")
                 logger.info(f"ANTHROPIC_HANDLER: type(system_param) = {type(system_param)}")
                 logger.info(f"ANTHROPIC_HANDLER: messages = {messages}")
-                logger.info(f"ANTHROPIC_HANDLER: llm_config.max_tokens = {llm_config.max_tokens}")
-                logger.info(f"ANTHROPIC_HANDLER: llm_config.temperature = {llm_config.temperature}")
-                logger.info(f"ANTHROPIC_HANDLER: llm_config.top_p = {llm_config.top_p}")
+                logger.info(f"ANTHROPIC_HANDLER: llm_config.max_tokens = {max_tokens}")
+                logger.info(f"ANTHROPIC_HANDLER: llm_config.temperature = {temperature}")
+                logger.info(f"ANTHROPIC_HANDLER: llm_config.top_p = {top_p}")
                 
                 # Prepare kwargs for the API call, only include top_p if it's a valid float
                 api_kwargs = {
                     "model": llm_config.model,
                     "system": system_param,
                     "messages": messages,
-                    "max_tokens": llm_config.max_tokens,
-                    "temperature": llm_config.temperature,
+                    "max_tokens": max_tokens,
+                    "temperature": temperature,
                 }
-                if isinstance(llm_config.top_p, float):
-                    api_kwargs["top_p"] = llm_config.top_p
+                if isinstance(top_p, float):
+                    api_kwargs["top_p"] = top_p
                 # Add any custom parameters if not Anthropic
                 if llm_config.provider != ModelProvider.ANTHROPIC:
                     api_kwargs.update(llm_config.custom_parameters)

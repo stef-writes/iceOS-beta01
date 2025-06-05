@@ -19,7 +19,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Configuration
-API_BASE_URL = "http://localhost:8000/api/v1"
+API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:8000/api/v1")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")

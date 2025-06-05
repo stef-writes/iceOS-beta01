@@ -1,3 +1,4 @@
+# This file provides single-step tool call detection and formatting utilities only.
 import json
 from typing import Tuple, Optional, Any
 

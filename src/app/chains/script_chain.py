@@ -82,7 +82,8 @@ class ScriptChain:
         callbacks: Optional[List[ScriptChainCallback]] = None,
         max_parallel: int = 5,
         persist_intermediate_outputs: bool = True,
-        tool_service: Optional[Any] = None
+        tool_service: Optional[Any] = None,
+        initial_context: Optional[Dict[str, Any]] = None
     ):
         """Initialize the script chain.
         
@@ -95,6 +96,7 @@ class ScriptChain:
             persist_intermediate_outputs: If True, persist output of each node in the chain
                                           to the global context manager.
             tool_service: Optional tool service for node execution
+            initial_context: Optional initial context for the chain
         """
         self.nodes = {node.id: node for node in nodes}
         self.global_context_manager = context_manager or GraphContextManager()
@@ -111,6 +113,7 @@ class ScriptChain:
             'chain_name': self.name
         }
         self.tool_service = tool_service
+        self.initial_context = initial_context or {}
         
         # Build dependency graph
         self.graph = nx.DiGraph()
@@ -285,6 +288,9 @@ class ScriptChain:
                                     context[dep_id] = dep_result.output
                             else:
                                 context[dep_id] = dep_result.output
+                    # If node has no dependencies, merge initial_context
+                    if not node.dependencies:
+                        context = {**self.initial_context, **context}
                     
                     # Check for missing dependencies
                     if missing_dependencies:

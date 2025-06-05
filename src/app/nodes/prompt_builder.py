@@ -1,3 +1,4 @@
+# This file is the single source of truth for prompt and tool preamble logic.
 import json
 from app.models.node_models import NodeConfig
 from app.models.config import LLMConfig

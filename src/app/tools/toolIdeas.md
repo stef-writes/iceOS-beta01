@@ -46,14 +46,12 @@
 - **User Authentication Tool**
   - Handles login, permissions, and user-specific actions securely.
 
-## 3. Tools for Differentiation (Delight & Creativity)
+## 3. Tools for Differentiation 
 
 - **Persona Simulator**
   - Simulates a specific person or character for roleplay, interviews, or creative writing.
 - **Emotion Analyzer**
   - Detects sentiment or emotion in text and suggests responses or actions.
-- **Game Engine Tool**
-  - Lets the LLM play or design simple games (e.g., chess, tic-tac-toe, text adventures).
 - **Music Generator**
   - Composes short melodies or generates MIDI files.
 - **IoT Device Controller**

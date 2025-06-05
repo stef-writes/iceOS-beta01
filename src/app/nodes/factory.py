@@ -1,5 +1,6 @@
 from app.nodes.ai_node import AiNode
-# from app.nodes.tool_node import ToolNode  # (future)
+from app.nodes.tool_node import ToolNode
+from app.nodes.api_node import ApiNode
 # from app.nodes.router_node import RouterNode  # (future)
 
 def node_factory(node_config, context_manager, llm_config=None, callbacks=None, tool_service=None):
@@ -9,8 +10,10 @@ def node_factory(node_config, context_manager, llm_config=None, callbacks=None, 
     """
     if node_config.type == "ai":
         return AiNode(node_config, context_manager, llm_config, callbacks, tool_service=tool_service)
-    # elif node_config.type == "tool":
-    #     return ToolNode(node_config, ...)
+    elif node_config.type == "tool":
+        return ToolNode(node_config, tool_service=tool_service)
+    elif node_config.type == "api":
+        return ApiNode(node_config)
     # elif node_config.type == "router":
     #     return RouterNode(node_config, ...)
     else:

@@ -63,12 +63,13 @@ async def create_text_generation_node(request: NodeRequest):
 async def execute_chain(request: ChainRequest):
     """Execute a chain of nodes"""
     try:
-        # Create chain with nodes, passing the shared context_manager
+        # Create chain with nodes, passing the shared context_manager and initial_context
         chain = ScriptChain(
             nodes=request.nodes,
             context_manager=context_manager,
             persist_intermediate_outputs=request.persist_intermediate_outputs,
-            tool_service=singleton_tool_service
+            tool_service=singleton_tool_service,
+            initial_context=request.context or {}
         )
         
         # Execute chain
