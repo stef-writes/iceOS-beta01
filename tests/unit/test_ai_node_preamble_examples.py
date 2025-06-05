@@ -2,7 +2,7 @@ import pytest
 from app.nodes.ai_node import AiNode, TOOL_INSTRUCTION
 from app.models.node_models import NodeConfig
 from app.models.config import LLMConfig
-from app.utils.context import GraphContextManager
+from app.utils.context.manager import GraphContextManager
 from app.services.tool_service import ToolService
 from app.tools.calculator import CalculatorTool
 

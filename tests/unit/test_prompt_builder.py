@@ -2,7 +2,7 @@ import pytest
 from app.nodes.prompt_builder import build_tool_preamble, prepare_prompt
 from app.models.node_models import NodeConfig
 from app.models.config import LLMConfig
-from app.utils.context import GraphContextManager
+from app.utils.context.manager import GraphContextManager
 from app.services.tool_service import ToolService
 from app.tools.calculator import CalculatorTool
 

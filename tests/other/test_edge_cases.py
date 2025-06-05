@@ -5,7 +5,7 @@ from unittest.mock import AsyncMock, patch
 from app.models.node_models import NodeConfig
 from app.models.config import LLMConfig
 from app.nodes.ai_node import AiNode
-from app.utils.context import GraphContextManager
+from app.utils.context.manager import GraphContextManager
 from app.services.llm_service import LLMService
 
 API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:8000/api/v1")

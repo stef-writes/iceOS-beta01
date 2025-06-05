@@ -2485,9 +2485,8 @@
     "data": {
       "result": 5
     },
-    "version": "60c1adf4-ccde-4ddf-8efa-454b2b67d4dc",
-    "timestamp": "2025-06-05T14:07:55.541201",
-    "execution_id": "f14205de-8896-4aac-b794-c9afa7664272"
+    "version": "ffe45776-044f-436d-bd21-6376207a4661",
+    "timestamp": "2025-06-05T14:58:11.472160"
   },
   "intent-01": {
     "data": {
@@ -4126,10 +4125,10 @@
   },
   "dummy": {
     "data": {
-      "result": 5
+      "result": "42"
     },
-    "version": "173ddd58-d81d-4350-9c8f-19b12e42d28e",
-    "timestamp": "2025-06-05T14:07:45.642202"
+    "version": "9ba7df24-e8cc-4e45-a357-fcff27a3703c",
+    "timestamp": "2025-06-05T14:58:08.129176"
   },
   "calc_test_1749105901": {
     "data": {
@@ -5242,5 +5241,103 @@
     "version": "e4a2abd7-bdfe-4c4d-ae3c-9ff18c8b440b",
     "timestamp": "2025-06-05T14:07:55.527453",
     "execution_id": "886429d8-d4c8-4704-91c7-1e5ce18e5791"
+  },
+  "simple_test_1749134240": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "1d17f228-854b-44da-9d97-33985bd053ed",
+    "timestamp": "2025-06-05T14:37:20.837398"
+  },
+  "calc_test_1749134242": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "d8a9641e-59bf-4e28-9ca5-5c871c6d4146",
+    "timestamp": "2025-06-05T14:37:22.723438",
+    "execution_id": "9da759b8-cb88-41e1-aed4-e8f30a1be63e"
+  },
+  "mp_openai_1749134242": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "6ca1271a-288c-45b6-ba2e-837d3f98882a",
+    "timestamp": "2025-06-05T14:37:23.099996",
+    "execution_id": "7f62a547-b3e7-4394-bb62-5bb614ff5eea"
+  },
+  "mp_anthropic_1749134242": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "63daecb8-b861-4910-b973-7f2c710d2068",
+    "timestamp": "2025-06-05T14:37:24.319206",
+    "execution_id": "7f62a547-b3e7-4394-bb62-5bb614ff5eea"
+  },
+  "mp_google_1749134242": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "150acd37-c1c4-46ab-b83d-ac15291fb690",
+    "timestamp": "2025-06-05T14:37:24.949051",
+    "execution_id": "7f62a547-b3e7-4394-bb62-5bb614ff5eea"
+  },
+  "mp_deepseek_1749134242": {
+    "data": {
+      "text": "May"
+    },
+    "version": "e07ee4a5-c6eb-4d16-99f5-3e064530b795",
+    "timestamp": "2025-06-05T14:37:29.475572",
+    "execution_id": "7f62a547-b3e7-4394-bb62-5bb614ff5eea"
+  },
+  "context_test_1749134249": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "55f8a890-71e8-40f9-ab21-f05343c63e8a",
+    "timestamp": "2025-06-05T14:37:30.029181"
+  },
+  "openai_test_1749134250": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "4da50e4e-cd26-4508-9e30-df8ae29cf20a",
+    "timestamp": "2025-06-05T14:37:30.600001"
+  },
+  "simple_test_1749135488": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "fd666044-bb14-4795-8b42-d3b82963e081",
+    "timestamp": "2025-06-05T14:58:08.552581"
+  },
+  "openai_test_1749135488": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "3ac72ef0-d0f3-441c-b404-a5a650f9c85a",
+    "timestamp": "2025-06-05T14:58:08.987386"
+  },
+  "mp_openai_1749135488": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "bd580de3-dd8b-486c-9e59-d05da8f3b325",
+    "timestamp": "2025-06-05T14:58:09.409313",
+    "execution_id": "478b65a4-6849-446d-ab2f-189abf43cf81"
+  },
+  "calc_test_1749135489": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "67992d0a-13d6-41b7-83da-1e57f67afb10",
+    "timestamp": "2025-06-05T14:58:09.429472",
+    "execution_id": "e53435a2-5d8e-4658-80a8-4bcf967b5ffd"
+  },
+  "context_test_1749135489": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "1a9f575e-ef51-4ffd-a9b0-4b8a53e89156",
+    "timestamp": "2025-06-05T14:58:09.962815"
   }
 }

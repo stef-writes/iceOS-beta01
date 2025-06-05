@@ -8,7 +8,7 @@ from app.nodes.factory import node_factory
 from app.tools.base import BaseTool
 from pydantic import BaseModel
 from app.models.config import LLMConfig
-from app.utils.context import GraphContextManager
+from app.utils.context.manager import GraphContextManager
 from app.utils.callbacks import ScriptChainCallback
 
 # --- Tool Definition ---

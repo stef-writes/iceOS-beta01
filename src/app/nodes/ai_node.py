@@ -29,7 +29,7 @@ from app.models.node_models import (
     ContextRule
 )
 from app.models.config import LLMConfig, MessageTemplate, ModelProvider
-from app.utils.context import GraphContextManager
+from app.utils.context.manager import GraphContextManager
 from app.nodes.base import BaseNode
 from app.utils.logging import logger
 from app.utils.tracking import track_usage

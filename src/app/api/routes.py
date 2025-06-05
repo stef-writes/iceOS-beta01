@@ -8,8 +8,9 @@ from pydantic import BaseModel, ValidationError
 from app.models.node_models import NodeConfig, NodeExecutionResult
 from app.models.config import LLMConfig, MessageTemplate
 from app.nodes.factory import node_factory
-from app.chains.script_chain import ScriptChain, CircularDependencyError
-from app.utils.context import GraphContextManager
+from app.chains.script_chain import ScriptChain
+from app.chains.errors import CircularDependencyError
+from app.utils.context.manager import GraphContextManager
 from app.utils.logging import logger
 from app.services.tool_service import ToolService
 import traceback
