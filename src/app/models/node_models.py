@@ -298,7 +298,7 @@ class NodeExecutionResult(BaseModel):
     """Result of a node execution."""
     success: bool = Field(default=True, description="Whether the execution was successful")
     error: Optional[str] = Field(None, description="Error message if execution failed")
-    output: Optional[Dict[str, Any]] = Field(None, description="Output data from the node")
+    output: Optional[Any] = Field(None, description="Output data from the node (dict, str, etc.)")
     metadata: NodeMetadata = Field(..., description="Metadata about the execution")
     usage: Optional[UsageMetadata] = Field(None, description="Usage statistics from the execution")
     execution_time: Optional[float] = Field(None, description="Execution time in seconds")
@@ -327,7 +327,7 @@ class ChainExecutionResult(BaseModel):
     """Result of a chain execution."""
     success: bool = Field(default=True, description="Whether the execution was successful")
     error: Optional[str] = Field(None, description="Error message if execution failed")
-    output: Optional[Dict[str, Any]] = Field(None, description="Output data from the final node in the chain")
+    output: Optional[Any] = Field(None, description="Output data from the final node in the chain (dict, str, etc.)")
     metadata: NodeMetadata = Field(..., description="Metadata about the chain execution")
     execution_time: Optional[float] = Field(None, description="Execution time in seconds")
     token_stats: Optional[Dict[str, Any]] = Field(

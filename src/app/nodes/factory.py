@@ -40,7 +40,12 @@ def node_factory(config: Any, *args, **kwargs):
     # ToolNode signature differs slightly – if the node expects a context
     # manager as first positional, preserve legacy behaviour.
     if config.type == "tool":
-        context_manager = args[0] if args else None
+        # Ensure we don\'t pass duplicate \"context_manager\". Prefer explicit kwarg, fall back to positional.
+        if "context_manager" in kwargs:
+            context_manager = kwargs.pop("context_manager")
+        else:
+            context_manager = args[0] if args else None
+
         return node_cls(config, context_manager=context_manager, **kwargs)
 
     return node_cls(config, *args, **kwargs) 
