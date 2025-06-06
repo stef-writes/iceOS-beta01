@@ -2483,10 +2483,10 @@
   },
   "test-node": {
     "data": {
-      "result": 5
+      "text": "Hi John"
     },
-    "version": "ffe45776-044f-436d-bd21-6376207a4661",
-    "timestamp": "2025-06-05T14:58:11.472160"
+    "version": "063d76ef-6072-4f41-a487-698c4cb1774c",
+    "timestamp": "2025-06-05T22:05:43.750458"
   },
   "intent-01": {
     "data": {
@@ -3972,12 +3972,11 @@
   },
   "math_solver": {
     "data": {
-      "result": 1379.0,
-      "text": "1379.0"
+      "result": 1379
     },
-    "version": "b996bcdb-5812-4a58-abc3-eab8017880db",
-    "timestamp": "2025-06-05T12:49:58.009453",
-    "execution_id": "7bbb2034-68f4-40d9-84d4-8f2248730464"
+    "version": "2da7071f-3c0b-475b-b016-7d3e6ecc761b",
+    "timestamp": "2025-06-05T22:05:47.800861",
+    "execution_id": "afc49b0e0693db1f"
   },
   "calc1": {
     "data": {
@@ -4125,10 +4124,10 @@
   },
   "dummy": {
     "data": {
-      "result": "42"
+      "result": 42
     },
-    "version": "9ba7df24-e8cc-4e45-a357-fcff27a3703c",
-    "timestamp": "2025-06-05T14:58:08.129176"
+    "version": "dcbda169-1470-45e2-bb11-313189c29486",
+    "timestamp": "2025-06-05T22:05:45.800294"
   },
   "calc_test_1749105901": {
     "data": {
@@ -5117,15 +5116,12 @@
   },
   "get_cat_fact": {
     "data": {
-      "status_code": 200,
-      "body": {
-        "fact": "Cats have 30 vertebrae (humans have 33 vertebrae during early development; 26 after the sacral and coccygeal regions fuse)",
-        "length": 122
-      }
+      "fact": "Cat families usually play best in even numbers. Cats and kittens should be aquired in pairs whenever possible.",
+      "length": 110
     },
-    "version": "9b9991e6-0ee0-41e0-82c8-85da52a6a9bb",
-    "timestamp": "2025-06-05T13:32:22.196357",
-    "execution_id": "1f1e4b9d-91b2-4801-b95d-045921fd30e1"
+    "version": "18349635-0fd3-4ea2-a590-332adedfcff2",
+    "timestamp": "2025-06-05T22:05:59.556229",
+    "execution_id": "d04bcee6f2b08547"
   },
   "openai_test_1749131498": {
     "data": {
@@ -5339,5 +5335,1610 @@
     },
     "version": "1a9f575e-ef51-4ffd-a9b0-4b8a53e89156",
     "timestamp": "2025-06-05T14:58:09.962815"
+  },
+  "simple_test_1749141539": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "de6d2125-f252-40a5-9c09-427a0398dda9",
+    "timestamp": "2025-06-05T16:39:00.032688"
+  },
+  "openai_test_1749144015": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "ceec4039-bf1e-4f29-9d88-a0412ee048bc",
+    "timestamp": "2025-06-05T17:20:16.536900"
+  },
+  "context_test_1749144016": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "16cb18a7-7bdb-4c84-9ec1-478a6de7f608",
+    "timestamp": "2025-06-05T17:20:17.887243"
+  },
+  "simple_test_1749144025": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "d2158fc5-f671-4d95-b1cf-9daaa5ab25ca",
+    "timestamp": "2025-06-05T17:20:25.634366"
+  },
+  "openai_test_1749144136": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "bc5095cd-08d2-480a-af67-ea1847247659",
+    "timestamp": "2025-06-05T17:22:17.266029"
+  },
+  "mp_openai_1749144137": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "ffd2c3d6-a9be-48d8-b08f-69f93bc3298d",
+    "timestamp": "2025-06-05T17:22:17.732492",
+    "execution_id": "945d413636ec50e9"
+  },
+  "context_test_1749144137": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "183be75b-10e2-4fbb-9441-7c8cba95a273",
+    "timestamp": "2025-06-05T17:22:18.312953"
+  },
+  "simple_test_1749144138": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "7493f354-c381-4c4e-a72b-4ea843393791",
+    "timestamp": "2025-06-05T17:22:18.896862"
+  },
+  "simple_test_1749144271": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "a770faf4-041b-4945-9359-af87f6ef07ec",
+    "timestamp": "2025-06-05T17:24:31.706983"
+  },
+  "calc_test_1749144281": {
+    "data": {
+      "result": 0
+    },
+    "version": "745efa82-829a-45d1-be4a-ce100b7783b2",
+    "timestamp": "2025-06-05T17:24:42.249239",
+    "execution_id": "25a53d9f8a9f3eef"
+  },
+  "mp_openai_1749144282": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "2c32344f-837f-47c3-9b3b-884e9cc7ee94",
+    "timestamp": "2025-06-05T17:24:43.267515",
+    "execution_id": "5a3f08bd50e77f05"
+  },
+  "openai_test_1749144283": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "95816e0e-5dbd-433f-a132-e4ffbba410ff",
+    "timestamp": "2025-06-05T17:24:44.031129"
+  },
+  "context_test_1749144284": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "a1bab87b-e95a-4aa4-8e0e-aac6d3785de8",
+    "timestamp": "2025-06-05T17:24:44.599832"
+  },
+  "simple_test_1749144676": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "0ad24b37-f830-427d-88c4-90b78e024541",
+    "timestamp": "2025-06-05T17:31:17.175617"
+  },
+  "context_test_1749144677": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "b5ba9337-bbb4-46f3-8457-bfdb3788aa8c",
+    "timestamp": "2025-06-05T17:31:17.600630"
+  },
+  "openai_test_1749144678": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "9197381f-f1ff-4a4b-ab83-d882db2b2692",
+    "timestamp": "2025-06-05T17:31:19.128538"
+  },
+  "context_test_1749144835": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "959b7139-a608-45b5-97ee-a0f2214dc994",
+    "timestamp": "2025-06-05T17:33:55.774767"
+  },
+  "openai_test_1749144835": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "d4c493c0-f1dc-46c8-b0bc-baa891e3cb0b",
+    "timestamp": "2025-06-05T17:33:56.238886"
+  },
+  "simple_test_1749144837": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "9869c4bb-46f4-426f-96fb-39f6a11c008c",
+    "timestamp": "2025-06-05T17:33:57.626630"
+  },
+  "simple_test_1749145774": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "258dfe70-c071-41b6-a042-56d5c1bf18c9",
+    "timestamp": "2025-06-05T17:49:34.465863"
+  },
+  "mp_openai_1749145775": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "4c0873d5-c36d-4b10-99b6-070f7179ca58",
+    "timestamp": "2025-06-05T17:49:36.199295",
+    "execution_id": "248cc1ec4cfc5ced"
+  },
+  "calc_test_1749145776": {
+    "data": {
+      "result": 0
+    },
+    "version": "a5dd9f0e-b548-467b-be2a-7e0c644849e6",
+    "timestamp": "2025-06-05T17:49:38.039866",
+    "execution_id": "beb6b936b165a982"
+  },
+  "context_test_1749145778": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "32809fb4-2f92-48d4-b3a4-4d1d75a361b9",
+    "timestamp": "2025-06-05T17:49:38.551053"
+  },
+  "openai_test_1749145778": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "ecc30ec1-6ad4-4ddf-afe7-b0b2f9c3628d",
+    "timestamp": "2025-06-05T17:49:39.268339"
+  },
+  "simple_test_1749145927": {
+    "data": {
+      "greeting": "Hello, World!"
+    },
+    "version": "897e177c-8ca9-4d61-8c84-06909f9ce53e",
+    "timestamp": "2025-06-05T17:52:08.159035"
+  },
+  "mp_openai_1749145929": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "cd595b28-f3cf-4219-a9c9-b8efcbbb0630",
+    "timestamp": "2025-06-05T17:52:09.604760",
+    "execution_id": "c6fa025e334be311"
+  },
+  "calc_test_1749145929": {
+    "data": {
+      "result": 0
+    },
+    "version": "e44cd3af-0532-4ad0-a264-822940f751f7",
+    "timestamp": "2025-06-05T17:52:10.222255",
+    "execution_id": "735ac6fb51efe7cb"
+  },
+  "openai_test_1749145930": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "380851de-3121-423d-954f-8f7594c1f3ae",
+    "timestamp": "2025-06-05T17:52:11.002665"
+  },
+  "context_test_1749145931": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "38bea661-dfeb-4ecb-b05d-589fa3123705",
+    "timestamp": "2025-06-05T17:52:11.908541"
+  },
+  "context_test_1749146200": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "bfa54f77-23ef-4c37-bbbc-9f2d715a2677",
+    "timestamp": "2025-06-05T17:56:42.263892"
+  },
+  "openai_test_1749146203": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "02debd52-e94b-4cff-980a-aa0d17cb6863",
+    "timestamp": "2025-06-05T17:56:44.135213"
+  },
+  "mp_openai_1749146204": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "0db6e830-959c-4961-961d-f659b724b0ab",
+    "timestamp": "2025-06-05T17:56:44.538423",
+    "execution_id": "9ffb156266994994"
+  },
+  "mp_openai_1749146223": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "032d370d-e8f2-44d1-ac31-957f6375adf4",
+    "timestamp": "2025-06-05T17:57:04.618063",
+    "execution_id": "4109bd72a0e9f1af"
+  },
+  "calc_test_1749146224": {
+    "data": {
+      "result": 0
+    },
+    "version": "55da24b4-8240-4ce1-8a73-1effd125fbb8",
+    "timestamp": "2025-06-05T17:57:05.150369",
+    "execution_id": "5633246fc474b9a7"
+  },
+  "openai_test_1749146225": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "8c18d884-9694-404e-85d3-23f3322b6fa8",
+    "timestamp": "2025-06-05T17:57:05.634117"
+  },
+  "context_test_1749146225": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "2bf09379-28ac-4953-9f30-6ca66dc04b4d",
+    "timestamp": "2025-06-05T17:57:06.044376"
+  },
+  "mp_openai_1749146280": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "4d411ea8-93b9-448a-902b-bb3e8e61c751",
+    "timestamp": "2025-06-05T17:58:00.567758",
+    "execution_id": "2259b1ed6b07be6c"
+  },
+  "context_test_1749146280": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "5c576e01-acd3-4eb0-a551-2d59b9a61cf1",
+    "timestamp": "2025-06-05T17:58:01.240714"
+  },
+  "openai_test_1749146281": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "7ef9f1c1-4304-4394-993b-92f4e3af0604",
+    "timestamp": "2025-06-05T17:58:01.751814"
+  },
+  "openai_test_1749146299": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "0eb3d24a-5523-4e53-babf-f9ad19afd8c7",
+    "timestamp": "2025-06-05T17:58:20.401808"
+  },
+  "calc_test_1749146300": {
+    "data": {
+      "result": 0
+    },
+    "version": "51a364da-ebfb-4349-b27b-40f74bf97d39",
+    "timestamp": "2025-06-05T17:58:20.905097",
+    "execution_id": "d73320c57e4bcd9a"
+  },
+  "mp_openai_1749146301": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "269b94fe-1d1d-4c9f-b4d7-edcfafae4cfa",
+    "timestamp": "2025-06-05T17:58:21.619610",
+    "execution_id": "c06ef59a107d2215"
+  },
+  "context_test_1749146301": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "40c79af0-fdf3-4321-9efe-8e62afbe3adf",
+    "timestamp": "2025-06-05T17:58:22.130184"
+  },
+  "mp_openai_1749146343": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "979c8912-ca42-46be-a97b-4e8b59b81806",
+    "timestamp": "2025-06-05T17:59:04.114527",
+    "execution_id": "a56a592df696164b"
+  },
+  "context_test_1749146344": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "34cd7169-f3bf-4dc5-b8c6-051389bf3df7",
+    "timestamp": "2025-06-05T17:59:09.257423"
+  },
+  "openai_test_1749146349": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "07887e30-7afa-44c5-9be5-b67561f5ed72",
+    "timestamp": "2025-06-05T17:59:09.746671"
+  },
+  "openai_test_1749146386": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "f4d69075-ad03-4a1d-8c9c-0777890a9112",
+    "timestamp": "2025-06-05T17:59:47.197318"
+  },
+  "mp_openai_1749146387": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "191f1cee-17ef-47ca-a684-a27ecf6ce870",
+    "timestamp": "2025-06-05T17:59:47.545421",
+    "execution_id": "6c177cd26d4b943e"
+  },
+  "calc_test_1749146387": {
+    "data": {
+      "result": "Please provide two numbers you\u2019d like me to add together."
+    },
+    "version": "2d075341-8b58-40f5-82e0-ea4ba785e6eb",
+    "timestamp": "2025-06-05T17:59:48.255325",
+    "execution_id": "17013341bd25811f"
+  },
+  "context_test_1749146388": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "6a82c5d0-840a-4201-88dc-cb44576f6d2a",
+    "timestamp": "2025-06-05T17:59:48.762958"
+  },
+  "openai_test_1749146425": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "2f89fb1f-b0ed-4a2f-aabd-d588a4270b3a",
+    "timestamp": "2025-06-05T18:00:26.548385"
+  },
+  "mp_openai_1749146426": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "a4e2b72a-da3e-466f-94a7-2ecc55664b7b",
+    "timestamp": "2025-06-05T18:00:26.957152",
+    "execution_id": "ea0aaf13f3416efe"
+  },
+  "calc_test_1749146426": {
+    "data": {
+      "result": 0
+    },
+    "version": "9a2c1704-bf96-4eef-85ad-2c2b36e6282e",
+    "timestamp": "2025-06-05T18:00:27.626669",
+    "execution_id": "f2db1868f93cc77c"
+  },
+  "context_test_1749146427": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "b058f441-9243-4725-892b-9124a1869cbb",
+    "timestamp": "2025-06-05T18:00:28.081037"
+  },
+  "context_test_1749146469": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "076bcc0f-f125-4fb9-900f-af49f7f8b792",
+    "timestamp": "2025-06-05T18:01:10.114177"
+  },
+  "openai_test_1749146470": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "e97aa8fa-21c9-47b9-b6c7-1697f38afdcb",
+    "timestamp": "2025-06-05T18:01:10.727792"
+  },
+  "mp_openai_1749146470": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "20451238-a583-4120-9042-798d4e604cf2",
+    "timestamp": "2025-06-05T18:01:11.244081",
+    "execution_id": "491ea1987f3efea9"
+  },
+  "mp_anthropic_1749146470": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "9ccc7c57-261d-449b-a395-a0721dde9ce5",
+    "timestamp": "2025-06-05T18:01:12.641476",
+    "execution_id": "491ea1987f3efea9"
+  },
+  "mp_google_1749146470": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "3d0a3602-d2c1-42de-900a-c7aa4786f8b4",
+    "timestamp": "2025-06-05T18:01:13.494989",
+    "execution_id": "491ea1987f3efea9"
+  },
+  "mp_deepseek_1749146470": {
+    "data": {
+      "text": "May"
+    },
+    "version": "d7f289c1-6f0c-45cc-a8f6-901324da75d2",
+    "timestamp": "2025-06-05T18:01:18.513204",
+    "execution_id": "491ea1987f3efea9"
+  },
+  "calc_test_1749146478": {
+    "data": {
+      "result": "Please provide the two numbers you want to add."
+    },
+    "version": "146648aa-07a1-4ca5-805b-292ef811e23c",
+    "timestamp": "2025-06-05T18:01:19.334056",
+    "execution_id": "3ba0c84b241bcf30"
+  },
+  "openai_test_1749146523": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "200e75a2-b77a-4493-bb9a-70edcd1cd9a3",
+    "timestamp": "2025-06-05T18:02:03.490179"
+  },
+  "mp_openai_1749146523": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "64d8a57f-e002-43c0-b7b1-17ceaefa2006",
+    "timestamp": "2025-06-05T18:02:03.830776",
+    "execution_id": "22e83a493ee57ffa"
+  },
+  "mp_anthropic_1749146523": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "b33110a8-43cc-4ddc-b860-3e9a2fbaaa63",
+    "timestamp": "2025-06-05T18:02:05.066794",
+    "execution_id": "22e83a493ee57ffa"
+  },
+  "mp_google_1749146523": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "59497127-0b7b-42b1-9c4f-ededa823b447",
+    "timestamp": "2025-06-05T18:02:05.806454",
+    "execution_id": "22e83a493ee57ffa"
+  },
+  "mp_deepseek_1749146523": {
+    "data": {
+      "text": "May"
+    },
+    "version": "f7ea9232-9e41-4b76-876a-16db417eb129",
+    "timestamp": "2025-06-05T18:02:13.410254",
+    "execution_id": "22e83a493ee57ffa"
+  },
+  "calc_test_1749146533": {
+    "data": {
+      "result": "You need to provide two numbers for me to run the calculator. Please tell me the numbers you want to add."
+    },
+    "version": "fc493e42-848b-4627-a746-a45e5720c489",
+    "timestamp": "2025-06-05T18:02:14.320171",
+    "execution_id": "6e9c584c91fab844"
+  },
+  "context_test_1749146534": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "765e9c1f-49c5-4a29-89a9-760c6cc81e57",
+    "timestamp": "2025-06-05T18:02:14.867975"
+  },
+  "mp_openai_1749146593": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "820a0ca3-01f5-4326-ac36-b778af16e74b",
+    "timestamp": "2025-06-05T18:03:15.978188",
+    "execution_id": "fa5e7c99e56e9970"
+  },
+  "mp_anthropic_1749146593": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "0f8d3b44-4ac9-43ee-a85f-0821c33a77c4",
+    "timestamp": "2025-06-05T18:03:16.745221",
+    "execution_id": "fa5e7c99e56e9970"
+  },
+  "mp_google_1749146593": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "ea30d9b9-6148-409a-a2e2-296d5315b5c2",
+    "timestamp": "2025-06-05T18:03:17.665741",
+    "execution_id": "fa5e7c99e56e9970"
+  },
+  "mp_deepseek_1749146593": {
+    "data": {
+      "text": "May"
+    },
+    "version": "a453401f-4e78-4922-866d-52cc123e927a",
+    "timestamp": "2025-06-05T18:03:23.527159",
+    "execution_id": "fa5e7c99e56e9970"
+  },
+  "openai_test_1749146603": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "e94d5559-8099-4e5e-8101-5cfe4732724f",
+    "timestamp": "2025-06-05T18:03:23.927627"
+  },
+  "context_test_1749146603": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "7e567159-9d14-47de-a1f2-bdce1cc65d84",
+    "timestamp": "2025-06-05T18:03:24.398213"
+  },
+  "calc_test_1749146604": {
+    "data": {
+      "result": "Please provide the two numbers you'd like to add together."
+    },
+    "version": "0e968510-c4be-4a2d-b447-5352fa10bf0b",
+    "timestamp": "2025-06-05T18:03:24.952298",
+    "execution_id": "2c4843c4f84cab31"
+  },
+  "openai_test_1749146670": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "849210dc-0e44-44ec-bc44-c15542689b6b",
+    "timestamp": "2025-06-05T18:04:31.331394"
+  },
+  "context_test_1749146671": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "8363df54-441e-4daf-a8ab-ef476514a29f",
+    "timestamp": "2025-06-05T18:04:31.754095"
+  },
+  "calc_test_1749146671": {
+    "data": {
+      "result": 0
+    },
+    "version": "b372fd75-19a9-43b9-bf27-99e4cf435ae9",
+    "timestamp": "2025-06-05T18:04:32.401724",
+    "execution_id": "56fe67ac9fe46b51"
+  },
+  "mp_openai_1749146672": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "15eb0a60-53b0-454b-af14-aad77753a296",
+    "timestamp": "2025-06-05T18:04:32.731175",
+    "execution_id": "336ce0df6e10405b"
+  },
+  "mp_anthropic_1749146672": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "b2ed3d35-2f1e-44b5-8bda-03c50ecdd590",
+    "timestamp": "2025-06-05T18:04:33.373191",
+    "execution_id": "336ce0df6e10405b"
+  },
+  "mp_google_1749146672": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "e443be84-8a67-4e58-85ca-73b8602958e3",
+    "timestamp": "2025-06-05T18:04:34.019210",
+    "execution_id": "336ce0df6e10405b"
+  },
+  "mp_deepseek_1749146672": {
+    "data": {
+      "text": "May"
+    },
+    "version": "fc7284e9-f0ba-4979-85bc-c1aa9e74c262",
+    "timestamp": "2025-06-05T18:04:40.155906",
+    "execution_id": "336ce0df6e10405b"
+  },
+  "mp_openai_1749146944": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "1c9e1a38-095d-42dc-bccb-a3a97a02b9dc",
+    "timestamp": "2025-06-05T18:09:04.875351",
+    "execution_id": "94539f225f3d6240"
+  },
+  "mp_anthropic_1749146944": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "c6e11d96-3b96-445f-94fa-e95a591bae6f",
+    "timestamp": "2025-06-05T18:09:05.643629",
+    "execution_id": "94539f225f3d6240"
+  },
+  "mp_google_1749146944": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "7ddd1cc4-cc03-4375-b4cf-d99646e4ac8f",
+    "timestamp": "2025-06-05T18:09:06.303874",
+    "execution_id": "94539f225f3d6240"
+  },
+  "mp_deepseek_1749146944": {
+    "data": {
+      "text": "May"
+    },
+    "version": "33c3ef38-a8a9-456b-ab57-e4e96cf69c3f",
+    "timestamp": "2025-06-05T18:09:10.640012",
+    "execution_id": "94539f225f3d6240"
+  },
+  "calc_test_1749146950": {
+    "data": {
+      "result": 0
+    },
+    "version": "c016546f-323c-499c-baba-406ebaec9429",
+    "timestamp": "2025-06-05T18:09:11.406133",
+    "execution_id": "545698aae9f6c685"
+  },
+  "openai_test_1749146951": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "298c09e9-fb12-47a9-922a-06012e01d6af",
+    "timestamp": "2025-06-05T18:09:12.054707"
+  },
+  "context_test_1749146952": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "0389805e-652e-475a-bb0d-ef8719a2476e",
+    "timestamp": "2025-06-05T18:09:12.524748"
+  },
+  "context_test_1749147000": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "20924b9a-ccaa-4ad1-9136-34fee531d300",
+    "timestamp": "2025-06-05T18:10:00.861865"
+  },
+  "openai_test_1749147000": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "e7889e9b-8a2f-4dd5-8fc4-274ac2905ff1",
+    "timestamp": "2025-06-05T18:10:01.436517"
+  },
+  "mp_openai_1749147001": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "a28bc940-70aa-4c13-87d5-13eb738b71c3",
+    "timestamp": "2025-06-05T18:10:01.913990",
+    "execution_id": "a1d56baa93947bda"
+  },
+  "mp_anthropic_1749147001": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "faaa6bc3-54a1-4d72-8d3b-15fbfb758651",
+    "timestamp": "2025-06-05T18:10:02.432971",
+    "execution_id": "a1d56baa93947bda"
+  },
+  "mp_google_1749147001": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "3b5ca110-1d9a-4138-bf44-c09c30c8973b",
+    "timestamp": "2025-06-05T18:10:03.081762",
+    "execution_id": "a1d56baa93947bda"
+  },
+  "mp_deepseek_1749147001": {
+    "data": {
+      "text": "May"
+    },
+    "version": "1281c7f3-6129-40f7-8962-5b1a4e5cfca5",
+    "timestamp": "2025-06-05T18:10:07.701631",
+    "execution_id": "a1d56baa93947bda"
+  },
+  "context_test_1749147043": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "1e26f541-92de-4a2f-9e3a-547303ce3853",
+    "timestamp": "2025-06-05T18:10:43.665882"
+  },
+  "mp_openai_1749147043": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "3c2b9fda-61e9-4ad3-9984-331f6a13d0e5",
+    "timestamp": "2025-06-05T18:10:44.117391",
+    "execution_id": "830ccd8763c57487"
+  },
+  "mp_anthropic_1749147043": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "b4b2d2a2-0f95-4f4c-97cb-96ee5ee70fa5",
+    "timestamp": "2025-06-05T18:10:44.796869",
+    "execution_id": "830ccd8763c57487"
+  },
+  "mp_google_1749147043": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "d8d5219e-f24a-4b12-9532-79d1636a6ec6",
+    "timestamp": "2025-06-05T18:10:45.375966",
+    "execution_id": "830ccd8763c57487"
+  },
+  "mp_deepseek_1749147043": {
+    "data": {
+      "text": "May"
+    },
+    "version": "89b8df1e-dc7e-41c5-a688-4b4cbd7f7639",
+    "timestamp": "2025-06-05T18:10:51.666961",
+    "execution_id": "830ccd8763c57487"
+  },
+  "openai_test_1749147051": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "a811d341-35e9-4895-ac07-10ec272c3335",
+    "timestamp": "2025-06-05T18:10:52.114921"
+  },
+  "openai_test_1749147127": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "5358b91b-6703-4bb7-bfcd-f4bc41c0718d",
+    "timestamp": "2025-06-05T18:12:07.651221"
+  },
+  "context_test_1749147127": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "aa1069d1-81ea-41d8-8fc6-330b82fd33b4",
+    "timestamp": "2025-06-05T18:12:08.100077"
+  },
+  "mp_openai_1749147128": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "51592294-3b95-4fd3-99f8-acce79b7f647",
+    "timestamp": "2025-06-05T18:12:08.558634",
+    "execution_id": "e9a6fe46567a82b0"
+  },
+  "mp_anthropic_1749147128": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "3c8f746b-3365-4806-8229-503ef2dc6f2c",
+    "timestamp": "2025-06-05T18:12:09.319185",
+    "execution_id": "e9a6fe46567a82b0"
+  },
+  "mp_google_1749147128": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "07fd3da7-4f27-4d7d-9cbe-52905d2a9bf4",
+    "timestamp": "2025-06-05T18:12:09.905034",
+    "execution_id": "e9a6fe46567a82b0"
+  },
+  "mp_deepseek_1749147128": {
+    "data": {
+      "text": "May"
+    },
+    "version": "08c4fd8b-58f9-41e8-8bde-b5d147e496ce",
+    "timestamp": "2025-06-05T18:12:13.898546",
+    "execution_id": "e9a6fe46567a82b0"
+  },
+  "openai_test_1749147203": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "219e0e55-c3cf-46c6-a4dc-153bb32ecd02",
+    "timestamp": "2025-06-05T18:13:24.602587"
+  },
+  "context_test_1749147204": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "d737ba1d-bd34-4198-8032-ca2068e55c86",
+    "timestamp": "2025-06-05T18:13:25.146527"
+  },
+  "mp_openai_1749147205": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "b52074f9-51bb-4422-a757-80f0a5058817",
+    "timestamp": "2025-06-05T18:13:25.568134",
+    "execution_id": "32036ad2d3f9ce4a"
+  },
+  "mp_anthropic_1749147205": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "d8290f1c-940d-489b-9afe-51181eb71395",
+    "timestamp": "2025-06-05T18:13:26.908705",
+    "execution_id": "32036ad2d3f9ce4a"
+  },
+  "mp_google_1749147205": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "3d48fc47-66ce-4114-b623-b765374fd67c",
+    "timestamp": "2025-06-05T18:13:27.481903",
+    "execution_id": "32036ad2d3f9ce4a"
+  },
+  "mp_deepseek_1749147205": {
+    "data": {
+      "text": "May"
+    },
+    "version": "a45e6ec4-fd92-429c-8a69-f05741489a01",
+    "timestamp": "2025-06-05T18:13:31.818773",
+    "execution_id": "32036ad2d3f9ce4a"
+  },
+  "count_words": {
+    "data": {
+      "word_count": 28,
+      "text": "Relative to its body size, the clouded leopard has the biggest canines of all animals\u2019 canines. Its dagger-like teeth can be as long as 1.8 inches (4.5 cm)."
+    },
+    "version": "4b0da607-2551-4f86-b5e0-62026cadda0e",
+    "timestamp": "2025-06-05T20:48:07.750969",
+    "execution_id": "644d1300b53466f3"
+  },
+  "generate_tweet": {
+    "data": {
+      "tweet": "Move over, saber-tooth! The clouded leopard rocks the ultimate fangs-to-body ratio\u20141.8-inch canines in a housecat-sized package. Proof that size matters\u2026 when it\u2019s all teeth! \ud83d\udc3e\ud83e\uddb7"
+    },
+    "version": "de8021d5-a7b7-4123-944a-37cb493822aa",
+    "timestamp": "2025-06-05T20:48:09.410779",
+    "execution_id": "644d1300b53466f3"
+  },
+  "calc_test_1749147267": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "cb929a27-f046-44b1-befe-4eb606f26596",
+    "timestamp": "2025-06-05T18:14:27.842688",
+    "execution_id": "6c679f011684cb42"
+  },
+  "calc_test_1749147291": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "664f16d9-118b-49f6-82c8-b51da3da439d",
+    "timestamp": "2025-06-05T18:14:51.258887",
+    "execution_id": "ef6d37d0b6fbd7e2"
+  },
+  "mp_openai_1749147291": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "3297da19-ac5c-424d-80c7-7c72b8e3147b",
+    "timestamp": "2025-06-05T18:14:51.684107",
+    "execution_id": "cb73db069b1a57bc"
+  },
+  "mp_anthropic_1749147291": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "997603ad-bf1a-4dd8-9204-3d7ccd6442ce",
+    "timestamp": "2025-06-05T18:14:52.286023",
+    "execution_id": "cb73db069b1a57bc"
+  },
+  "mp_google_1749147291": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "34bd84cf-2148-4511-8eba-3d5feeb06a56",
+    "timestamp": "2025-06-05T18:14:52.934002",
+    "execution_id": "cb73db069b1a57bc"
+  },
+  "mp_deepseek_1749147291": {
+    "data": {
+      "text": "May"
+    },
+    "version": "8ee65e7a-49d1-4508-94c5-90a41f9c64fb",
+    "timestamp": "2025-06-05T18:14:57.470928",
+    "execution_id": "cb73db069b1a57bc"
+  },
+  "openai_test_1749147297": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "90e99265-4785-4056-abe0-caa5e38a14e3",
+    "timestamp": "2025-06-05T18:14:57.950329"
+  },
+  "context_test_1749147297": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "6dc4a87e-f152-4c13-b6a2-c7522e470254",
+    "timestamp": "2025-06-05T18:14:59.478693"
+  },
+  "calc_test_1749147904": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "b23b2d95-b7b1-4a0a-a1ef-3ee92645ba1d",
+    "timestamp": "2025-06-05T18:25:04.617622",
+    "execution_id": "214333d10c1b82d2"
+  },
+  "mp_openai_1749147904": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "806ce9da-80ed-409b-8161-2a42cee950d1",
+    "timestamp": "2025-06-05T18:25:05.024581",
+    "execution_id": "4958b8b5d652a81c"
+  },
+  "mp_anthropic_1749147904": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "f1b2e48a-62ef-4934-801a-bdc7a0c9e3a1",
+    "timestamp": "2025-06-05T18:25:05.625262",
+    "execution_id": "4958b8b5d652a81c"
+  },
+  "mp_google_1749147904": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "3e40cfb2-b412-42bb-ac50-31e758a9f1ce",
+    "timestamp": "2025-06-05T18:25:06.323361",
+    "execution_id": "4958b8b5d652a81c"
+  },
+  "mp_deepseek_1749147904": {
+    "data": {
+      "text": "May"
+    },
+    "version": "f32d5575-7c07-4ed4-baf7-bc111ca5237b",
+    "timestamp": "2025-06-05T18:25:10.276725",
+    "execution_id": "4958b8b5d652a81c"
+  },
+  "openai_test_1749147910": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "ed8b9bfa-c618-4f18-9830-f83a3ad421f8",
+    "timestamp": "2025-06-05T18:25:10.682436"
+  },
+  "context_test_1749147910": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "2359e6cb-2d00-4e94-a5c8-e0ab67dd8442",
+    "timestamp": "2025-06-05T18:25:11.132189"
+  },
+  "mp_openai_1749148463": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "225af135-e8c2-4326-8d35-e1ce8cb9a52e",
+    "timestamp": "2025-06-05T18:34:24.368488",
+    "execution_id": "bfa46ca62e010227"
+  },
+  "mp_anthropic_1749148463": {
+    "data": {
+      "text": "Eiffel Tower."
+    },
+    "version": "7a701f12-796e-4394-ad09-ebcf96cd48d0",
+    "timestamp": "2025-06-05T18:34:25.638818",
+    "execution_id": "bfa46ca62e010227"
+  },
+  "mp_google_1749148463": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "30b8afcd-fe2f-4074-9052-0d7a75ca5f62",
+    "timestamp": "2025-06-05T18:34:26.233896",
+    "execution_id": "bfa46ca62e010227"
+  },
+  "mp_deepseek_1749148463": {
+    "data": {
+      "text": "May"
+    },
+    "version": "50c1068d-e037-4d11-b1a9-f5654299e458",
+    "timestamp": "2025-06-05T18:34:32.574499",
+    "execution_id": "bfa46ca62e010227"
+  },
+  "calc_test_1749148472": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "de48e974-c393-4e6a-b96f-3dd1ebb8fab7",
+    "timestamp": "2025-06-05T18:34:32.593399",
+    "execution_id": "2d0e9efe39a41e8b"
+  },
+  "openai_test_1749148472": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "2dc27f46-8296-4399-9160-666e67c23f72",
+    "timestamp": "2025-06-05T18:34:33.055104"
+  },
+  "context_test_1749148473": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "68b9cb49-e978-430e-ad8d-52a3ba2ebfd2",
+    "timestamp": "2025-06-05T18:34:33.585081"
+  },
+  "openai_test_1749149512": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "9a036313-4bca-4e71-80f2-87c79d3c3312",
+    "timestamp": "2025-06-05T18:51:52.494030"
+  },
+  "context_test_1749149512": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "c1889d89-7e9c-48f7-82d9-1b5a87395420",
+    "timestamp": "2025-06-05T18:51:52.957273"
+  },
+  "mp_openai_1749149512": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "4a584c96-a545-4816-95b2-be9fd45e8c47",
+    "timestamp": "2025-06-05T18:51:53.945498",
+    "execution_id": "c0b6bf23a7100f3a"
+  },
+  "mp_anthropic_1749149512": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "3b50c949-3367-4c83-acfd-33ab9f4cee4e",
+    "timestamp": "2025-06-05T18:51:55.012558",
+    "execution_id": "c0b6bf23a7100f3a"
+  },
+  "mp_google_1749149512": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "f5a2e681-6ac5-4e44-958c-7cc2193f92ba",
+    "timestamp": "2025-06-05T18:51:55.716276",
+    "execution_id": "c0b6bf23a7100f3a"
+  },
+  "mp_deepseek_1749149512": {
+    "data": {
+      "text": "May"
+    },
+    "version": "2d8dee6a-abc4-4b9d-8e2e-302af88bfdd3",
+    "timestamp": "2025-06-05T18:51:59.971326",
+    "execution_id": "c0b6bf23a7100f3a"
+  },
+  "calc_test_1749149519": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "e6e2a376-ff2f-4f9e-ba81-c2469ea39cca",
+    "timestamp": "2025-06-05T18:51:59.983429",
+    "execution_id": "593d4f8268dc04ca"
+  },
+  "openai_test_1749150159": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "a1067a09-a6b4-4a3f-9953-4f1abc3878fe",
+    "timestamp": "2025-06-05T19:02:39.758196"
+  },
+  "context_test_1749150159": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "aeabec52-47c6-4af5-9b6d-851c185c9b39",
+    "timestamp": "2025-06-05T19:02:40.607229"
+  },
+  "mp_openai_1749150160": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "cd1f6e92-de06-44f4-af8e-b7569f29b84f",
+    "timestamp": "2025-06-05T19:02:40.982452",
+    "execution_id": "d0c28265242d8214"
+  },
+  "mp_anthropic_1749150160": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "ad5044bd-9b0b-4899-915e-a392a346d9fc",
+    "timestamp": "2025-06-05T19:02:42.407203",
+    "execution_id": "d0c28265242d8214"
+  },
+  "mp_google_1749150160": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "914abb1d-5d18-40d8-85b6-564eb507821c",
+    "timestamp": "2025-06-05T19:02:43.123212",
+    "execution_id": "d0c28265242d8214"
+  },
+  "mp_deepseek_1749150160": {
+    "data": {
+      "text": "May"
+    },
+    "version": "f5298bb6-9688-49dc-b42b-bd7aa7f80df3",
+    "timestamp": "2025-06-05T19:02:49.820456",
+    "execution_id": "d0c28265242d8214"
+  },
+  "calc_test_1749150169": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "bb2df3c4-6a3b-4908-98b5-98fd47106631",
+    "timestamp": "2025-06-05T19:02:49.834134",
+    "execution_id": "48aea157b78b958b"
+  },
+  "context_test_1749150919": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "34da04f2-dd55-49b4-982f-d624f1ca2141",
+    "timestamp": "2025-06-05T19:15:20.209203"
+  },
+  "calc_test_1749150920": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "1cb64057-16ac-4e24-a498-eb81afe42b9b",
+    "timestamp": "2025-06-05T19:15:20.223304",
+    "execution_id": "bdbb4f7d00835a4c"
+  },
+  "openai_test_1749150920": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "8ec83ee1-2959-42a1-bbf1-ed25fcc42858",
+    "timestamp": "2025-06-05T19:15:20.647779"
+  },
+  "mp_openai_1749150920": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "de2aa793-4ca0-4dea-9315-f0d314655bdf",
+    "timestamp": "2025-06-05T19:15:21.177161",
+    "execution_id": "987ef29b8020e704"
+  },
+  "mp_anthropic_1749150920": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "d8479d82-122e-4802-849a-10b5b300fca8",
+    "timestamp": "2025-06-05T19:15:21.992972",
+    "execution_id": "987ef29b8020e704"
+  },
+  "mp_google_1749150920": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "d38f4382-c77e-4f7b-a524-abb505c7228b",
+    "timestamp": "2025-06-05T19:15:22.671854",
+    "execution_id": "987ef29b8020e704"
+  },
+  "mp_deepseek_1749150920": {
+    "data": {
+      "text": "May"
+    },
+    "version": "f121f4df-8070-4221-a868-2b36ed0daa90",
+    "timestamp": "2025-06-05T19:15:26.920954",
+    "execution_id": "987ef29b8020e704"
+  },
+  "calc_test_1749150973": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "8c6480a2-d486-41ab-b2b0-dc8bdf1b7c2a",
+    "timestamp": "2025-06-05T19:16:13.929015",
+    "execution_id": "1e06112b44fc329b"
+  },
+  "openai_test_1749150973": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "61cbff1a-5079-4072-9473-e7212baa94e8",
+    "timestamp": "2025-06-05T19:16:14.345527"
+  },
+  "context_test_1749150974": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "3e4ee59d-f627-49dd-9645-47b56ea7bfa1",
+    "timestamp": "2025-06-05T19:16:15.684109"
+  },
+  "mp_openai_1749150975": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "fd431cad-e7af-47ff-8e88-e91c3043298f",
+    "timestamp": "2025-06-05T19:16:16.198198",
+    "execution_id": "5156e4a0808f7e80"
+  },
+  "mp_anthropic_1749150975": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "66476ef0-cd6b-4a03-875c-df1dd567f0cf",
+    "timestamp": "2025-06-05T19:16:16.768211",
+    "execution_id": "5156e4a0808f7e80"
+  },
+  "mp_google_1749150975": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "3665ad30-bda6-4e54-bc3d-901ea36657b8",
+    "timestamp": "2025-06-05T19:16:17.491531",
+    "execution_id": "5156e4a0808f7e80"
+  },
+  "mp_deepseek_1749150975": {
+    "data": {
+      "text": "May"
+    },
+    "version": "409d2de9-b99e-454b-9517-2a8463e50b05",
+    "timestamp": "2025-06-05T19:16:21.251658",
+    "execution_id": "5156e4a0808f7e80"
+  },
+  "openai_test_1749153893": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "7c762fd1-4879-4884-97c8-95789157130b",
+    "timestamp": "2025-06-05T20:04:53.700962"
+  },
+  "context_test_1749153893": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "d26b7a45-67ec-4b4b-8971-f9e24eba9496",
+    "timestamp": "2025-06-05T20:04:54.095266"
+  },
+  "mp_openai_1749155428": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "00326c6e-b5a1-4d79-a1cd-7e67081a7bf7",
+    "timestamp": "2025-06-05T20:30:29.037873",
+    "execution_id": "fb39eb614e479bb8"
+  },
+  "context_test_1749155429": {
+    "data": {
+      "text": "Hello Alice!"
+    },
+    "version": "bacb40c7-42b0-4fe1-a772-86a64c11ea93",
+    "timestamp": "2025-06-05T20:30:31.260057"
+  },
+  "openai_test_1749155431": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "b9989882-fa2d-4c1b-811f-fefdaaf74cf2",
+    "timestamp": "2025-06-05T20:30:31.664449"
+  },
+  "node-fail": {
+    "data": {
+      "result": "The prompt cannot be processed because the input \"{invalid_input}\" is not recognized or valid."
+    },
+    "version": "c890c733-ce01-4a01-8ffd-d359538fe980",
+    "timestamp": "2025-06-05T22:05:27.298983",
+    "execution_id": "2d71ac690028d17a"
+  },
+  "mp_openai_1749155504": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "b667c7cf-9547-4ea1-bcaa-949734dfdab5",
+    "timestamp": "2025-06-05T20:31:44.653136",
+    "execution_id": "5812de42e9271424"
+  },
+  "mp_anthropic_1749155504": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "bd5db8d0-4109-45e8-89c6-3d6233cf219c",
+    "timestamp": "2025-06-05T20:31:45.784139",
+    "execution_id": "5812de42e9271424"
+  },
+  "mp_google_1749155504": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "d46a35f0-d147-447b-909a-750e85aca50c",
+    "timestamp": "2025-06-05T20:31:46.378982",
+    "execution_id": "5812de42e9271424"
+  },
+  "mp_deepseek_1749155504": {
+    "data": {
+      "text": "May"
+    },
+    "version": "53a41648-8737-4a68-955f-db094ebb44c8",
+    "timestamp": "2025-06-05T20:31:53.023922",
+    "execution_id": "5812de42e9271424"
+  },
+  "openai_test_1749155513": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "fe33055e-4cea-4932-8a11-6f6ac8566924",
+    "timestamp": "2025-06-05T20:31:53.513752"
+  },
+  "context_test_1749155513": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "7db34d4b-a18f-4a0c-9b87-8cc6080712b9",
+    "timestamp": "2025-06-05T20:31:54.032855"
+  },
+  "mp_openai_1749155722": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "12d2af76-2536-4e22-96e6-db69d6279890",
+    "timestamp": "2025-06-05T20:35:23.280873",
+    "execution_id": "cba6967e8b2ae84e"
+  },
+  "mp_anthropic_1749155722": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "be93fed7-c7f6-4f61-b16c-0cb1eabd359b",
+    "timestamp": "2025-06-05T20:35:23.846410",
+    "execution_id": "cba6967e8b2ae84e"
+  },
+  "mp_google_1749155722": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "3bb59734-8109-4b08-8af0-e9552cf32ae7",
+    "timestamp": "2025-06-05T20:35:24.567672",
+    "execution_id": "cba6967e8b2ae84e"
+  },
+  "mp_deepseek_1749155722": {
+    "data": {
+      "text": "May"
+    },
+    "version": "5cfd876e-4996-4734-86e3-de7f581779c0",
+    "timestamp": "2025-06-05T20:35:28.060938",
+    "execution_id": "cba6967e8b2ae84e"
+  },
+  "openai_test_1749155728": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "e281b0a8-f876-46f4-b562-feaa7dffe201",
+    "timestamp": "2025-06-05T20:35:28.503669"
+  },
+  "calc_test_1749155728": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "0569d3be-43cb-4c37-8768-3d7680ec273d",
+    "timestamp": "2025-06-05T20:35:28.514367",
+    "execution_id": "cbf3869167971284"
+  },
+  "context_test_1749155728": {
+    "data": {
+      "text": "Hello Alice!"
+    },
+    "version": "84ed85a6-d0e4-4dd2-bc94-037d9d5713d0",
+    "timestamp": "2025-06-05T20:35:28.839610"
+  },
+  "mp_openai_1749155873": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "927d0d2a-6fd5-4e17-b1b5-a0a9b58e7bc0",
+    "timestamp": "2025-06-05T20:37:54.400098",
+    "execution_id": "0f0171b7b7e0ebda"
+  },
+  "mp_anthropic_1749155873": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "540c1a40-7abc-4dbd-b3a2-713f9575501a",
+    "timestamp": "2025-06-05T20:37:55.569575",
+    "execution_id": "0f0171b7b7e0ebda"
+  },
+  "mp_google_1749155873": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "3428b297-9ef3-4ef0-a7ec-5e23c3a53623",
+    "timestamp": "2025-06-05T20:37:56.232423",
+    "execution_id": "0f0171b7b7e0ebda"
+  },
+  "mp_deepseek_1749155873": {
+    "data": {
+      "text": "May"
+    },
+    "version": "c1b6a756-7b47-490f-b87a-5b3b021e10ec",
+    "timestamp": "2025-06-05T20:38:00.418997",
+    "execution_id": "0f0171b7b7e0ebda"
+  },
+  "context_test_1749155880": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "f44aa12d-b6ce-4b67-a2dc-626429bb5ed3",
+    "timestamp": "2025-06-05T20:38:00.780759"
+  },
+  "calc_test_1749155880": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "62acabd2-5042-4b0e-a91b-64b8f62918e9",
+    "timestamp": "2025-06-05T20:38:00.795622",
+    "execution_id": "82c21d2c95697e00"
+  },
+  "openai_test_1749155880": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "505401e3-9da6-4955-a484-108182f0677e",
+    "timestamp": "2025-06-05T20:38:01.454728"
+  },
+  "calc_test_1749156328": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "bdb3101b-7231-4461-a421-b73b0f8c1b2e",
+    "timestamp": "2025-06-05T20:45:28.505350",
+    "execution_id": "f05a5d40e4a9bada"
+  },
+  "openai_test_1749156328": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "f631ba8c-705d-4de7-878e-bc700fabf54c",
+    "timestamp": "2025-06-05T20:45:28.872333"
+  },
+  "context_test_1749156328": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "9b45f544-5ad9-4146-a04e-7a604ade6841",
+    "timestamp": "2025-06-05T20:45:29.484313"
+  },
+  "mp_openai_1749156329": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "b8ba130e-360f-4ed0-aac2-0ebe85e6509a",
+    "timestamp": "2025-06-05T20:45:29.923006",
+    "execution_id": "bec64532e23d7e36"
+  },
+  "mp_anthropic_1749156329": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "d71806c7-97bf-4b2d-9f35-fe547fc5fae7",
+    "timestamp": "2025-06-05T20:45:30.572495",
+    "execution_id": "bec64532e23d7e36"
+  },
+  "mp_google_1749156329": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "c090e67e-e9a4-45da-8d08-e9a670d76483",
+    "timestamp": "2025-06-05T20:45:31.152793",
+    "execution_id": "bec64532e23d7e36"
+  },
+  "mp_deepseek_1749156329": {
+    "data": {
+      "text": "May"
+    },
+    "version": "a259a7b1-9090-434c-b211-ad84e9ac4005",
+    "timestamp": "2025-06-05T20:45:37.173095",
+    "execution_id": "bec64532e23d7e36"
+  },
+  "mp_openai_1749156492": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "06490343-35ae-49ad-9ee5-82005b9b7f61",
+    "timestamp": "2025-06-05T20:48:12.816259",
+    "execution_id": "c905fc61fca1bb21"
+  },
+  "mp_anthropic_1749156492": {
+    "data": {
+      "text": "The Eiffel Tower."
+    },
+    "version": "b3bab7b0-bc14-4e11-b093-4edcae38829c",
+    "timestamp": "2025-06-05T20:48:13.424471",
+    "execution_id": "c905fc61fca1bb21"
+  },
+  "mp_google_1749156492": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "6c109365-f0ac-4dd5-8acc-02884017c7d7",
+    "timestamp": "2025-06-05T20:48:13.995682",
+    "execution_id": "c905fc61fca1bb21"
+  },
+  "mp_deepseek_1749156492": {
+    "data": {
+      "text": "May"
+    },
+    "version": "1d4298ca-951d-4f00-84e4-cdd2e4d97ffc",
+    "timestamp": "2025-06-05T20:48:17.966520",
+    "execution_id": "c905fc61fca1bb21"
+  },
+  "calc_test_1749156497": {
+    "data": {
+      "result": 15.0
+    },
+    "version": "8db0a411-0242-474f-8aea-c75f67ad99f4",
+    "timestamp": "2025-06-05T20:48:17.985070",
+    "execution_id": "1c2622979def8fb7"
+  },
+  "openai_test_1749156497": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "e95d7234-98a2-41bb-bf59-6d0b3275152e",
+    "timestamp": "2025-06-05T20:48:18.428293"
+  },
+  "context_test_1749156498": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "6d745711-fca2-4612-9dbd-07337cbf128f",
+    "timestamp": "2025-06-05T20:48:18.882043"
+  },
+  "mp_openai_1749161133": {
+    "data": {
+      "text": "Paris"
+    },
+    "version": "a943bd06-97cc-463c-83b9-1924f2d960af",
+    "timestamp": "2025-06-05T22:05:34.124324",
+    "execution_id": "b0547c5055f88cda"
+  },
+  "mp_anthropic_1749161133": {
+    "data": {
+      "text": "Eiffel Tower"
+    },
+    "version": "92200fd3-b17e-44b7-92dd-b4488d9892c5",
+    "timestamp": "2025-06-05T22:05:35.995193",
+    "execution_id": "b0547c5055f88cda"
+  },
+  "mp_google_1749161133": {
+    "data": {
+      "text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris."
+    },
+    "version": "82fb30d6-9045-4d26-9410-5333144ef1e7",
+    "timestamp": "2025-06-05T22:05:36.577679",
+    "execution_id": "b0547c5055f88cda"
+  },
+  "mp_deepseek_1749161133": {
+    "data": {
+      "text": "May"
+    },
+    "version": "f5983e97-e9af-4a61-b4c7-9e0edaedceca",
+    "timestamp": "2025-06-05T22:05:40.672422",
+    "execution_id": "b0547c5055f88cda"
+  },
+  "openai_test_1749161141": {
+    "data": {
+      "text": "{\"text\": \"Paris\"}"
+    },
+    "version": "2d8c1e55-a5fb-4c87-aade-b9a25d9e0fe5",
+    "timestamp": "2025-06-05T22:05:42.114579"
+  },
+  "context_test_1749161142": {
+    "data": {
+      "text": "Hello, Alice!"
+    },
+    "version": "d3b9f6cc-f68b-4667-9b01-7c52df3c144a",
+    "timestamp": "2025-06-05T22:05:42.656542"
   }
 }

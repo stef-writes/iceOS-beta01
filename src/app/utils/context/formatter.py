@@ -56,9 +56,32 @@ class ContextFormatter(BaseContextFormatter):
         self._run_hooks(str(format_type), content)
         if format_type in self.format_handlers:
             if getattr(format_type, 'name', None) == "CUSTOM" and format_specs:
-                return self.format_handlers[format_type](content, format_specs)
-            return self.format_handlers[format_type](content)
-        return str(content)
+                formatted = self.format_handlers[format_type](content, format_specs)
+            else:
+                formatted = self.format_handlers[format_type](content)
+        else:
+            formatted = str(content)
+
+        # NEW: token truncation logic honouring ContextRule.max_tokens ----------------
+        max_tokens = getattr(rule, 'max_tokens', None)
+        should_truncate = getattr(rule, 'truncate', True)
+        if max_tokens is not None and should_truncate:
+            try:
+                from app.utils.token_counter import TokenCounter
+                # We don't know the exact model/provider here; use fast estimate.
+                current_tokens = TokenCounter.estimate_tokens(formatted, model="", provider="custom")
+                if current_tokens > max_tokens:
+                    # Roughly remove excess characters assuming 4 chars per token.
+                    chars_to_keep = max_tokens * 4
+                    formatted = formatted[:chars_to_keep]
+            except Exception:  # pragma: no cover
+                # Fallback to naive char-based truncation
+                approx_chars = max_tokens * 4 if max_tokens is not None else None
+                if approx_chars and len(formatted) > approx_chars:
+                    formatted = formatted[:approx_chars]
+        # ---------------------------------------------------------------------------
+
+        return formatted
 
     def validate_schema(self, content: Any, schema: Optional[Dict[str, str]] = None) -> bool:
         """Simple schema validation: checks keys and types if schema is provided."""

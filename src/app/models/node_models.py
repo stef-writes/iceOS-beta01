@@ -2,11 +2,12 @@
 Data models for node configurations and metadata
 """
 
-from typing import Dict, List, Optional, Union, Any
-from pydantic import BaseModel, Field, field_validator, model_validator, ConfigDict, validator
+from typing import Dict, List, Optional, Union, Any, Type, Literal, Annotated
+from pydantic import BaseModel, Field, field_validator, model_validator, ConfigDict
 from datetime import datetime
 from .config import LLMConfig, MessageTemplate, ModelProvider
 from enum import Enum
+import json
 
 class ContextFormat(str, Enum):
     TEXT = "text"
@@ -53,91 +54,200 @@ class NodeMetadata(BaseModel):
         values['modified_at'] = datetime.utcnow()
         return values
 
-    model_config = ConfigDict(
-        json_encoders={
-            datetime: lambda dt: dt.isoformat()
-        }
-    )
+    # TODO: Refactor or remove json_encoders for Pydantic v2 compatibility
+
+    # Automatically compute duration if possible ------------------------------
+    @model_validator(mode='after')
+    def _set_duration(self):  # noqa: D401
+        if self.start_time and self.end_time and self.duration is None:
+            self.duration = (self.end_time - self.start_time).total_seconds()
+        elif self.start_time and self.duration is not None and self.end_time is None:
+            from datetime import timedelta
+            self.end_time = self.start_time + timedelta(seconds=self.duration)
+        return self
 
 class ToolConfig(BaseModel):
     name: str
     description: Optional[str] = None
     parameters: Dict[str, Any]
 
-class NodeConfig(BaseModel):
-    """Configuration for a node in the workflow."""
+# ---------------------------------------------------------------------------
+# NEW, SIMPLIFIED NODE CONFIG CLASSES
+# ---------------------------------------------------------------------------
+
+# NOTE: The original monolithic ``NodeConfig`` class has been renamed to
+# ``AiNodeConfig``.  A lighter ``ToolNodeConfig`` was added and, for backwards
+# compatibility, ``NodeConfig`` is now an alias::
+#
+#     NodeConfig = Union[AiNodeConfig, ToolNodeConfig]
+#
+# External code therefore keeps working while the new, clearer split is in
+# place.  The *only* mandatory discriminator is the ``type`` field which must
+# be either ``"ai"`` or ``"tool"``.
+
+
+class BaseNodeConfig(BaseModel):
+    """Common fields shared by all node configurations."""
+
     id: str = Field(..., description="Unique identifier for the node")
-    type: str = Field(..., description="Type of node (e.g., 'ai')")
-    model: str = Field(..., description="Model to use for the node")
-    prompt: str = Field(..., description="Prompt template for the node")
-    name: Optional[str] = Field(None, description="Human-readable name for the node")
-    level: int = Field(default=0, description="Execution level for parallel processing")
-    dependencies: List[str] = Field(default_factory=list, description="List of node IDs this node depends on")
-    timeout: Optional[float] = Field(None, description="Optional timeout in seconds")
-    templates: Dict[str, Any] = Field(default_factory=dict, description="Message templates for the node")
-    llm_config: Optional[LLMConfig] = Field(None, description="LLM configuration for the node")
+    type: str = Field(..., description="Type discriminator (ai | tool)")
+    name: Optional[str] = Field(None, description="Human-readable name")
+    dependencies: List[str] = Field(default_factory=list, description="IDs of prerequisite nodes")
+    level: int = Field(default=0, description="Execution level for parallelism")
     metadata: Optional[NodeMetadata] = None
-    input_schema: Dict[str, str] = Field(default_factory=dict, description="Input schema for the node")
-    output_schema: Dict[str, str] = Field(default_factory=dict, description="Output schema for the node")
-    input_mappings: Dict[str, InputMapping] = Field(default_factory=dict, description="Input mappings for the node's prompt placeholders")
-    input_selection: Optional[List[str]] = None
-    context_rules: Dict[str, ContextRule] = Field(default_factory=dict, description="Context rules for the node")
-    max_tokens: Optional[int] = None
-    temperature: float = 0.7
-    format_specifications: Dict[str, Any] = Field(default_factory=dict, description="Format specifications for the node")
     provider: ModelProvider = Field(default=ModelProvider.OPENAI, description="Model provider for the node")
-    token_management: Dict[str, Any] = Field(
-        default_factory=lambda: {
-            "truncate": True,
-            "preserve_sentences": True,
-            "max_context_tokens": 4096,
-            "max_completion_tokens": 1024
-        },
-        description="Token management configuration"
+    # Maximum time (in seconds) the orchestrator will wait for this node to finish. ``None`` disables the timeout.
+    timeout_seconds: Optional[int] = Field(
+        default=None,
+        ge=1,
+        description="Hard timeout for node execution in seconds (None = no timeout)"
     )
-    tools: Optional[List[ToolConfig]] = None
-    output_format: str = Field('plain', description="Expected output format from the LLM: 'plain', 'json', or 'function_call'")
-    coerce_output_types: bool = Field(default=True, description="Attempt to coerce LLM output types to match output_schema")
+
+    # IO schemas are optional and can be provided as loose dicts or Pydantic models.
+    input_schema: Union[Dict[str, Any], Type[BaseModel]] = Field(default_factory=dict)
+    output_schema: Union[Dict[str, Any], Type[BaseModel]] = Field(default_factory=dict)
+
+    # Mapping of placeholders in the prompt / template to dependency outputs.
+    input_mappings: Dict[str, InputMapping] = Field(default_factory=dict)
+
+    use_cache: bool = Field(
+        default=True,
+        description="Whether the orchestrator should reuse cached results when the context & config are unchanged."
+    )
+
+    input_selection: Optional[List[str]] = Field(default=None, description="List of input keys to include in the prompt (order preserved). If None, include all inputs.")
 
     @field_validator('dependencies')
     @classmethod
-    def validate_dependencies(cls, v: List[str], info) -> List[str]:
-        """Validate that a node doesn't depend on itself."""
+    def _no_self_dependency(cls, v: List[str], info):
         node_id = info.data.get('id')
         if node_id and node_id in v:
             raise ValueError(f"Node {node_id} cannot depend on itself")
         return v
 
-    @field_validator('input_mappings')
-    @classmethod
-    def validate_input_mappings(cls, v: Dict[str, InputMapping], info) -> Dict[str, InputMapping]:
-        """Validate input mappings against dependencies."""
-        data = info.data
-        dependencies = data.get('dependencies', [])
-        
-        # Only validate if there are dependencies
-        if dependencies:
-            for placeholder, mapping in v.items():
-                if mapping.source_node_id not in dependencies:
-                    raise ValueError(
-                        f"Input mapping for '{placeholder}' references non-existent dependency '{mapping.source_node_id}'. "
-                        f"Available dependencies: {dependencies}"
-                    )
-        
-        return v
-
-    def __init__(self, **data):
-        super().__init__(**data)
+    @model_validator(mode='after')
+    def _ensure_metadata(self) -> 'BaseNodeConfig':
         if self.metadata is None:
             self.metadata = NodeMetadata(
                 node_id=self.id,
                 node_type=self.type,
                 version="1.0.0",
-                description=f"Node {self.id} of type {self.type}",
-                provider=self.provider
+                description=f"Node {self.id} (type={self.type})",
             )
+        return self
 
-    model_config = ConfigDict(extra="allow")  # Allow extra fields for future-proofing
+    # ------------------------------------------------------------------
+    # Common helpers preserved from the legacy implementation
+    # ------------------------------------------------------------------
+
+    @field_validator('input_mappings')
+    @classmethod
+    def _validate_input_mappings(cls, v: Dict[str, InputMapping], info):
+        """Ensure that input mappings reference declared dependencies."""
+        data = info.data
+        dependencies = data.get('dependencies', [])
+        if dependencies:
+            for placeholder, mapping in v.items():
+                # Allow literal/static values as-is.
+                if not isinstance(mapping, InputMapping):
+                    continue
+                if mapping.source_node_id not in dependencies:
+                    raise ValueError(
+                        f"Input mapping for '{placeholder}' references non-existent dependency '{mapping.source_node_id}'. "
+                        f"Available dependencies: {dependencies}"
+                    )
+        return v
+
+    def process_input(self, input_data: Dict[str, Any]) -> Dict[str, Any]:
+        """Validate and coerce *input_data* according to *input_schema*."""
+        if not self.input_schema:
+            return input_data
+
+        result: Dict[str, Any] = {}
+        for key, expected_type in self.input_schema.items():
+            if key not in input_data:
+                raise ValueError(f"Missing required input field: {key}")
+
+            value = input_data[key]
+
+            # Only attempt coercion when the config advertises the flag.
+            coerce = getattr(self, 'coerce_input_types', True)
+
+            if not coerce:
+                result[key] = value
+                continue
+
+            try:
+                if expected_type == "int":
+                    result[key] = int(value)
+                elif expected_type == "float":
+                    result[key] = float(value)
+                elif expected_type == "bool":
+                    result[key] = bool(value)
+                elif expected_type == "str":
+                    result[key] = str(value)
+                else:
+                    result[key] = value
+            except (ValueError, TypeError):
+                raise ValueError(
+                    f"Validation error: Could not coerce {key}={value} to type {expected_type}"
+                )
+
+        return result
+
+    def adapt_schema_from_context(self, context: Dict[str, Any]) -> None:  # noqa: D401
+        """Hook for dynamic schema adaptation based on upstream context."""
+        return None
+
+    @staticmethod
+    def is_pydantic_schema(schema) -> bool:  # noqa: D401
+        from pydantic import BaseModel as _BaseModelChecker
+        return isinstance(schema, type) and issubclass(schema, _BaseModelChecker)
+
+class AiNodeConfig(BaseNodeConfig):
+    """Configuration for an LLM-powered node."""
+
+    type: Literal['ai'] = 'ai'
+
+    # LLM-specific ----------------------------------------------------------------
+    model: str = Field(..., description="Model name, e.g. gpt-3.5-turbo")
+    prompt: str = Field(..., description="Prompt template")
+    llm_config: LLMConfig = Field(..., description="Provider-specific parameters")
+
+    # Optional quality-of-life flags kept for now (may be removed later).
+    temperature: float = 0.7
+    max_tokens: Optional[int] = None
+
+    # Experimental / less frequently used knobs – scheduled for removal.
+    context_rules: Dict[str, ContextRule] = Field(default_factory=dict)
+    format_specifications: Dict[str, Any] = Field(default_factory=dict)
+    coerce_output_types: bool = Field(default=True)
+    coerce_input_types: bool = Field(default=True)
+
+    tools: Optional[List[ToolConfig]] = Field(default=None, description="List of ToolConfig objects describing callable tools available to the node")
+    tool_args: Dict[str, Any] = Field(default_factory=dict, description="Default arguments for the tool when invoked via tool_name")
+
+class ToolNodeConfig(BaseNodeConfig):
+    """Configuration for a deterministic tool execution."""
+
+    type: Literal['tool'] = 'tool'
+
+    tool_name: str = Field(..., description="Registered name of the tool to invoke")
+    tool_args: Dict[str, Any] = Field(default_factory=dict, description="Arguments to forward to the tool")
+
+
+# Backwards-compatibility alias ----------------------------------------------------
+
+from typing import Union as _UnionAlias  # local alias
+
+NodeConfig = Annotated[
+    _UnionAlias[AiNodeConfig, ToolNodeConfig],
+    Field(discriminator='type'),
+]
+
+# ---------------------------------------------------------------------------
+# END OF NEW CLASSES – the legacy giant NodeConfig definition was removed.
+# ---------------------------------------------------------------------------
 
 class NodeExecutionRecord(BaseModel):
     """Execution statistics and historical data"""
@@ -177,6 +287,13 @@ class UsageMetadata(BaseModel):
         description="Token limits for the execution"
     )
 
+    # Auto-calculate totals ---------------------------------------------------
+    @model_validator(mode='after')
+    def _fill_totals(self):  # noqa: D401
+        if self.total_tokens == 0 and (self.prompt_tokens or self.completion_tokens):
+            self.total_tokens = self.prompt_tokens + self.completion_tokens
+        return self
+
 class NodeExecutionResult(BaseModel):
     """Result of a node execution."""
     success: bool = Field(default=True, description="Whether the execution was successful")
@@ -191,8 +308,29 @@ class NodeExecutionResult(BaseModel):
         description="Token statistics including truncation and limits"
     )
 
-    class Config:
-        arbitrary_types_allowed = True
-        json_encoders = {
-            datetime: str
-        }
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+    # TODO: Refactor or remove json_encoders for Pydantic v2 compatibility
+
+# --- Pydantic Schemas for Node Outputs ---
+class CatFactOutput(BaseModel):
+    fact: str
+    length: int
+
+class WordCountOutput(BaseModel):
+    word_count: int
+    text: str
+
+class TweetOutput(BaseModel):
+    tweet: str
+
+class ChainExecutionResult(BaseModel):
+    """Result of a chain execution."""
+    success: bool = Field(default=True, description="Whether the execution was successful")
+    error: Optional[str] = Field(None, description="Error message if execution failed")
+    output: Optional[Dict[str, Any]] = Field(None, description="Output data from the final node in the chain")
+    metadata: NodeMetadata = Field(..., description="Metadata about the chain execution")
+    execution_time: Optional[float] = Field(None, description="Execution time in seconds")
+    token_stats: Optional[Dict[str, Any]] = Field(
+        None,
+        description="Token statistics including truncation and limits"
+    )

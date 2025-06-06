@@ -11,6 +11,9 @@ from pathlib import Path
 
 from app.api.routes import router
 from app.utils.logging import setup_logger
+from ice_sdk import ToolService
+from app.utils.context.manager import GraphContextManager
+from app.core.errors import add_exception_handlers
 
 # Setup logging
 logger = setup_logger()
@@ -24,6 +27,10 @@ async def lifespan(app: FastAPI):
     env_path = project_root / '.env'
     load_dotenv(dotenv_path=env_path)
     
+    # Create singleton services and attach to app state so they can be injected elsewhere.
+    app.state.tool_service = ToolService()  # type: ignore[attr-defined]
+    app.state.context_manager = GraphContextManager()  # type: ignore[attr-defined]
+
     # Load all relevant API keys from environment and make them available if needed by SDKs
     # The actual key used by an LLM call will be the one specified in the Node's LLMConfig.
     # This step ensures that if SDKs implicitly look for env vars, they might be found.
@@ -50,6 +57,9 @@ async def lifespan(app: FastAPI):
     #     logger.error("No API keys found for any supported providers. Application might not function correctly.")
     
     logger.info("Starting up the application...")
+    
+    # Register standard exception handlers (must happen *after* app creation).
+    add_exception_handlers(app)
     
     yield
     

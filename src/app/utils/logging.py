@@ -1,21 +1,3 @@
-"""
-Logging configuration for the application
-"""
+"""Deprecated: kept for backward-compatibility.  Import from ``app.core.logging`` instead."""
 
-import logging
-import sys
-from typing import Optional
-
-def setup_logger():
-    logger = logging.getLogger()
-    logger.setLevel(logging.INFO)
-    if not logger.hasHandlers():
-        handler = logging.StreamHandler()
-        handler.setLevel(logging.INFO)
-        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-        handler.setFormatter(formatter)
-        logger.addHandler(handler)
-    return logger
-
-# Create default logger instance
-logger = setup_logger() 
+from app.core.logging import setup_logger, logger  # noqa: F401  re-export 

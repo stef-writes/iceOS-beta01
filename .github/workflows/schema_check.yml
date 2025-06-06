@@ -1,0 +1,22 @@
+name: Validate JSON Schemas
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+
+jobs:
+  schema:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Export Schemas
+        run: python scripts/export_schemas.py
+      - name: Verify no diff
+        run: git diff --exit-code 

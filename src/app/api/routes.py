@@ -2,27 +2,23 @@
 API routes for the workflow engine
 """
 
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Query
 from typing import Dict, List, Optional, Any
 from pydantic import BaseModel, ValidationError
-from app.models.node_models import NodeConfig, NodeExecutionResult
+from app.models.node_models import NodeConfig, NodeExecutionResult, NodeMetadata, ChainExecutionResult
 from app.models.config import LLMConfig, MessageTemplate
 from app.nodes.factory import node_factory
-from app.chains.script_chain import ScriptChain
-from app.chains.errors import CircularDependencyError
-from app.utils.context.manager import GraphContextManager
+from app.chains.orchestration import LevelBasedScriptChain
+from app.chains.chain_errors import CircularDependencyError
 from app.utils.logging import logger
-from app.services.tool_service import ToolService
+from ice_sdk import ToolService
+# Removed explicit built-in tool imports, ToolService already loads defaults
 import traceback
 
+# Dependency injection functions from app.dependencies
+from app.dependencies import get_tool_service, get_context_manager
+
 router = APIRouter(prefix="/api/v1")
-
-# Create a singleton context manager
-context_manager = GraphContextManager()
-
-# Create a singleton ToolService and register default tools
-singleton_tool_service = ToolService()
-ToolService.register_default_tools(singleton_tool_service)
 
 class NodeRequest(BaseModel):
     """Request model for node operations"""
@@ -36,16 +32,32 @@ class ChainRequest(BaseModel):
     persist_intermediate_outputs: bool = True
 
 @router.post("/nodes/text-generation", response_model=NodeExecutionResult)
-async def create_text_generation_node(request: NodeRequest):
+async def create_text_generation_node(
+    request: NodeRequest,
+    tool_service: ToolService = Depends(get_tool_service),
+    context_manager = Depends(get_context_manager),
+):
     """Create and execute a text generation node"""
     try:
         # Extract llm_config from the config object
         llm_config = request.config.llm_config
-        # Remove API key check; assume server-side env vars are used
-        # if not llm_config.api_key:
-        #     raise HTTPException(status_code=422, detail="API key is required")
-        node = node_factory(request.config, context_manager, llm_config, tool_service=singleton_tool_service)
-        result = await node.execute(request.context or {})
+        
+        # Validate and process input
+        try:
+            processed_context = request.config.process_input(request.context or {})
+        except ValueError as e:
+            return NodeExecutionResult(
+                success=False,
+                error=str(e),
+                metadata=NodeMetadata(
+                    node_id=request.config.id,
+                    node_type=request.config.type,
+                    error_type="validation_error"
+                )
+            )
+            
+        node = node_factory(request.config, context_manager, llm_config, tool_service=tool_service)
+        result = await node.execute(processed_context)
         
         # If execution was successful, update the context manager with its output
         if result.success and result.output:
@@ -53,23 +65,51 @@ async def create_text_generation_node(request: NodeRequest):
             
         return result
     except ValidationError as e:
-        raise HTTPException(status_code=422, detail=str(e))
+        return NodeExecutionResult(
+            success=False,
+            error=str(e),
+            metadata=NodeMetadata(
+                node_id=request.config.id,
+                node_type=request.config.type,
+                error_type="validation_error"
+            )
+        )
     except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        return NodeExecutionResult(
+            success=False,
+            error=str(e),
+            metadata=NodeMetadata(
+                node_id=request.config.id,
+                node_type=request.config.type,
+                error_type="value_error"
+            )
+        )
     except Exception as e:
         logger.error(f"Error in text generation node: {str(e)}")
-        raise HTTPException(status_code=500, detail="Internal server error")
+        return NodeExecutionResult(
+            success=False,
+            error="Internal server error",
+            metadata=NodeMetadata(
+                node_id=request.config.id,
+                node_type=request.config.type,
+                error_type="internal_error"
+            )
+        )
 
-@router.post("/chains/execute", response_model=NodeExecutionResult)
-async def execute_chain(request: ChainRequest):
+@router.post("/chains/execute", response_model=ChainExecutionResult)
+async def execute_chain(
+    request: ChainRequest,
+    tool_service: ToolService = Depends(get_tool_service),
+    context_manager = Depends(get_context_manager),
+):
     """Execute a chain of nodes"""
     try:
         # Create chain with nodes, passing the shared context_manager and initial_context
-        chain = ScriptChain(
+        chain = LevelBasedScriptChain(
             nodes=request.nodes,
             context_manager=context_manager,
             persist_intermediate_outputs=request.persist_intermediate_outputs,
-            tool_service=singleton_tool_service,
+            tool_service=tool_service,
             initial_context=request.context or {}
         )
         
@@ -77,20 +117,57 @@ async def execute_chain(request: ChainRequest):
         result = await chain.execute()
         return result
     except CircularDependencyError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        return ChainExecutionResult(
+            success=False,
+            error=str(e),
+            metadata=NodeMetadata(
+                node_id="chain",
+                node_type="chain",
+                error_type="circular_dependency"
+            )
+        )
     except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        return ChainExecutionResult(
+            success=False,
+            error=str(e),
+            metadata=NodeMetadata(
+                node_id="chain",
+                node_type="chain",
+                error_type="value_error"
+            )
+        )
     except Exception as e:
         logger.error(f"Error executing chain: {str(e)}")
-        raise HTTPException(status_code=500, detail="Internal server error")
+        return ChainExecutionResult(
+            success=False,
+            error="Internal server error",
+            metadata=NodeMetadata(
+                node_id="chain",
+                node_type="chain",
+                error_type="internal_error"
+            )
+        )
 
 @router.get("/nodes/{node_id}/context")
-async def get_node_context(node_id: str):
+async def get_node_context(
+    node_id: str,
+    limit: int | None = Query(None, ge=1, description="Max number of keys to return (dicts will be truncated)."),
+    after: str | None = Query(None, description="Pagination cursor – last key from previous page."),
+    context_manager = Depends(get_context_manager),
+):
     """Get context for a specific node"""
     try:
         context = context_manager.get_context(node_id)
         if not context:
             raise HTTPException(status_code=404, detail=f"Context not found for node {node_id}")
+        if isinstance(context, dict) and limit is not None:
+            keys = sorted(context.keys())
+            if after and after in keys:
+                start_index = keys.index(after) + 1
+            else:
+                start_index = 0
+            slice_keys = keys[start_index : start_index + limit]
+            context = {k: context[k] for k in slice_keys}
         return context
     except HTTPException:
         raise
@@ -99,7 +176,7 @@ async def get_node_context(node_id: str):
         raise HTTPException(status_code=500, detail="Internal server error")
 
 @router.delete("/nodes/{node_id}/context")
-async def clear_node_context(node_id: str):
+async def clear_node_context(node_id: str, context_manager = Depends(get_context_manager)):
     """Clear context for a specific node"""
     logger.info(f"API HANDLER: clear_node_context CALLED for node_id: {node_id}")
     try:
@@ -112,3 +189,21 @@ async def clear_node_context(node_id: str):
         logger.error(f"API HANDLER: Error clearing node context for {node_id}: {str(e)}")
         logger.error(traceback.format_exc())
         raise HTTPException(status_code=500, detail="Internal server error")
+
+@router.post("/execute/node", response_model=NodeExecutionResult)
+async def execute_node(
+    request: NodeRequest,
+    tool_service: ToolService = Depends(get_tool_service),
+    context_manager=Depends(get_context_manager),
+):
+    """Alias for creating/executing a single node (generic)."""
+    return await create_text_generation_node(request, tool_service, context_manager)
+
+@router.post("/execute/chain", response_model=ChainExecutionResult)
+async def execute_chain_alias(
+    request: ChainRequest,
+    tool_service: ToolService = Depends(get_tool_service),
+    context_manager=Depends(get_context_manager),
+):
+    """Alias for executing a chain (generic path)."""
+    return await execute_chain(request, tool_service, context_manager)

@@ -1,69 +1,71 @@
-from app.nodes.base import BaseNode
-from app.models.node_models import NodeConfig, NodeExecutionResult, NodeMetadata
-from app.services.tool_service import ToolService
 from datetime import datetime
 from typing import Dict, Any, Optional
 
+from ice_sdk.base_node import BaseNode
+from app.models.node_models import NodeExecutionResult, NodeMetadata
+from ice_sdk import ToolService
+
+
 class ToolNode(BaseNode):
-    """Node for executing a tool via ToolService."""
-    def __init__(self, config: NodeConfig, tool_service: Optional[ToolService] = None):
+    """Node implementation that delegates execution to a registered ToolService tool.
+
+    Unlike :class:`app.nodes.ai.ai_node.AiNode`, this node does *not* require any
+    model-specific fields.  It simply takes the resolved context, merges it with
+    any ``tool_args`` provided in the configuration, and invokes the
+    ``ToolService``.
+    """
+
+    def __init__(
+        self,
+        config,
+        context_manager=None,
+        tool_service: Optional[ToolService] = None,
+        *args,
+        **kwargs,
+    ):
         super().__init__(config)
+        self.context_manager = context_manager
         self.tool_service = tool_service or ToolService()
 
-    async def execute(self, context: Dict[str, Any]) -> NodeExecutionResult:
+    async def execute(self, context: Dict[str, Any]) -> NodeExecutionResult:  # type: ignore[override]
         start_time = datetime.utcnow()
-        tool_name = self.config.name or self.config.id
-        tool_args = context
-        try:
-            result = await self.tool_service.execute(tool_name, tool_args)
-            end_time = datetime.utcnow()
-            duration = (end_time - start_time).total_seconds()
-            if result.get("success"):
-                return NodeExecutionResult(
-                    success=True,
-                    output=result.get("output"),
-                    metadata=NodeMetadata(
-                        node_id=self.config.id,
-                        node_type=self.config.type,
-                        version=self.config.metadata.version if self.config.metadata else "1.0.0",
-                        start_time=start_time,
-                        end_time=end_time,
-                        duration=duration,
-                        provider=self.config.provider
-                    ),
-                    execution_time=duration
-                )
-            else:
-                return NodeExecutionResult(
-                    success=False,
-                    error=result.get("error", "Unknown error"),
-                    metadata=NodeMetadata(
-                        node_id=self.config.id,
-                        node_type=self.config.type,
-                        version=self.config.metadata.version if self.config.metadata else "1.0.0",
-                        start_time=start_time,
-                        end_time=end_time,
-                        duration=duration,
-                        provider=self.config.provider,
-                        error_type="ToolExecutionError"
-                    ),
-                    execution_time=duration
-                )
-        except Exception as e:
-            end_time = datetime.utcnow()
-            duration = (end_time - start_time).total_seconds()
+
+        tool_name: Optional[str] = getattr(self.config, "tool_name", None)
+        # Start with arguments provided in the node configuration.
+        tool_args: Dict[str, Any] = dict(getattr(self.config, "tool_args", {}) or {})
+        # Merge/override with the context coming from dependencies or chain.
+        tool_args.update(context or {})
+
+        if not tool_name:
             return NodeExecutionResult(
                 success=False,
-                error=str(e),
+                error="No tool_name specified in node configuration.",
                 metadata=NodeMetadata(
                     node_id=self.config.id,
                     node_type=self.config.type,
-                    version=self.config.metadata.version if self.config.metadata else "1.0.0",
                     start_time=start_time,
-                    end_time=end_time,
-                    duration=duration,
-                    provider=self.config.provider,
-                    error_type=type(e).__name__
+                    end_time=datetime.utcnow(),
+                    duration=0.0,
+                    error_type="ConfigError",
                 ),
-                execution_time=duration
-            ) 
+            )
+
+        # Execute the tool via ToolService.
+        res = await self.tool_service.execute(tool_name, tool_args)
+
+        metadata = NodeMetadata(
+            node_id=self.config.id,
+            node_type=self.config.type,
+            start_time=start_time,
+            end_time=datetime.utcnow(),
+            duration=(datetime.utcnow() - start_time).total_seconds(),
+            error_type=None if res["success"] else "ToolExecutionError",
+        )
+
+        return NodeExecutionResult(
+            success=res["success"],
+            error=res["error"],
+            output=res["output"],
+            metadata=metadata,
+            execution_time=res["execution_time"],
+        ) 

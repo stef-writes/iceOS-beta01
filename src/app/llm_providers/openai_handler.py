@@ -19,7 +19,7 @@ class OpenAIHandler(BaseLLMHandler):
         tools: Optional[list] = None
     ) -> Tuple[str, Optional[Dict[str, int]], Optional[str]]:
         """Generate text using the OpenAI API with optional function/tool calling support."""
-        api_key = llm_config.api_key or os.getenv("OPENAI_API_KEY")
+        api_key = os.getenv("OPENAI_API_KEY")
         if not api_key:
             # Raise an exception so the node can catch it and return success: False
             raise RuntimeError("API key for OpenAI is missing.")
